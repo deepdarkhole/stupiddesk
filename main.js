@@ -4,9 +4,12 @@
 
         this.label = label;
         this.color = color;
-        var maxSpeed = 1000;
+        var maxSpeed = 0;
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
+
+        this.x = Math.random() * stage.canvas.width;
+        this.y = Math.random() * stage.canvas.height;
 
         this.setup();
     }
@@ -29,7 +32,6 @@
 
         this.addChild( background, text );
         this.on( "click", this.handleClick );
-        this.on( "pressdown", this.handlePressDown );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
@@ -47,22 +49,20 @@
         console.log( "type: " + evt.type + " target: " + evt.target + " stageX: " + evt.stageX );
     }
 
-    p.handlePressDown = function( event ) {
-        this.offsetX = event.stageX - this.x;
-        this.offsetY = event.stageY - this.y;
-    }
-
     p.handlePressMove = function( event ) {
         if ( !this.wasPressed )
         {
-            console.log( "Press down" );
             this.offsetX = event.stageX - this.x;
             this.offsetY = event.stageY - this.y;
             this.wasPressed = true;
         }
 
-        this.x = event.stageX - this.offsetX;
-        this.y = event.stageY - this.offsetY;
+        var testX = event.stageX - this.offsetX;
+        var testY = event.stageY - this.offsetY;
+        
+        var snapPos = grid.GetClosestGridPositionToPoint( testX, testY );
+        this.x = snapPos.x;
+        this.y = snapPos.y;
     }
 
     p.handlePressUp = function( event ) {
@@ -89,18 +89,23 @@
 
 var stage;
 var myButtons;
+var grid;
 
 window.addEventListener( 'resize', resize, false );
-function init() {
-    stage = new createjs.Stage( "demoCanvas" );
 
-    // Needed to enable mouseover/mouseout/rollover/rollout events.
-    // Parameter is frequency, default is 20.
+function init() {
+
+    stage = new createjs.Stage( "demoCanvas" );
+    resize();
+
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 
-    //  Other available events are:
-    //  click, mousedown, dblclick, pressmove, pressup.
+    var back = new createjs.Shape();
+    stage.addChild( back );
+    back.x = 0;
+    back.y = 0;
+    back.graphics.beginFill( "#191970" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
     var circle = new createjs.Shape();
     circle.graphics.beginFill("DeepSkyBlue").drawCircle(0,0,50);
@@ -108,26 +113,28 @@ function init() {
     circle.y = 100;
     stage.addChild( circle );
 
-    var buttonCount = 1000;
+    // Grid Initialization
+    grid = new Grid( 21, 21 );
+    grid.drawGrid();
+
+    // Button Initialization();
+    var buttonCount = 10;
     myButtons = new Array();
     for( var i = 0; i < buttonCount; i++ )
     {
         var color = randomColor({
                         luminosity: 'light',
-                        hue: 'red'
+                        hue: 'monochrome'
                     });
         var button = new Button( i, color );
         myButtons.push( button );
         stage.addChild( button );
     }
     
-    stage.update();
 
+    stage.update();
     createjs.Ticker.addEventListener( "tick", tick );
-    // Setting framerate by interval or framerate
-    //createjs.Ticker.setInterval( 25 );
     createjs.Ticker.setFPS( 60 );
-    resize();
 }
 
 function tick( event ) {
@@ -141,7 +148,13 @@ function tick( event ) {
 }
 
 function resize() {
+    stage.clear();
     stage.canvas.width = window.innerWidth;
     stage.canvas.height = window.innerHeight;
+    if ( grid == null ) return;
+    var x = stage.canvas.width * .5;
+    var y = stage.canvas.height * .5;
+    grid.resizeGrid( x, y );
+    grid.drawGrid();
 }
 

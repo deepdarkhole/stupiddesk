@@ -24,8 +24,12 @@
 
         var bitmap = new createjs.Bitmap("./imgs/" + img);
         //bitmap.mouseEnabled = false;
-        //bitmap.scaleX = .25;
-        //bitmap.scaleY = .25;
+
+        // add shadow
+        var shadowSize = 5;
+        bitmap.shadow = new createjs.Shadow("#c5c2bb", 3, 3, shadowSize);
+
+        bitmap.scaleX = bitmap.scaleY = .5;
         this.addChild( bitmap );
 
         this.background = new createjs.Shape();
@@ -39,13 +43,16 @@
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
         this.on( "rollout", this.handleRollOver );
-        this.cursor = "pointer";
+        bitmap.cursor = "pointer";
 
         //this.mouseChildren = false;
 
         this.offset = Math.random() * 10;
         this.count = 0;
         this.wasPressed = false;
+
+        
+ 		
     }
 
     p.getRoundedNumber = function( number ) { 
@@ -77,6 +84,7 @@
 
     p.handleRollOver = function( event ) {
         this.alpha = event.type == "rollover" ? 0.4 : 1 ; 
+        // put image above other images
     }
 
     p.resize = function( event ) {

@@ -2,7 +2,7 @@ var stage;
 var myButtons;
 var grid;
 var gridSize;
-var images = ["book.png","pencils.png","pencil.png","pen.png"];
+var images = ["old_book.png","pencil_noshadow.png","book.png","pencils.png","pencil.png","pen.png"];
 
 window.addEventListener( 'resize', resize, false );
 

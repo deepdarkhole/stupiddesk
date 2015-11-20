@@ -10,6 +10,7 @@ function init() {
     stage = new createjs.Stage( "demoCanvas" );
     resize();
 
+    createjs.Touch.enable(stage);
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 
@@ -17,7 +18,7 @@ function init() {
     stage.addChild( back );
     back.x = 0;
     back.y = 0;
-    back.graphics.beginFill( "#fff" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+    back.graphics.beginFill( "#ece9e2" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
     // Grid Initialization
     grid = new Grid( 25, 25 );
@@ -50,7 +51,7 @@ function resize() {
     stage.canvas.width = window.innerWidth;
     stage.canvas.height = window.innerHeight;
 
-    var units = 50;
+    var units = 30;
     var xGridSize = stage.canvas.height / units;
     var yGridSize = stage.canvas.width / units;
 

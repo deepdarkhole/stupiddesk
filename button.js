@@ -22,7 +22,14 @@
         this.widthIncrement  = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
         this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
+        var bitmap = new createjs.Bitmap("book.png");
+        bitmap.mouseEnabled = false;
+        bitmap.scaleX = .25;
+        bitmap.scaleY = .25;
+        this.addChild( bitmap );
+
         this.background = new createjs.Shape();
+        this.background.alpha = 0.1;
         this.addChild( this.background );
 
         this.resize();
@@ -34,7 +41,7 @@
         this.on( "rollout", this.handleRollOver );
         this.cursor = "pointer";
 
-        this.mouseChildren = false;
+        //this.mouseChildren = false;
 
         this.offset = Math.random() * 10;
         this.count = 0;
@@ -78,7 +85,8 @@
         var width = this.widthIncrement * gridSize;
         var height = this.heightIncrement * gridSize;
         
-        this.background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 5 );
+        //this.background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 5 );
+        this.background.graphics.beginFill( this.color ).drawRoundRect( 0, 0, width, height, 5 );
 
         this.x = Math.round( this.x );
         this.y = Math.round( this.y );

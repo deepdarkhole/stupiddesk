@@ -2,41 +2,44 @@ var stage;
 var myButtons;
 var grid;
 var gridSize;
+var images = ["book.png"];
 
 window.addEventListener( 'resize', resize, false );
 
 function init() {
 
     stage = new createjs.Stage( "demoCanvas" );
-    resize();
-
-    createjs.Touch.enable(stage);
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 
-    var back = new createjs.Shape();
+    resize();
+
+    createjs.Touch.enable(stage);
+
+    var back = new createjs.Shape();    
+    	back.x = 0;
+    	back.y = 0;
+    	back.graphics.beginFill( "#ece9e2" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+
     stage.addChild( back );
-    back.x = 0;
-    back.y = 0;
-    back.graphics.beginFill( "#ece9e2" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
     // Grid Initialization
     grid = new Grid( 25, 25 );
     grid.drawGrid();
 
     // Button Initialization();
-    var buttonCount = 24;
     myButtons = new Array();
-    for( var i = 0; i < buttonCount; i++ )
+    for( var i = 0; i < images.length; i++ )
     {
         var color = randomColor();
-        var button = new Button( i, color );
+        var button = new Button( i, color, images[i] );
         myButtons.push( button );
         stage.addChild( button );
     }
     
-
     stage.update();
+
+    // Update
     createjs.Ticker.addEventListener( "tick", tick );
     createjs.Ticker.setFPS( 60 );
 }

@@ -1,5 +1,5 @@
 (function() {
-    function Button( label, color ) {
+    function Button( label, color, img ) {
         this.Container_constructor();
 
         this.label = label;
@@ -11,28 +11,28 @@
         this.x = Math.random() * stage.canvas.width;
         this.y = Math.random() * stage.canvas.height;
 
-        this.setup();
+        this.setup( img );
     }
 
     var p = createjs.extend( Button, createjs.Container );
 
-    p.setup = function() {
+    p.setup = function( img ) {
 
         var sizeArray = new Array( 1, 3, 5, 7, 9 );
         this.widthIncrement  = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
         this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
-        var bitmap = new createjs.Bitmap("book.png");
-        bitmap.mouseEnabled = false;
-        bitmap.scaleX = .25;
-        bitmap.scaleY = .25;
+        var bitmap = new createjs.Bitmap("imgs/" + img);
+        //bitmap.mouseEnabled = false;
+        //bitmap.scaleX = .25;
+        //bitmap.scaleY = .25;
         this.addChild( bitmap );
 
         this.background = new createjs.Shape();
         this.background.alpha = 0.1;
-        this.addChild( this.background );
+        //this.addChild( this.background );
 
-        this.resize();
+        //this.resize();
 
         this.on( "click", this.handleClick );
         this.on( "pressmove", this.handlePressMove );

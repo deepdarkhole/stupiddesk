@@ -120,8 +120,8 @@
     }
 
     p.GetCloserPosition = function( test, lower, upper ) {
-        var lowTest = Math.abs( test - lower );
-        var highTest = Math.abs( test - upper );
+        var lowTest = Math.abs( lower - test );
+        var highTest = Math.abs( upper - test );
         return ( lowTest < highTest ) ? lower : upper ;
     }
 
@@ -131,9 +131,7 @@
         var lastXVal;
         for( var x = 0; x < this.xSize; x++ )
         {
-            xVal = this.GetXByIndex( x );
-            console.log( "xPos: " + xPos );
-            console.log( "xVal: " + xVal );
+            xVal = this.GetYByIndex( x );
             if ( xVal < xPos ) 
             {
                 lastXVal = xVal;
@@ -150,7 +148,7 @@
         var lastYVal;
         for( var y = 0; y < this.ySize; y++ )
         {
-            yVal = this.GetYByIndex( y );
+            yVal = this.GetXByIndex( y );
             if ( yVal < yPos ) 
             {
                 lastYVal = yVal;

@@ -17,18 +17,24 @@
     var p = createjs.extend( Button, createjs.Container );
 
     p.setup = function() {
-        var text = new createjs.Text( this.label, "20px Arial", "#fff" );
+        var color = randomColor({
+                luminosity: 'dark',
+                hue: 'monochrome'
+            });
+
+        var text = new createjs.Text( this.label, "20px Arial", color );
         text.textBaseline = "top";
         text.textAlign = "center";
 
         var width = text.getMeasuredWidth() + 30;
         var height = text.getMeasuredHeight() + 20;
 
-        text.x = width/2;
-        text.y = 10;
+        text.x = 0;
+        text.y = -height*.5 + 10;
 
         var background = new createjs.Shape();
-        background.graphics.beginFill( this.color ).drawRoundRect( 0, 0, width, height, 10 );
+        //background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 10 );
+        background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 10 );
 
         this.addChild( background, text );
         this.on( "click", this.handleClick );
@@ -107,14 +113,8 @@ function init() {
     back.y = 0;
     back.graphics.beginFill( "#191970" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
-    var circle = new createjs.Shape();
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0,0,50);
-    circle.x = 100;
-    circle.y = 100;
-    stage.addChild( circle );
-
     // Grid Initialization
-    grid = new Grid( 21, 21 );
+    grid = new Grid( 25, 25 );
     grid.drawGrid();
 
     // Button Initialization();

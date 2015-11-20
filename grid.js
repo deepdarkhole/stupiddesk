@@ -20,35 +20,6 @@
     }
 
     p.setup = function() {
-        /*
-        var text = new createjs.Text( this.label, "20px Arial", "#fff" );
-        text.textBaseline = "top";
-        text.textAlign = "center";
-
-        var width = text.getMeasuredWidth() + 30;
-        var height = text.getMeasuredHeight() + 20;
-
-        text.x = width/2;
-        text.y = 10;
-
-        var background = new createjs.Shape();
-        background.graphics.beginFill( this.color ).drawRoundRect( 0, 0, width, height, 10 );
-
-        this.addChild( background, text );
-        this.on( "click", this.handleClick );
-        this.on( "pressdown", this.handlePressDown );
-        this.on( "pressmove", this.handlePressMove );
-        this.on( "pressup", this.handlePressUp );
-        this.on( "rollover", this.handleRollOver );
-        this.on( "rollout", this.handleRollOver );
-        this.cursor = "pointer";
-
-        this.mouseChildren = false;
-
-        this.offset = Math.random() * 10;
-        this.count = 0;
-        this.wasPressed = false;
-        */
     }
 
     p.drawGrid = function() {

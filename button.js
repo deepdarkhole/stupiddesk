@@ -22,7 +22,7 @@
         this.widthIncrement  = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
         this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
-        var bitmap = new createjs.Bitmap("imgs/" + img);
+        var bitmap = new createjs.Bitmap("./imgs/" + img);
         //bitmap.mouseEnabled = false;
         //bitmap.scaleX = .25;
         //bitmap.scaleY = .25;
@@ -80,6 +80,7 @@
     }
 
     p.resize = function( event ) {
+    	/*
         this.background.graphics.clear();
 
         var width = this.widthIncrement * gridSize;
@@ -90,6 +91,7 @@
 
         this.x = Math.round( this.x );
         this.y = Math.round( this.y );
+        */
     }
 
     window.Button = createjs.promote( Button, "Container" );

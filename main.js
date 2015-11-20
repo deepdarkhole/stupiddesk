@@ -2,7 +2,7 @@ var stage;
 var myButtons;
 var grid;
 var gridSize;
-var images = ["book.png"];
+var images = ["book.png","pencils.png","pencil.png","pen.png"];
 
 window.addEventListener( 'resize', resize, false );
 
@@ -19,13 +19,14 @@ function init() {
     var back = new createjs.Shape();    
     	back.x = 0;
     	back.y = 0;
-    	back.graphics.beginFill( "#ece9e2" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+    	back.graphics.beginFill( "#f6f3e8" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
-    stage.addChild( back );
+	stage.addChild( back );
 
     // Grid Initialization
-    grid = new Grid( 25, 25 );
-    grid.drawGrid();
+    //grid = new Grid( 25, 25 );
+    //grid.drawGrid();
+   
 
     // Button Initialization();
     myButtons = new Array();

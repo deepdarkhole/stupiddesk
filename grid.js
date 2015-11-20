@@ -8,7 +8,7 @@
         this.resizeGrid( stage.canvas.width * .5, stage.canvas.height * .5 );
 
         this.setup();
-        //this.drawGrid();
+        this.drawGrid();
     }
 
     var p = createjs.extend( Grid, createjs.Container );

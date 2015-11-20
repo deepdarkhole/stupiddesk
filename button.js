@@ -15,6 +15,7 @@
     }
 
     var p = createjs.extend( Button, createjs.Container );
+    var pressing = false;
 
     p.setup = function( img ) {
 
@@ -32,18 +33,21 @@
         bitmap.scaleX = bitmap.scaleY = .5;
         this.addChild( bitmap );
 
+		// need to make a larger hit area than the bitmpa
+
         this.background = new createjs.Shape();
         this.background.alpha = 0.1;
         //this.addChild( this.background );
 
-        //this.resize();
+        this.resize();
 
         this.on( "click", this.handleClick );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
         this.on( "rollout", this.handleRollOver );
-        bitmap.cursor = "pointer";
+
+        this.cursor = "pointer";
 
         //this.mouseChildren = false;
 
@@ -76,19 +80,26 @@
         
         this.x = this.getRoundedNumber( testX );
         this.y = this.getRoundedNumber( testY );
+
+        pressing = true;
     }
 
     p.handlePressUp = function( event ) {
         this.wasPressed = false;
+        pressing = false;
     }
 
     p.handleRollOver = function( event ) {
-        this.alpha = event.type == "rollover" ? 0.4 : 1 ; 
+    	if(pressing == true)
+    		return;
+        //this.alpha = event.type == "rollover" ? 0.4 : 1 ; 
         // put image above other images
+        //this.parent.setChildIndex(this, this.parent.numChildren-1)
+        this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
     p.resize = function( event ) {
-    	/*
+    	
         this.background.graphics.clear();
 
         var width = this.widthIncrement * gridSize;
@@ -99,7 +110,7 @@
 
         this.x = Math.round( this.x );
         this.y = Math.round( this.y );
-        */
+        
     }
 
     window.Button = createjs.promote( Button, "Container" );

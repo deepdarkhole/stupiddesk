@@ -52,6 +52,7 @@
     }
 
     p.drawGrid = function() {
+        return;
         if ( this.lines != null && this.lines.length > 0 ) 
         {
             for( var i = 0; i < this.lines.length; i++ )
@@ -64,6 +65,7 @@
         this.lines = new Array();
 
         // Draw Gridlines
+        var color = randomColor();
         var xIncrement = stage.canvas.height / this.xSize;
         var yIncrement = stage.canvas.width / this.ySize;
 
@@ -72,7 +74,7 @@
             var line = new createjs.Shape();
             stage.addChild( line );
 
-            line.graphics.setStrokeStyle( 1 ).beginStroke( "gainsboro" );
+            line.graphics.setStrokeStyle( 1 ).beginStroke( color );
             var yVal = this.GetXByIndex( x );
             line.graphics.moveTo( 0, yVal );
             line.graphics.lineTo( stage.canvas.width, yVal );
@@ -86,7 +88,7 @@
             var line = new createjs.Shape();
             stage.addChild( line );
 
-            line.graphics.setStrokeStyle( 1 ).beginStroke( "gainsboro" );
+            line.graphics.setStrokeStyle( 1 ).beginStroke( color );
             var xVal = this.GetYByIndex( y );
             line.graphics.moveTo( xVal, 0 );
             line.graphics.lineTo( xVal, stage.canvas.height );
@@ -94,29 +96,6 @@
 
             this.lines.push( line );
         }
-
-        return;
-        // Draw Main lines.  //Horizontal Line
-        var line = new createjs.Shape();
-        stage.addChild( line );
-
-        line.graphics.setStrokeStyle( 2 ).beginStroke( "white" );
-        line.graphics.moveTo( 0, this.y );
-        line.graphics.lineTo( stage.canvas.width, this.y );
-        line.graphics.endStroke();
-
-        this.lines.push( line );
-
-        //Vertical Line
-        var line = new createjs.Shape();
-        stage.addChild( line );
-
-        line.graphics.setStrokeStyle( 2 ).beginStroke( "white" );
-        line.graphics.moveTo( this.x, 0 );
-        line.graphics.lineTo( this.x, stage.canvas.height );
-        line.graphics.endStroke();
-
-        this.lines.push( line );
     }
 
     p.GetCloserPosition = function( test, lower, upper ) {

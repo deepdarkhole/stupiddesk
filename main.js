@@ -17,11 +17,15 @@
     var p = createjs.extend( Button, createjs.Container );
 
     p.setup = function() {
+        /*
         var color = randomColor({
-                luminosity: 'dark',
+                luminosity: 'light',
                 hue: 'monochrome'
             });
+        */
+        var color = "white";
 
+        /*
         var text = new createjs.Text( this.label, "20px Arial", color );
         text.textBaseline = "top";
         text.textAlign = "center";
@@ -31,12 +35,17 @@
 
         text.x = 0;
         text.y = -height*.5 + 10;
+        */
+        var sizeArray = new Array( 1, 3, 5, 7, 9 );
+        var width  = gridSize * sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
+        var height = gridSize * sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
         var background = new createjs.Shape();
         //background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 10 );
-        background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 10 );
+        background.graphics.beginFill( this.color ).drawRoundRect( -width * .5, -height * .5, width, height, 5 );
 
-        this.addChild( background, text );
+        //this.addChild( background, text );
+        this.addChild( background );
         this.on( "click", this.handleClick );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
@@ -49,6 +58,10 @@
         this.offset = Math.random() * 10;
         this.count = 0;
         this.wasPressed = false;
+    }
+
+    p.getRoundedNumber = function( number ) { 
+        return Math.round( number / gridSize ) * gridSize; 
     }
 
     p.handleClick = function( evt ) {
@@ -66,9 +79,11 @@
         var testX = event.stageX - this.offsetX;
         var testY = event.stageY - this.offsetY;
         
-        var snapPos = grid.GetClosestGridPositionToPoint( testX, testY );
-        this.x = snapPos.x;
-        this.y = snapPos.y;
+        //var snapPos = grid.GetClosestGridPositionToPoint( testX, testY );
+        //this.x = snapPos.x;
+        //this.y = snapPos.y;
+        this.x = this.getRoundedNumber( testX );
+        this.y = this.getRoundedNumber( testY );
     }
 
     p.handlePressUp = function( event ) {
@@ -90,12 +105,14 @@
         if ( this.y < 0 ) { this.y = stage.canvas.height; };
     }
 
+
     window.Button = createjs.promote( Button, "Container" );
 } () );
 
 var stage;
 var myButtons;
 var grid;
+var gridSize = 10;
 
 window.addEventListener( 'resize', resize, false );
 
@@ -111,20 +128,21 @@ function init() {
     stage.addChild( back );
     back.x = 0;
     back.y = 0;
-    back.graphics.beginFill( "#191970" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+    //back.graphics.beginFill( "#191970" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+    back.graphics.beginFill( "#fff" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
     // Grid Initialization
     grid = new Grid( 25, 25 );
     grid.drawGrid();
 
     // Button Initialization();
-    var buttonCount = 10;
+    var buttonCount = 24;
     myButtons = new Array();
     for( var i = 0; i < buttonCount; i++ )
     {
         var color = randomColor({
-                        luminosity: 'light',
-                        hue: 'monochrome'
+                        //luminosity: 'light',
+                        //hue: 'monochrome'
                     });
         var button = new Button( i, color );
         myButtons.push( button );

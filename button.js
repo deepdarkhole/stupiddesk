@@ -11,6 +11,7 @@
         this.x = Math.random() * stage.canvas.width;
         this.y = Math.random() * stage.canvas.height;
 
+        this.tickEnabled = false;
         this.setup( img );
     }
 

@@ -63,8 +63,7 @@
     }
 
     p.getNextRotationValue = function( rotation ) {
-        var step = 360 / 8;
-        var stepCount = 8;
+        var stepCount = 4;
         for( var i = 0; i < stepCount; i++ )
         {
             var stepAngle = ( 360 / stepCount ) * (i+1);

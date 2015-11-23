@@ -29,6 +29,7 @@ function init() {
         var color = randomColor();
         var button = new Button( i, color, images[i] );
         myButtons.push( button );
+        button.rotation = Math.random() * 360;
         stage.addChild( button );
     }
     

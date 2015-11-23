@@ -25,13 +25,12 @@
         this.widthIncrement  = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
         this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
-        var bitmap = new createjs.Bitmap("./imgs/" + img);
+        var bitmap = new createjs.Bitmap("./imgs/items/" + img);
         //bitmap.mouseEnabled = false;
 
         // add shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("#c5c2bb", 3, 3, shadowSize);
-
         bitmap.scaleX = bitmap.scaleY = .5;
         this.addChild( bitmap );
 
@@ -59,9 +58,6 @@
         this.offset = Math.random() * 10;
         this.count = 0;
         this.wasPressed = false;
-
-        
- 		
     }
 
     p.getRoundedNumber = function( number ) { 
@@ -121,5 +117,3 @@
 
     window.Button = createjs.promote( Button, "Container" );
 } () );
-
-

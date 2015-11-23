@@ -84,12 +84,12 @@ function init() {
 
     createjs.Touch.enable(stage);
 
-    var back = new createjs.Shape();    
-    	back.x = 0;
-    	back.y = 0;
-    	back.graphics.beginFill( "#f6f3e8" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+    //var back = new createjs.Shape();    
+    //	back.x = 0;
+   // 	back.y = 0;
+    //	back.graphics.beginFill( "#f6f3e8" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
-	stage.addChild( back );
+	//stage.addChild( back );
 
     // Button Initialization();
     myButtons = new Array();

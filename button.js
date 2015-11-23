@@ -27,12 +27,16 @@
         this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
         var bitmap = new createjs.Bitmap("./imgs/items/" + img);
+        //bitmap.image.width
+        //bitmap.image.height
         //bitmap.mouseEnabled = false;
 
+		
         // add shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("#c5c2bb", 3, 3, shadowSize);
-        bitmap.scaleX = bitmap.scaleY = .5;
+        //bitmap.scaleX = bitmap.scaleY = .5;
+
         this.addChild( bitmap );
 
         var hit = new createjs.Shape();

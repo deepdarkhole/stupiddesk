@@ -1,4 +1,5 @@
 var stage;
+var items;
 var myButtons;
 var gridSize;
 var images = [
@@ -84,14 +85,9 @@ function init() {
 
     createjs.Touch.enable(stage);
 
-    //var back = new createjs.Shape();    
-    //	back.x = 0;
-   // 	back.y = 0;
-    //	back.graphics.beginFill( "#f6f3e8" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
+	items = new createjs.Container();
+	items.x = items.y = 0;
 
-	//stage.addChild( back );
-
-    // Button Initialization();
     myButtons = new Array();
     for( var i = 0; i < images.length; i++ )
     {
@@ -99,11 +95,14 @@ function init() {
         var button = new Button( i, color, images[i] );
         myButtons.push( button );
         button.rotation = Math.random() * 360;
-        stage.addChild( button );
+        items.addChild( button );
     }
     
+    stage.addChild(items);
     stage.update();
-
+    // Center
+    center();
+    
     // Update
     createjs.Ticker.addEventListener( "tick", tick );
     createjs.Ticker.setFPS( 60 );
@@ -112,6 +111,14 @@ function init() {
 function tick( event ) {
     var deltaTime = event.delta/1000;
     stage.update();
+    center();
+}
+
+function center()
+{
+	var bounds = items.getBounds();
+	items.x = window.innerWidth * 0.5;
+	items.y = window.innerHeight * 0.5;
 }
 
 function resize() {
@@ -125,10 +132,12 @@ function resize() {
 
     gridSize = ( xGridSize < yGridSize ) ? xGridSize : yGridSize;
 
+    /*
     if ( myButtons == null || myButtons.length <= 0 ) return;
     for( var i = 0; i < myButtons.length; i++ )
     {
         myButtons[i].resize();
     }
+    */
 }
 

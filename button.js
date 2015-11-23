@@ -8,10 +8,22 @@
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
 
-        this.x = Math.random() * stage.canvas.width;
-        this.y = Math.random() * stage.canvas.height;
+        //( (max - min) * random) + min
+        //-5 5
+        var w = stage.canvas.width;
+        var h = stage.canvas.height;
 
-        this.tickEnabled = false;
+        //this.x = stage.canvas.width * 0.5 * Math.random();
+        //this.y = stage.canvas.height * 0.5 * Math.random();
+
+        this.x = (w * Math.random()) - (w * 0.5);
+        this.y = (h * Math.random()) - (h * 0.5);
+        
+        //this.x = ((w - w * -1) * Math.random())+ (w * -1)
+        //this.y = ((h - h * -1) * Math.random())+ (h * -1)
+        //this.y =
+
+        //this.tickEnabled = false;
         this.setup( img );
         this.pressing = false;
         this.wasMoved = false;

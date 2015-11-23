@@ -14,6 +14,7 @@
         this.tickEnabled = false;
         this.setup( img );
         this.pressing = false;
+        this.wasMoved = false;
     }
 
     var p = createjs.extend( Button, createjs.Container );
@@ -58,6 +59,21 @@
         this.offset = Math.random() * 10;
         this.count = 0;
         this.wasPressed = false;
+        this.wasMoved = false;    
+    }
+
+    p.getNextRotationValue = function( rotation ) {
+        var step = 360 / 8;
+        var stepCount = 8;
+        for( var i = 0; i < stepCount; i++ )
+        {
+            var stepAngle = ( 360 / stepCount ) * (i+1);
+            console.log( "Testing step angle: " + stepAngle );
+            if ( rotation >= stepAngle ) continue;
+
+            if ( i == stepCount - 1 ) return 0;
+            return stepAngle;
+        }
     }
 
     p.getRoundedNumber = function( number ) { 
@@ -65,7 +81,8 @@
     }
 
     p.handleClick = function( evt ) {
-        console.log( "type: " + evt.type + " target: " + evt.target + " stageX: " + evt.stageX );
+        if ( this.wasMoved ) return;
+        this.rotation = this.getNextRotationValue( this.rotation );
     }
 
     p.handlePressMove = function( event ) {
@@ -74,6 +91,10 @@
             this.offsetX = event.stageX - this.x;
             this.offsetY = event.stageY - this.y;
             this.wasPressed = true;
+            this.wasMoved = false;
+        } else {
+            this.wasMoved = true;
+            
         }
 
         var testX = event.stageX - this.offsetX;
@@ -89,6 +110,7 @@
     p.handlePressUp = function( event ) {
         this.wasPressed = false;
         this.pressing = false;
+        this.wasMoved = false;
     }
 
     p.handleRollOver = function( event ) {

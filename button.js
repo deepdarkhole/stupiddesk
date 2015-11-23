@@ -13,10 +13,11 @@
 
         this.tickEnabled = false;
         this.setup( img );
+        this.pressing = false;
     }
 
     var p = createjs.extend( Button, createjs.Container );
-    var pressing = false;
+    //this.pressing = false;
 
     p.setup = function( img ) {
 
@@ -34,6 +35,9 @@
         bitmap.scaleX = bitmap.scaleY = .5;
         this.addChild( bitmap );
 
+        var hit = new createjs.Shape();
+        //hit.graphics.beginFill("#fff").drawRect( bitmap.sourceRect );
+        //bitmap.hitArea = hit;
 		// need to make a larger hit area than the bitmpa
 
         this.background = new createjs.Shape();
@@ -82,16 +86,17 @@
         this.x = this.getRoundedNumber( testX );
         this.y = this.getRoundedNumber( testY );
 
-        pressing = true;
+        this.pressing = true;
+        this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
     p.handlePressUp = function( event ) {
         this.wasPressed = false;
-        pressing = false;
+        this.pressing = false;
     }
 
     p.handleRollOver = function( event ) {
-    	if(pressing == true)
+    	if(this.pressing == true)
     		return;
         //this.alpha = event.type == "rollover" ? 0.4 : 1 ; 
         // put image above other images

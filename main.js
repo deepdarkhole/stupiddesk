@@ -1,6 +1,5 @@
 var stage;
 var myButtons;
-var grid;
 var gridSize;
 var images = ["old_book.png","pencil_noshadow.png","book.png","pencils.png","pencil.png","pen.png"];
 
@@ -22,11 +21,6 @@ function init() {
     	back.graphics.beginFill( "#f6f3e8" ).rect( 0, 0, stage.canvas.width, stage.canvas.height );
 
 	stage.addChild( back );
-
-    // Grid Initialization
-    //grid = new Grid( 25, 25 );
-    //grid.drawGrid();
-   
 
     // Button Initialization();
     myButtons = new Array();
@@ -66,11 +60,5 @@ function resize() {
     {
         myButtons[i].resize();
     }
-    
-    if ( grid == null ) return;
-    var x = stage.canvas.width * .5;
-    var y = stage.canvas.height * .5;
-    grid.resizeGrid( x, y );
-    grid.drawGrid();
 }
 

@@ -95,8 +95,7 @@
             this.wasPressed = true;
             this.wasMoved = false;
         } else {
-            this.wasMoved = true;
-            
+            this.wasMoved = true;            
         }
 
         var testX = event.stageX - this.offsetX;

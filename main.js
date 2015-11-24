@@ -98,6 +98,11 @@ function init()
     stupid();
 }
 
+function start()
+{
+
+}
+
 function stupid()
 {
 	removeItems();

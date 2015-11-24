@@ -1,4 +1,34 @@
-/* Remove margins and HTML scrollbars */
+#intro
+{
+	position: absolute;
+	top:50%;
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	min-height: 285px;
+	bottom: -50%;
+	color: #FFFFFF;
+	padding: 30px 0px;
+	overflow: visible;
+	align-items: center;
+  	justify-content: center; 
+}
+#intro h1
+{
+	font-size: 4em;
+}
+#intro p
+{
+	margin: 10px auto;
+	font-style: italic;
+	font-size: 2em;
+	width: 70%;
+	max-width: 880px;
+}
+#intro button
+{
+	margin-top:10px;
+}
+
 #header
 {
 	position: absolute;
@@ -12,16 +42,12 @@
 }
 #header ul
 {
-	list-style-type: none;
-    padding:0px;
-    margin:0px;
-        
+	list-style-type: none;     
 }
 #header li
 {
 	display: inline;
 	padding: 5px;
-	margin: 0px;
 }
 
 #content
@@ -40,5 +66,5 @@
     text-align: center;
     left: 50%;
     margin-right: -50%;    
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0%);
 }

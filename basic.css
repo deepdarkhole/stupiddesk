@@ -1,9 +1,14 @@
-html, body
+html, body, div, ul, li, button, h1, p
 {
     margin: 0px;
     padding: 0px;
+}
+
+body
+{
     overflow: hidden;
     background-color: #f6f3e8;
+    min-height: 280px;  
 }
 
 a
@@ -20,7 +25,6 @@ a:hover
 
 button
 {
-    margin: 0px;
     padding: 14px 20px;
     background-color: #505050;
     border-radius: 12px;

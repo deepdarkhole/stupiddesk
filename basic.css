@@ -39,12 +39,18 @@ button:active
 {
 	background-color: #7F7F7F;		
 }
+button:disabled
+{
+    background-color: #454545;
+    color: #222222; 
+    cursor: not-allowed; 
+}
 
 .green_btn
 {
 	background-color: #80C23C;
 }
-.green_btn:hover
+.green_btn:enabled:hover
 {
 	background-color: #A8E767;
 }

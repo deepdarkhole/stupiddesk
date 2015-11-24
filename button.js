@@ -8,29 +8,19 @@
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
 
-        //( (max - min) * random) + min
-        //-5 5
         var w = stage.canvas.width;
         var h = stage.canvas.height;
 
-        //this.x = stage.canvas.width * 0.5 * Math.random();
-        //this.y = stage.canvas.height * 0.5 * Math.random();
-
         this.x = (w * Math.random()) - (w * 0.5);
         this.y = (h * Math.random()) - (h * 0.5);
-        
-        //this.x = ((w - w * -1) * Math.random())+ (w * -1)
-        //this.y = ((h - h * -1) * Math.random())+ (h * -1)
-        //this.y =
 
-        //this.tickEnabled = false;
+        this.tickEnabled = false;
         this.setup( img );
         this.pressing = false;
         this.wasMoved = false;
     }
 
     var p = createjs.extend( Button, createjs.Container );
-    //this.pressing = false;
 
     p.setup = function( img ) {
 
@@ -42,8 +32,7 @@
         var bounds = bitmap.getBounds();
         bitmap.x = -bounds.width * .5;
         bitmap.y = -bounds.height * .5;
-
-		
+        
         // add shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("#c5c2bb", 3, 3, shadowSize);

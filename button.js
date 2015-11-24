@@ -39,9 +39,9 @@
         this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
 
         var bitmap = new createjs.Bitmap("./imgs/items/" + img);
-        //bitmap.image.width
-        //bitmap.image.height
-        //bitmap.mouseEnabled = false;
+        var bounds = bitmap.getBounds();
+        bitmap.x = -bounds.width * .5;
+        bitmap.y = -bounds.height * .5;
 
 		
         // add shadow

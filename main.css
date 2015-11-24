@@ -1,14 +1,77 @@
 /* Remove margins and HTML scrollbars */
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+html, body
+{
+    margin: 0px;
+    padding: 0px;
+    overflow: auto;
     background-color: #f6f3e8;
 }
 
-/*
-#demoCanvas {
-    width: 100%;
-    height: 100%;
+button
+{
+    margin: 0px;
+    padding: 15px 20px;
+    background-color: #000000;
+    border-radius: 12px;
+    border: none;
+    cursor:pointer;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-size: 1em;
 }
-*/
+button:hover
+{
+	background-color: #555555;	
+}
+button:active
+{
+	background-color: #CCCCCC;		
+}
+
+#header
+{
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0px;
+	width: 50%;
+	background-color: #000000;
+	border-radius: 0px 0px 24px 24px;
+    border: none;	
+}
+#header ul
+{
+	list-style-type: none;
+    margin: 10px;
+    padding: 0px;
+    border: 1px solid orange;
+    padding-left: 10px;
+}
+#header li
+{
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+	padding-right: 10px;
+	
+}
+
+#content
+{
+
+}
+
+#footer
+{
+	position: absolute;
+	bottom: 0;
+}
+
+.center
+{
+    text-align: center;
+    left: 50%;
+    margin-right: -50%;
+    border: 1px solid red;
+    transform: translate(-50%, 0);
+}

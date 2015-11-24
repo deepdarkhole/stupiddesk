@@ -7,11 +7,23 @@ html, body
     background-color: #f6f3e8;
 }
 
+a
+{
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+}
+a:hover
+{
+	color: #FFFFFF;
+	background-color: #505050;
+}
+
 button
 {
     margin: 0px;
-    padding: 15px 20px;
-    background-color: #000000;
+    padding: 14px 20px;
+    background-color: #505050;
     border-radius: 12px;
     border: none;
     cursor:pointer;
@@ -21,11 +33,29 @@ button
 }
 button:hover
 {
-	background-color: #555555;	
+	background-color: #7F7F7F;	
 }
 button:active
 {
-	background-color: #CCCCCC;		
+	background-color: #7F7F7F;		
+}
+
+.green_btn
+{
+	background-color: #80C23C;
+}
+.green_btn:hover
+{
+	background-color: #A8E767;
+}
+
+.blue_btn
+{
+	background-color: #46D1F6;
+}
+.blue_btn:hover
+{
+	background-color: #77DDF8;
 }
 
 #header
@@ -33,27 +63,24 @@ button:active
 	position: absolute;
 	top: 0;
 	margin: 0;
-	padding: 0px;
-	width: 50%;
-	background-color: #000000;
+	padding: 30px 20px;
+	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0px 0px 24px 24px;
-    border: none;	
+    border: none;
+	
 }
 #header ul
 {
 	list-style-type: none;
-    margin: 10px;
-    padding: 0px;
-    border: 1px solid orange;
-    padding-left: 10px;
+    padding: 0px 0px 0px 20px;
+    margin:0px;    
 }
 #header li
 {
 	display: inline;
 	padding: 0px;
 	margin: 0px;
-	padding-right: 10px;
-	
+	padding-right: 20px;
 }
 
 #content
@@ -71,7 +98,6 @@ button:active
 {
     text-align: center;
     left: 50%;
-    margin-right: -50%;
-    border: 1px solid red;
+    margin-right: -50%;    
     transform: translate(-50%, 0);
 }

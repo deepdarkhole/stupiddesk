@@ -8,14 +8,14 @@
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0px 0px 24px 24px;
     border: none;
-	
+	min-width: 430px;
 }
 #header ul
 {
 	list-style-type: none;
     padding:0px;
     margin:0px;
-    min-width: 430px;    
+        
 }
 #header li
 {

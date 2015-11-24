@@ -29,6 +29,7 @@ button
     text-transform: uppercase;
     color: #FFFFFF;
     font-size: 1em;
+    display: inline-block;
 }
 button:hover
 {

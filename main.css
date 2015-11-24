@@ -14,7 +14,8 @@
 {
 	list-style-type: none;
     padding:0px;
-    margin:0px;    
+    margin:0px;
+    min-width: 430px;    
 }
 #header li
 {

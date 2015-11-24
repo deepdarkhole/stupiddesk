@@ -1,6 +1,5 @@
 var stage;
 var items;
-var myButtons;
 var gridSize;
 var images = [
 	"black notepaper.png",
@@ -88,15 +87,7 @@ function init() {
 	items = new createjs.Container();
 	items.x = items.y = 0;
 
-    myButtons = new Array();
-    for( var i = 0; i < images.length; i++ )
-    {
-        var color = randomColor();
-        var button = new Button( i, color, images[i] );
-        myButtons.push( button );
-        button.rotation = Math.random() * 360;
-        items.addChild( button );
-    }
+
     
     stage.addChild(items);
     stage.update();
@@ -106,6 +97,31 @@ function init() {
     // Update
     createjs.Ticker.addEventListener( "tick", tick );
     createjs.Ticker.setFPS( 60 );
+
+    // Create Items
+    createItems();
+}
+
+function createItems()
+{
+    var myButtons = new Array();
+    for( var i = 0; i < images.length; i++ )
+    {
+        var color = randomColor();
+        var button = new Button( i, color, images[i] );
+        myButtons.push( button );
+        button.rotation = Math.random() * 360;
+        items.addChild( button );
+    }
+}
+
+function removeItems()
+{
+	for( var i = 0; i < items.children.length; i++)
+	{
+		var button = items.children[i];
+		console.log(items.removeChild( button ));
+	}
 }
 
 function tick( event ) {
@@ -116,7 +132,6 @@ function tick( event ) {
 
 function center()
 {
-	var bounds = items.getBounds();
 	items.x = window.innerWidth * 0.5;
 	items.y = window.innerHeight * 0.5;
 }

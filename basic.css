@@ -1,0 +1,58 @@
+html, body
+{
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #f6f3e8;
+}
+
+a
+{
+	text-decoration: none;
+	color: #000000;
+	font-weight: bold;
+}
+a:hover
+{
+	color: #FFFFFF;
+	background-color: #505050;
+}
+
+button
+{
+    margin: 0px;
+    padding: 14px 20px;
+    background-color: #505050;
+    border-radius: 12px;
+    border: none;
+    cursor:pointer;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-size: 1em;
+}
+button:hover
+{
+	background-color: #7F7F7F;	
+}
+button:active
+{
+	background-color: #7F7F7F;		
+}
+
+.green_btn
+{
+	background-color: #80C23C;
+}
+.green_btn:hover
+{
+	background-color: #A8E767;
+}
+
+.blue_btn
+{
+	background-color: #46D1F6;
+}
+.blue_btn:hover
+{
+	background-color: #77DDF8;
+}

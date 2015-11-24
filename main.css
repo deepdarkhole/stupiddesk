@@ -1,69 +1,10 @@
 /* Remove margins and HTML scrollbars */
-html, body
-{
-    margin: 0px;
-    padding: 0px;
-    overflow: auto;
-    background-color: #f6f3e8;
-}
-
-a
-{
-	text-decoration: none;
-	color: #000000;
-	font-weight: bold;
-}
-a:hover
-{
-	color: #FFFFFF;
-	background-color: #505050;
-}
-
-button
-{
-    margin: 0px;
-    padding: 14px 20px;
-    background-color: #505050;
-    border-radius: 12px;
-    border: none;
-    cursor:pointer;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    font-size: 1em;
-}
-button:hover
-{
-	background-color: #7F7F7F;	
-}
-button:active
-{
-	background-color: #7F7F7F;		
-}
-
-.green_btn
-{
-	background-color: #80C23C;
-}
-.green_btn:hover
-{
-	background-color: #A8E767;
-}
-
-.blue_btn
-{
-	background-color: #46D1F6;
-}
-.blue_btn:hover
-{
-	background-color: #77DDF8;
-}
-
 #header
 {
 	position: absolute;
 	top: 0;
 	margin: 0;
-	padding: 30px 20px;
+	padding: 20px;
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0px 0px 24px 24px;
     border: none;
@@ -72,15 +13,14 @@ button:active
 #header ul
 {
 	list-style-type: none;
-    padding: 0px 0px 0px 20px;
+    padding:0px;
     margin:0px;    
 }
 #header li
 {
 	display: inline;
-	padding: 0px;
+	padding: 5px;
 	margin: 0px;
-	padding-right: 20px;
 }
 
 #content

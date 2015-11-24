@@ -87,10 +87,7 @@ function init() {
 	items = new createjs.Container();
 	items.x = items.y = 0;
 
-
     
-    stage.addChild(items);
-    stage.update();
     // Center
     center();
     
@@ -99,7 +96,14 @@ function init() {
     createjs.Ticker.setFPS( 60 );
 
     // Create Items
-    createItems();
+    stupid();
+}
+
+function stupid()
+{
+	removeItems();
+	createItems();
+	stage.update();
 }
 
 function createItems()
@@ -117,11 +121,16 @@ function createItems()
 
 function removeItems()
 {
+	/*
 	for( var i = 0; i < items.children.length; i++)
 	{
 		var button = items.children[i];
 		console.log(items.removeChild( button ));
-	}
+	}*/
+	stage.removeChild( items );
+	items = new createjs.Container();
+	items.x = items.y = 0;
+	stage.addChild(items);
 }
 
 function tick( event ) {

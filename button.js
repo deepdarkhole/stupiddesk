@@ -32,11 +32,12 @@
         var bounds = bitmap.getBounds();
         bitmap.x = -bounds.width * .5;
         bitmap.y = -bounds.height * .5;
-        
+
         // add shadow
         var shadowSize = 5;
-        bitmap.shadow = new createjs.Shadow("#c5c2bb", 3, 3, shadowSize);
-        //bitmap.scaleX = bitmap.scaleY = .5;
+        bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
+        bitmap.shadow.a = 0;
+        bitmap.scaleX = bitmap.scaleY = .7;
 
         this.addChild( bitmap );
 

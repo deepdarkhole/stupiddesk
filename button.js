@@ -34,9 +34,12 @@
         bitmap.scaleX *= scaleFactor;
         bitmap.scaleY *= scaleFactor;
 
-        bitmap.x = -bounds.width * .5 * scaleFactor;
-        bitmap.y = -bounds.height * .5 * scaleFactor;
-
+        // Doesn't work the first time because the bounds has not been created yet, works the second time because the image has been cached
+        if(bounds)
+        {
+        	bitmap.x = -bounds.width * .5 * scaleFactor;
+        	bitmap.y = -bounds.height * .5 * scaleFactor;
+		}
         // add shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"

@@ -74,28 +74,27 @@ var images = [
 
 window.addEventListener( 'resize', resize, false );
 
-function init() {
-
+function init()
+{
+	// Setup Stage
     stage = new createjs.Stage( "demoCanvas" );
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 
+    // Resize
     resize();
 
+    // Enable Touch
     createjs.Touch.enable(stage);
 
-	items = new createjs.Container();
-	items.x = items.y = 0;
-
-    
     // Center
-    center();
-    
+    center();   
+
     // Update
     createjs.Ticker.addEventListener( "tick", tick );
     createjs.Ticker.setFPS( 60 );
 
-    // Create Items
+    // Get Stupid
     stupid();
 }
 
@@ -103,11 +102,13 @@ function stupid()
 {
 	removeItems();
 	createItems();
-	stage.update();
 }
 
 function createItems()
 {
+	items = new createjs.Container();
+	items.x = items.y = 0;
+	
     var myButtons = new Array();
     for( var i = 0; i < images.length; i++ )
     {
@@ -117,20 +118,16 @@ function createItems()
         button.rotation = Math.random() * 360;
         items.addChild( button );
     }
+
+    stage.addChild(items);
 }
 
 function removeItems()
 {
-	/*
-	for( var i = 0; i < items.children.length; i++)
-	{
-		var button = items.children[i];
-		console.log(items.removeChild( button ));
-	}*/
-	stage.removeChild( items );
-	items = new createjs.Container();
-	items.x = items.y = 0;
-	stage.addChild(items);
+	if(!items)
+		return;
+
+	stage.removeChild( items );	
 }
 
 function tick( event ) {
@@ -141,6 +138,9 @@ function tick( event ) {
 
 function center()
 {
+	if(!items)
+		return;
+	
 	items.x = window.innerWidth * 0.5;
 	items.y = window.innerHeight * 0.5;
 }
@@ -155,13 +155,4 @@ function resize() {
     var yGridSize = stage.canvas.width / units;
 
     gridSize = ( xGridSize < yGridSize ) ? xGridSize : yGridSize;
-
-    /*
-    if ( myButtons == null || myButtons.length <= 0 ) return;
-    for( var i = 0; i < myButtons.length; i++ )
-    {
-        myButtons[i].resize();
-    }
-    */
 }
-

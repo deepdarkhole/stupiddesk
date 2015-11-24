@@ -30,13 +30,14 @@
 
         var bitmap = new createjs.Bitmap("./imgs/items/" + img);
         var bounds = bitmap.getBounds();
-        bitmap.x = -bounds.width * .5;
-        bitmap.y = -bounds.height * .5;
 
         var scaleFactor = .5;
         bitmap.scaleX *= scaleFactor;
         bitmap.scaleY *= scaleFactor;
-        
+
+        bitmap.x = -bounds.width * .5 * scaleFactor;
+        bitmap.y = -bounds.height * .5 * scaleFactor;
+
         // add shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("#c5c2bb", 3, 3, shadowSize);

@@ -104,6 +104,11 @@ function stupid()
 	createItems();
 }
 
+function share()
+{
+	alert("Shared");
+}
+
 function createItems()
 {
 	items = new createjs.Container();
@@ -140,7 +145,7 @@ function center()
 {
 	if(!items)
 		return;
-	
+
 	items.x = window.innerWidth * 0.5;
 	items.y = window.innerHeight * 0.5;
 }

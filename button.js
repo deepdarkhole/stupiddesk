@@ -62,30 +62,24 @@
 
     p.getClosestAlignmentDotToPoint = function( point ) {
         var aPoints = this.alignment.allAlignments;
-        //var itemPosition = new Vector( this.x - this.bitmap.x, this.y - this.bitmap.y );
-        itemPosition = new Vector( this.x, this.y );
+        var itemPosition = new Vector( this.x, this.y );
+
         var closestIndex = 0;
-        var closestPoint = aPoints[closestIndex];
+        var closestPoint = itemPosition.add( aPoints[closestIndex] );
         var closestDistance = Vector.distance( closestPoint, point );
 
-        console.log( "-=-=-=-=-=-==-" );
-        console.log( point );
-        console.log( "----------------" );
-        console.log( itemPosition );
-        console.log( "----------------" );
         for( var i = 0; i < aPoints.length; i++ )
         {
             var position = itemPosition.add( aPoints[i] );
             var distance = Vector.distance( position, point );
-            //console.log( distance );
             if ( distance < closestDistance )
             {
-                closestPoint = aPoints[i];
                 closestDistance = distance;
                 closestIndex = i;
             }
         }
-
+        
+        var closestIndex = this.alignment.getClosestIndexByRotation( closestIndex, this.rotation );
         return this.dots[closestIndex];
     }
 
@@ -130,8 +124,9 @@
 
             var stagePoint = new Vector( event.stageX - items.x, event.stageY - items.y );
             this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
-            this.closestAlignmentDot.graphics.clear();
-            console.log( this.closestAlignmentDot.graphics );
+            var dot = this.closestAlignmentDot;
+            dot.graphics.clear();
+            dot.graphics.beginFill( "red" ).drawCircle( 0, 0, this.diameter );
 
         } else {
             this.wasMoved = true;            
@@ -155,6 +150,10 @@
         this.wasPressed = false;
         this.pressing = false;
         this.wasMoved = false;
+
+        var dot = this.closestAlignmentDot;
+        dot.graphics.clear();
+        dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.diameter );
     }
 
     p.handleRollOver = function( event ) {
@@ -173,9 +172,9 @@
         // Alignment
         this.alignment = new Alignment( this );
 
-        var dotColor = "#99FF00";
-        var diameter = 10;
-        var offset = diameter * .5;
+        this.dotColor = "#99FF00";
+        this.diameter = 10;
+        var offset = this.diameter * .5;
 
         this.dots = new Array();
         
@@ -185,7 +184,9 @@
 
             // Create dots.
             var dot = new createjs.Shape();
-            dot.graphics.beginFill( dotColor ).drawCircle( aVector.x - offset, aVector.y - offset, diameter );
+            dot.x = aVector.x - offset;
+            dot.y = aVector.y - offset;
+            dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.diameter );
             this.addChild( dot );
             this.dots.push( dot );
         }

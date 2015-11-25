@@ -34,7 +34,7 @@
         this.tickEnabled = false;
 
         // Bitmap
-        var bitmap = new createjs.Bitmap("./imgs/items/" + img);
+        var bitmap = new createjs.Bitmap(imgPath + img);
         var bounds = bitmap.getBounds();
         this.scaleFactor = .7;
         bitmap.scaleX *= this.scaleFactor;
@@ -134,7 +134,7 @@
             this.wasPressed = true;
             this.wasMoved = false;
 
-            var stagePoint = new Vector( event.stageX - items.x, event.stageY - items.y );
+            var stagePoint = new Vector( event.stageX - itemContainer.x, event.stageY - itemContainer.y );
             this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
             var dot = this.closestAlignmentDot;
             if ( dot != null )

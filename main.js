@@ -127,6 +127,7 @@ function removeItems()
 	if(!itemContainer)
 		return;
 
+	items = new Array();
 	stage.removeChild( itemContainer );	
 }
 

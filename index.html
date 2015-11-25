@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="main.css">
     <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
 
+    <script src="global.js"></script>
     <script src="alignment.js"></script>
     <script src="item.js"></script>
     <script src="guideDrawer.js"></script>
@@ -41,11 +42,12 @@
 			<!--<li><button type="button" name="share" class="blue_btn" onclick="share();">Share</button></li>-->
 			<!--<li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';">Learn More</button></li>-->
 			<li><button type="button" name="save" class="grey_btn" onclick="save();">Save</button></li>
-			<li><button type="button" name="save" class="grey_btn" onclick="load();">Load</button></li>
+			<li><button type="button" name="load" class="grey_btn" onclick="load();">Load</button></li>
+			<li><button type="button" name="export" class="grey_btn" onclick="exportCanvas();">Export</button></li>
 		</ul>
 	</div>
     <div id="content">
-    	<canvas id="demoCanvas" width="500" height="300"></canvas>
+    	<canvas id="canvas" width="500" height="300"></canvas>
     </div>
     <div id="footer" class="center">    	
     	<p>

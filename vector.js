@@ -107,6 +107,11 @@ Vector.unit = function(a, b) {
   b.z = a.z / length;
   return b;
 };
+
+Vector.distance = function( a, b ) {
+    var sub = a.subtract( b );
+    return sub.length();
+}
 Vector.fromAngles = function(theta, phi) {
   return new Vector(Math.cos(theta) * Math.cos(phi), Math.sin(phi), Math.sin(theta) * Math.cos(phi));
 };

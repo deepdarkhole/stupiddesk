@@ -1,5 +1,3 @@
-window.addEventListener( 'resize', resize, false );
-
 function init()
 {
 	// Setup Stage
@@ -9,6 +7,7 @@ function init()
 
     // Resize
     resize();
+	window.addEventListener( 'resize', resize, false );
 
     // Enable Touch
     createjs.Touch.enable(stage);

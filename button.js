@@ -5,6 +5,9 @@
         this.label = label;
         this.color = color;
 
+        // Dots Debugging
+        this.dotColor = "#99FF00";
+        this.dotDiameter = 2;
 
         this.setup( img );
     }
@@ -126,7 +129,7 @@
             this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
             var dot = this.closestAlignmentDot;
             dot.graphics.clear();
-            dot.graphics.beginFill( "red" ).drawCircle( 0, 0, this.diameter );
+            dot.graphics.beginFill( "red" ).drawCircle( 0, 0, this.dotDiameter );
 
         } else {
             this.wasMoved = true;            
@@ -153,7 +156,7 @@
 
         var dot = this.closestAlignmentDot;
         dot.graphics.clear();
-        dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.diameter );
+        dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
     }
 
     p.handleRollOver = function( event ) {
@@ -172,9 +175,7 @@
         // Alignment
         this.alignment = new Alignment( this );
 
-        this.dotColor = "#99FF00";
-        this.diameter = 10;
-        var offset = this.diameter * .5;
+        var offset = this.dotDiameter * .5;
 
         this.dots = new Array();
         
@@ -186,10 +187,13 @@
             var dot = new createjs.Shape();
             dot.x = aVector.x - offset;
             dot.y = aVector.y - offset;
-            dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.diameter );
+            dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
             this.addChild( dot );
             this.dots.push( dot );
         }
+
+        // Guides
+        this.guideDrawer = new GuideDrawer( this );
     }
 
     window.Button = createjs.promote( Button, "Container" );

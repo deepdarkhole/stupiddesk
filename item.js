@@ -1,5 +1,5 @@
 (function() {
-    function Button( label, color, img ) {
+    function Item( label, color, img ) {
         this.Container_constructor();
 
         this.label = label;
@@ -12,7 +12,7 @@
         this.setup( img );
     }
 
-    var p = createjs.extend( Button, createjs.Container );
+    var p = createjs.extend( Item, createjs.Container );
 
     p.setup = function( img ) {
         var maxSpeed = 0;
@@ -205,6 +205,6 @@
         this.guideDrawer.hideGuides();
     }
 
-    window.Button = createjs.promote( Button, "Container" );
+    window.Item = createjs.promote( Item, "Container" );
 
 } () );

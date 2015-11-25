@@ -1,5 +1,11 @@
 function GuideDrawer( item ) {
 
+    this.item = item; 
+
+    this.setup = function() {
+        this.drawGuides();
+    }
+
     this.drawGuides = function() {
         this.guides = new Array();
         var alignment = this.item.alignment;
@@ -29,18 +35,42 @@ function GuideDrawer( item ) {
         }
     }
 
-    this.setup = function() {
-        this.drawGuides();
+    this.hideGuides = function() {
+        for( var i = 0; i < this.guides.length; i++ )
+        {
+            this.guides[i].hide();
+        }
     }
 
-    this.item = item; 
+    this.showGuides = function() {
+        for( var i = 0; i < this.guides.length; i++ )
+        {
+            this.guides[i].show();
+        }
+    }
+
+
     this.setup();
 }
 
 function Guideline( item, startVector, endVector )
 {
-    var line = new createjs.Shape();
-    line.graphics.setStrokeStyle( 1 ).beginStroke( item.dotColor ).moveTo( startVector.x, startVector.y ).lineTo( endVector.x, endVector.y ).endStroke();
-    item.addChild( line );
-    console.log( "hello?" );
+    this.startVector = startVector;
+    this.endVector = endVector;
+
+    this.setup = function() {
+        this.line = new createjs.Shape();
+        this.show();
+        item.addChild( this.line );
+    }
+
+    this.hide = function() {
+        this.line.graphics.clear(); 
+    }
+
+    this.show = function() {
+        this.line.graphics.setStrokeStyle( 1 ).beginStroke( item.dotColor ).moveTo( startVector.x, startVector.y ).lineTo( endVector.x, endVector.y ).endStroke();
+    }
+
+    this.setup();
 }

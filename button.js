@@ -131,6 +131,7 @@
             dot.graphics.clear();
             dot.graphics.beginFill( "red" ).drawCircle( 0, 0, this.dotDiameter );
 
+            this.guideDrawer.showGuides();
         } else {
             this.wasMoved = true;            
         }
@@ -157,6 +158,8 @@
         var dot = this.closestAlignmentDot;
         dot.graphics.clear();
         dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
+
+        this.guideDrawer.hideGuides();
     }
 
     p.handleRollOver = function( event ) {
@@ -194,6 +197,7 @@
 
         // Guides
         this.guideDrawer = new GuideDrawer( this );
+        this.guideDrawer.hideGuides();
     }
 
     window.Button = createjs.promote( Button, "Container" );

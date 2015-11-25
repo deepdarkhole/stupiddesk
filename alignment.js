@@ -109,7 +109,10 @@ Object.defineProperties( Alignment.prototype, {
     
     height : {
         get : function() {
-            return this.bitmap.getBounds().height * this.scaleFactor;
+            var bounds = this.bitmap.getBounds();
+            if(bounds)
+                return bounds.height * this.scaleFactor;
+            return 0;
         }
     },
 

@@ -83,7 +83,7 @@
         }
         
         var closestIndex = this.alignment.getClosestIndexByRotation( closestIndex, this.rotation );
-        return this.dots[closestIndex];
+        return this.guideDrawer.dots[closestIndex];
     }
 
     p.getClosestAlignmentPoint = function() {
@@ -156,8 +156,11 @@
         this.wasMoved = false;
 
         var dot = this.closestAlignmentDot;
-        dot.graphics.clear();
-        dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
+        if ( dot != null )
+        {
+            dot.graphics.clear();
+            dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
+        }
 
         this.guideDrawer.hideGuides();
     }
@@ -182,23 +185,6 @@
     p.setAlignment = function () {
         // Alignment
         this.alignment = new Alignment( this );
-
-        var offset = this.dotDiameter * .5;
-
-        this.dots = new Array();
-        
-        for( var i = 0; i < this.alignment.allAlignments.length; i++ )
-        {
-            var aVector = this.alignment.allAlignments[i];
-
-            // Create dots.
-            var dot = new createjs.Shape();
-            dot.x = aVector.x;// + offset;
-            dot.y = aVector.y;// + offset;
-            dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
-            this.addChild( dot );
-            this.dots.push( dot );
-        }
 
         // Guides
         this.guideDrawer = new GuideDrawer( this );

@@ -3,7 +3,27 @@ function GuideDrawer( item ) {
     this.item = item; 
 
     this.setup = function() {
+        this.drawDots();
         this.drawGuides();
+    }
+
+    this.drawDots = function() {
+        var offset = this.item.dotDiameter * .5;
+
+        this.dots = new Array();
+        
+        for( var i = 0; i < this.item.alignment.allAlignments.length; i++ )
+        {
+            var aVector = this.item.alignment.allAlignments[i];
+
+            // Create dots.
+            var dot = new createjs.Shape();
+            dot.x = aVector.x;// + offset;
+            dot.y = aVector.y;// + offset;
+            dot.graphics.beginFill( this.item.dotColor ).drawCircle( 0, 0, this.item.dotDiameter );
+            this.item.addChild( dot );
+            this.dots.push( dot );
+        }
     }
 
     this.drawGuides = function() {

@@ -16,46 +16,142 @@ function Alignment( item ) {
     this.item = item;
     this.bitmap = item.bitmap;
 
+    this.allAlignments = new Array( this.topLeft,
+                                    this.topCenter,
+                                    this.topRight,
+                                    this.middleLeft,
+                                    this.middleCenter,
+                                    this.middleRight,
+                                    this.bottomLeft,
+                                    this.bottomCenter,
+                                    this.bottomRight );
+}
+
+//Alignment.prototype = {
+Object.defineProperties( Alignment.prototype, {
     // Sizing
-    this.x = function() {
-        return this.bitmap.x;
-    }
+    x : {
+        get : function() {
+            return this.bitmap.x;
+        }
+    },
 
-    this.y = function() {
-        return this.bitmap.y;
-    }
+    y : {
+        get : function() {
+            return this.bitmap.y;
+        }
+    },
 
-    this.scaleFactor = item.scaleFactor;
+    scaleFactor : {
+        get : function() {
+            return this.item.scaleFactor;
+        }
+    },
     
-    this.height = function() {
-        return this.bitmap.getBounds().height * this.scaleFactor;
-    }
+    height : {
+        get : function() {
+            return this.bitmap.getBounds().height * this.scaleFactor;
+        }
+    },
 
-    this.width = function() {
-        return this.bitmap.getBounds().width * this.scaleFactor;
-    }
+    width : { 
+        get : function() {
+            return this.bitmap.getBounds().width * this.scaleFactor;
+        }
+    },
 
     // Orientation
-    this.isHorizontal = function() {
-        return this.item.rotation == 90 || this.item.rotation == 270; 
-    }
+    isHorizontal : {
+        get : function() {
+            return this.item.rotation == 90 || this.item.rotation == 270; 
+        }
+    },
 
-    this.isVertical = function() {
-        return this.item.rotation == 0 || this.item.rotation == 180; 
-    }
+    isVertical : {
+        get : function() {
+            return this.item.rotation == 0 || this.item.rotation == 180; 
+        }
+    },
     
-    this.topLeft = function() {
-        var x = this.x - (this.width * .5);
-        var y = this.y - (this.height * .5);
+    topLeft : {
+        get : function() {
+            var x = - (this.width * .5);
+            var y = - (this.height * .5);
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    }, 
 
-        return new Vector( x, y );
+    topCenter : {
+        get : function() {
+            var x = 0;
+            var y = - (this.height * .5);
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    }, 
+
+    topRight : {
+        get : function() {
+            var x = (this.width * .5);
+            var y = - (this.height * .5);
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    }, 
+
+    middleLeft : {
+        get : function() {
+            var x = - ( this.width * .5 );
+            var y = 0;
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    },
+
+    middleCenter : {
+        get : function() {
+            var x = 0;
+            var y = 0;
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    },
+
+    middleRight : {
+        get : function() {
+            var x = ( this.width * .5 );
+            var y = 0;
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    },
+
+    bottomLeft : {
+        get : function() {
+            var x = - ( this.width * .5 );
+            var y = ( this.height * .5 );
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    },
+
+    bottomCenter : {
+        get : function() {
+            var x = 0;
+            var y = (this.height * .5 );
+            var vector = new Vector( x, y );
+            return vector;
+        }
+    },
+    
+    bottomRight : {
+        get : function() {
+            var x = ( this.width * .5 );
+            var y = ( this.height * .5 );
+            var vector = new Vector( x, y );
+            return vector;
+        }
     }
-
-    this.middleCenter = function() {
-        var x = this.x;
-        var y = this.y;
-
-        return new Vector( x, y );
-    }
-}
+});
 

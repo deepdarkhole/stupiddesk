@@ -4,6 +4,14 @@
 
         this.label = label;
         this.color = color;
+
+
+        this.setup( img );
+    }
+
+    var p = createjs.extend( Button, createjs.Container );
+
+    p.setup = function( img ) {
         var maxSpeed = 0;
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
@@ -15,42 +23,26 @@
         this.y = (h * Math.random()) - (h * 0.5);
 
         this.tickEnabled = false;
-        this.setup( img );
-        this.pressing = false;
-        this.wasMoved = false;
-    }
 
-    var p = createjs.extend( Button, createjs.Container );
-
-    p.setup = function( img ) {
-
-        var sizeArray = new Array( 1, 3, 5, 7, 9 );
-        this.widthIncrement  = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
-        this.heightIncrement = sizeArray[ Math.floor( Math.random() * sizeArray.length ) ];
-
+        // Bitmap
         var bitmap = new createjs.Bitmap("./imgs/items/" + img);
         var bounds = bitmap.getBounds();
-        var scaleFactor = .7;
-        bitmap.scaleX *= scaleFactor;
-        bitmap.scaleY *= scaleFactor;
+        this.scaleFactor = .7;
+        bitmap.scaleX *= this.scaleFactor;
+        bitmap.scaleY *= this.scaleFactor;
 
-        // Doesn't work the first time because the bounds has not been created yet, works the second time because the image has been cached
-        if(bounds)
-        {
-        	bitmap.x = -bounds.width * .5 * scaleFactor;
-        	bitmap.y = -bounds.height * .5 * scaleFactor;
-		}
+        bitmap.x = -bounds.width * .5 * this.scaleFactor;
+        bitmap.y = -bounds.height * .5 * this.scaleFactor;
+
+        this.bitmap = bitmap;
+        this.addChild( bitmap );
+
         // add shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
-        bitmap.scaleX = bitmap.scaleY = scaleFactor;
-
-        this.addChild( bitmap );
+        bitmap.scaleX = bitmap.scaleY = this.scaleFactor;
 
         var hit = new createjs.Shape();
-
-        this.background = new createjs.Shape();
-        this.background.alpha = 0.1;
 
         this.resize();
 
@@ -64,7 +56,7 @@
 
         this.offset = Math.random() * 10;
         this.count = 0;
-        this.wasPressed = false;
+        this.pressing = false;
         this.wasMoved = false;    
     }
 
@@ -73,7 +65,6 @@
         for( var i = 0; i < stepCount; i++ )
         {
             var stepAngle = ( 360 / stepCount ) * (i+1);
-            console.log( "Testing step angle: " + stepAngle );
             if ( rotation >= stepAngle ) continue;
 
             if ( i == stepCount - 1 ) return 0;
@@ -124,18 +115,30 @@
     }
 
     p.resize = function( event ) {
-    	
-        this.background.graphics.clear();
-
-        var width = this.widthIncrement * gridSize;
-        var height = this.heightIncrement * gridSize;
-        
-        this.background.graphics.beginFill( this.color ).drawRoundRect( 0, 0, width, height, 5 );
-
         this.x = Math.round( this.x );
         this.y = Math.round( this.y );
         
     }
 
+    p.setAlignment = function () {
+        // Alignment
+        this.alignment = new Alignment( this );
+
+        var dotColor = "#99FF00";
+        var diameter = 2;
+        var offset = diameter * .5;
+
+        for( var i = 0; i < this.alignment.allAlignments.length; i++ )
+        {
+            var aVector = this.alignment.allAlignments[i];
+
+            // Create dots.
+            var dot= new createjs.Shape();
+            dot.graphics.beginFill( dotColor ).drawCircle( aVector.x - offset, aVector.y - offset, diameter );
+            this.addChild( dot );
+        }
+    }
+
     window.Button = createjs.promote( Button, "Container" );
+
 } () );

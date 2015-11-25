@@ -132,12 +132,15 @@ function createItems()
 	items.x = items.y = 0;
 	
     var myButtons = new Array();
-    for( var i = 0; i < images.length; i++ )
+    var imageCount = images.length;
+    //var imageCount = 1;
+    for( var i = 0; i < imageCount; i++ )
     {
         var color = randomColor();
         var button = new Button( i, color, images[i] );
         myButtons.push( button );
         button.rotation = Math.random() * 360;
+        button.setAlignment();
         items.addChild( button );
     }
 

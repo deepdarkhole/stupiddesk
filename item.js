@@ -1,20 +1,16 @@
 (function() {
-    function Item( label, color, img ) {
+    function Item( img, position ) {
         this.Container_constructor();
-
-        this.label = label;
-        this.color = color;
-
         // Dots Debugging
         this.dotColor = "#99FF00";
         this.dotDiameter = 2;
 
-        this.setup( img );
+        this.setup( img , position);
     }
 
     var p = createjs.extend( Item, createjs.Container );
 
-    p.setup = function( img ) {
+    p.setup = function( img, position ) {
         var maxSpeed = 0;
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
@@ -23,8 +19,16 @@
         var w = stage.canvas.width;
         var h = stage.canvas.height;
 
-        this.x = (w * Math.random()) - (w * 0.5);
-        this.y = (h * Math.random()) - (h * 0.5);
+        if(position != null)
+        {
+            this.x = position.x;
+            this.y = position.y;
+            this.rotation = position.rotation;
+        }else{
+            this.x = (w * Math.random()) - (w * 0.5);
+            this.y = (h * Math.random()) - (h * 0.5);
+            this.rotation = Math.random() * 360;
+        }   
 
         this.tickEnabled = false;
 

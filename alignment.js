@@ -115,7 +115,10 @@ Object.defineProperties( Alignment.prototype, {
 
     width : { 
         get : function() {
-            return this.bitmap.getBounds().width * this.scaleFactor;
+            var bounds = this.bitmap.getBounds();
+            if(bounds)
+                return bounds.width * this.scaleFactor;
+            return 0;
         }
     },
 

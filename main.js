@@ -1,6 +1,6 @@
 var stage;
 var items;
-var itemPositions;
+var itemData = [{"img":"kraft notepaper.png","x":-56,"y":-117,"rotation":0},{"img":"sketch book.png","x":-313,"y":-108,"rotation":0},{"img":"old book.png","x":-301,"y":214,"rotation":180},{"img":"spatula.png","x":94,"y":239,"rotation":0},{"img":"black notepaper.png","x":186,"y":-175,"rotation":0}];
 var gridSize;
 var element_id = {
 		intro: "intro",
@@ -101,8 +101,11 @@ function init()
     createjs.Ticker.addEventListener( "tick", tick );
     createjs.Ticker.setFPS( 60 );
 
+    // Create a nice Knoll
+    create( itemData );
+
     // Get Stupid
-    stupid();
+    //stupid();
 }
 
 function start()
@@ -116,9 +119,23 @@ function start()
 	stupid();
 }
 
-function create( positions )
+function load()
 {
+	removeItems();
+	create( itemData );
+}
 
+function create( data )
+{
+	items = new createjs.Container();
+	items.x = items.y = 0;	
+	for( var i = 0 ; i < data.length; i++)
+	{
+		var item = new Item( data[i].img, data[i] );
+       		item.setAlignment();
+        	items.addChild( item );		
+	}
+    stage.addChild(items);
 }
 
 function stupid()
@@ -134,21 +151,22 @@ function share()
 
 function save()
 {
-	console.log("Save Knoll");
-	console.log(items.children.length);
-	itemPositions = new Array();
+	console.log("Save");
+	itemData = new Array();
 	for( var i = 0; i < items.children.length; i++)
 	{
 		var item = items.children[i];
-
-		var position = {
+		var data = {
+			img: item.name,
 			x: item.x,
 			y: item.y,
-			img: item.name
+			rotation: item.rotation
 		}
-		itemPositions[i] = position;
+		itemData[i] = data;
 	}
-	console.log(itemPositions);
+	//console.log(itemData);
+	//console.trace(itemData);
+	console.log(JSON.stringify(itemData));
 }
 
 function createItems()
@@ -161,11 +179,9 @@ function createItems()
     imageCount = 5; // Debugging.
     for( var i = 0; i < imageCount; i++ )
     {
-        var color = randomColor();
-        var item = new Item( i, color, images[i] );
+        var item = new Item( images[i], null );
         myItems.push( item );
-        item.setAlignment();
-        item.rotation = Math.random() * 360;
+        item.setAlignment();        
         items.addChild( item );
     }
 

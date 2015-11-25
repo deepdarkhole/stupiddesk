@@ -34,7 +34,8 @@
         this.tickEnabled = false;
 
         // Bitmap
-        var bitmap = new createjs.Bitmap(imgPath + img);
+        //var bitmap = new createjs.Bitmap(imgPath + img);
+        var bitmap = new createjs.Bitmap( itemQueue.getResult(img) );
         var bounds = bitmap.getBounds();
 
         this.scaleFactor = .7;

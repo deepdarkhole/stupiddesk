@@ -10,9 +10,12 @@
 
 	<link rel="stylesheet" href="basic.css">
     <link rel="stylesheet" href="main.css">
+
+    <script src="https://code.createjs.com/preloadjs-0.6.1.min.js"></script>
     <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
 
     <script src="global.js"></script>
+    <script src="preload.js"></script>
     <script src="alignment.js"></script>
     <script src="item.js"></script>
     <script src="guideDrawer.js"></script>
@@ -28,7 +31,7 @@
     
 </head>
 
-<body onload="init();" class="disable-selection">
+<body onload="preload();" class="disable-selection">
 	<div id="intro" class="center">
 		<h1>Knoll ( verb )</h1>
 		<p>

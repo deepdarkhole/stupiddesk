@@ -25,8 +25,17 @@ function init()
     	start();
     }else{
     	// Create
+    	enableStart();
     	create( itemData );	
     }
+}
+
+function enableStart()
+{
+	var intro = document.getElementById(element_id.intro);
+		button = intro.getElementsByTagName("BUTTON")[0];
+		attr = button.getAttributeNode("disabled");// = "false";
+		button.removeAttributeNode(attr);  
 }
 
 function start()
@@ -114,8 +123,6 @@ function save()
 		}
 		itemData[i] = data;
 	}
-	//console.log(itemData);
-	//console.trace(itemData);
 	console.log(JSON.stringify(itemData));
 	alert((JSON.stringify(itemData) ));
 }

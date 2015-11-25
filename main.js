@@ -131,17 +131,17 @@ function createItems()
 	items = new createjs.Container();
 	items.x = items.y = 0;
 	
-    var myButtons = new Array();
+    var myItems = new Array();
     var imageCount = images.length;
     imageCount = 5; // Debugging.
     for( var i = 0; i < imageCount; i++ )
     {
         var color = randomColor();
-        var button = new Button( i, color, images[i] );
-        myButtons.push( button );
-        button.setAlignment();
-        button.rotation = Math.random() * 360;
-        items.addChild( button );
+        var item = new Item( i, color, images[i] );
+        myItems.push( item );
+        item.setAlignment();
+        item.rotation = Math.random() * 360;
+        items.addChild( item );
     }
 
     stage.addChild(items);

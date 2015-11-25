@@ -18,7 +18,8 @@
         var maxSpeed = 0;
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
-
+        this.name = img;
+        
         var w = stage.canvas.width;
         var h = stage.canvas.height;
 
@@ -34,9 +35,12 @@
         bitmap.scaleX *= this.scaleFactor;
         bitmap.scaleY *= this.scaleFactor;
 
-        bitmap.x = -bounds.width * .5 * this.scaleFactor;
-        bitmap.y = -bounds.height * .5 * this.scaleFactor;
-
+        if(bounds)
+        {
+        	bitmap.x = -bounds.width * .5 * this.scaleFactor;
+        	bitmap.y = -bounds.height * .5 * this.scaleFactor;
+    	}
+    	
         this.bitmap = bitmap;
         this.addChild( bitmap );
 

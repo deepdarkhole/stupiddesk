@@ -1,5 +1,6 @@
 var stage;
 var items;
+var itemPositions;
 var gridSize;
 var element_id = {
 		intro: "intro",
@@ -115,6 +116,11 @@ function start()
 	stupid();
 }
 
+function create( positions )
+{
+
+}
+
 function stupid()
 {
 	removeItems();
@@ -124,6 +130,25 @@ function stupid()
 function share()
 {
 	alert("Shared");
+}
+
+function save()
+{
+	console.log("Save Knoll");
+	console.log(items.children.length);
+	itemPositions = new Array();
+	for( var i = 0; i < items.children.length; i++)
+	{
+		var item = items.children[i];
+
+		var position = {
+			x: item.x,
+			y: item.y,
+			img: item.name
+		}
+		itemPositions[i] = position;
+	}
+	console.log(itemPositions);
 }
 
 function createItems()

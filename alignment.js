@@ -25,6 +25,8 @@ function Alignment( item ) {
                                     this.bottomLeft,
                                     this.bottomCenter,
                                     this.bottomRight );
+
+
 }
 
 //Alignment.prototype = {

@@ -60,6 +60,45 @@
         this.wasMoved = false;    
     }
 
+    p.getClosestAlignmentDotToPoint = function( point ) {
+        var aPoints = this.alignment.allAlignments;
+        //var itemPosition = new Vector( this.x - this.bitmap.x, this.y - this.bitmap.y );
+        itemPosition = new Vector( this.x, this.y );
+        var closestIndex = 0;
+        var closestPoint = aPoints[closestIndex];
+        var closestDistance = Vector.distance( closestPoint, point );
+
+        console.log( "-=-=-=-=-=-==-" );
+        console.log( point );
+        console.log( "----------------" );
+        console.log( itemPosition );
+        console.log( "----------------" );
+        for( var i = 0; i < aPoints.length; i++ )
+        {
+            var position = itemPosition.add( aPoints[i] );
+            var distance = Vector.distance( position, point );
+            //console.log( distance );
+            if ( distance < closestDistance )
+            {
+                closestPoint = aPoints[i];
+                closestDistance = distance;
+                closestIndex = i;
+            }
+        }
+
+        return this.dots[closestIndex];
+    }
+
+    p.getClosestAlignmentPoint = function() {
+        var closestDistance;
+        var closestVector;
+
+        for( var i = 0; i < this.alignment.allAlignments.length; i++ )
+        {
+            var alignmentVector = this.alignment.allAlignments[i];
+        }
+    }
+
     p.getNextRotationValue = function( rotation ) {
         var stepCount = 4;
         for( var i = 0; i < stepCount; i++ )
@@ -88,6 +127,12 @@
             this.offsetY = event.stageY - this.y;
             this.wasPressed = true;
             this.wasMoved = false;
+
+            var stagePoint = new Vector( event.stageX - items.x, event.stageY - items.y );
+            this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
+            this.closestAlignmentDot.graphics.clear();
+            console.log( this.closestAlignmentDot.graphics );
+
         } else {
             this.wasMoved = true;            
         }
@@ -95,8 +140,12 @@
         var testX = event.stageX - this.offsetX;
         var testY = event.stageY - this.offsetY;
         
+        /*
         this.x = this.getRoundedNumber( testX );
         this.y = this.getRoundedNumber( testY );
+        */
+        this.x = testX;
+        this.y = testY;
 
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
@@ -125,17 +174,20 @@
         this.alignment = new Alignment( this );
 
         var dotColor = "#99FF00";
-        var diameter = 2;
+        var diameter = 10;
         var offset = diameter * .5;
 
+        this.dots = new Array();
+        
         for( var i = 0; i < this.alignment.allAlignments.length; i++ )
         {
             var aVector = this.alignment.allAlignments[i];
 
             // Create dots.
-            var dot= new createjs.Shape();
+            var dot = new createjs.Shape();
             dot.graphics.beginFill( dotColor ).drawCircle( aVector.x - offset, aVector.y - offset, diameter );
             this.addChild( dot );
+            this.dots.push( dot );
         }
     }
 

@@ -133,7 +133,7 @@ function createItems()
 	
     var myButtons = new Array();
     var imageCount = images.length;
-    //var imageCount = 1;
+    imageCount = 5; // Debugging.
     for( var i = 0; i < imageCount; i++ )
     {
         var color = randomColor();

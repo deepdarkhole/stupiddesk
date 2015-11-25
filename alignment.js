@@ -23,6 +23,47 @@ function Alignment( item ) {
                                     this.bottomCenter,
                                     this.bottomRight );
     
+    this.horizontalAlignmentPoints = new Array( AlignmentPoint.Top,
+                                                AlignmentPoint.Middle,
+                                                AlignmentPoint.Bottom );
+
+    this.verticalAlignmentPoints = new Array( AlignmentPoint.Left,
+                                                AlignmentPoint.Center,
+                                                AlignmentPoint.Right );
+                                                    
+        
+
+    this.getValueFromAlignmentPoint = function( alignmentPoint ) {
+        var alignmentValue;
+        switch( alignmentPoint )
+        {
+            case( AlignmentPoint.Left ):
+                alignmentValue = this.left;
+            break;
+
+            case( AlignmentPoint.Center ):
+                alignmentValue = this.center;
+            break;
+
+            case( AlignmentPoint.Right ):
+                alignmentValue = this.right;
+            break;
+
+            case( AlignmentPoint.Top ):
+                alignmentValue = this.top;
+            break;
+
+            case( AlignmentPoint.Middle ):
+                alignmentValue = this.middle;
+            break;
+
+            case( AlignmentPoint.Bottom ):
+                alignmentValue = this.bottom;
+            break;
+        }
+
+        return alignmentValue;
+    }
 
     this.getClosestIndexByRotation = function( index, rotation ) {
         var indexArray = new Array( 0, 1, 2, 3, 4, 5, 6, 7, 8 );

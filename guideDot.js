@@ -1,20 +1,31 @@
-function GuideDot( item, startVector, endVector )
+function GuideDot( item, horizontalAlignmentPoint, verticalAlignmentPoint )
 {
-    this.startVector = startVector;
-    this.endVector = endVector;
+    this.item = item;
+    this.horizontalAlignmentPoint = horizontalAlignmentPoint;
+    this.verticalAlignmentPoint = verticalAlignmentPoint;
 
     this.setup = function() {
-        this.line = new createjs.Shape();
+        this.dot = new createjs.Shape();
+        var xVal = this.item.alignment.getValueFromAlignmentPoint( verticalAlignmentPoint );
+        var yVal = this.item.alignment.getValueFromAlignmentPoint( horizontalAlignmentPoint );
+
+        this.dot.x = xVal;
+        this.dot.y = yVal;
+        this.dot.graphics.beginFill( this.item.dotColor ).drawCircle( 0, 0, this.item.dotDiameter );
+
         this.show();
-        item.addChild( this.line );
+
+        this.item.addChild( this.dot );
     }
 
     this.hide = function() {
-        this.line.graphics.clear(); 
+        this.dot.graphics.clear(); 
     }
 
-    this.show = function() {
-        this.line.graphics.setStrokeStyle( 1 ).beginStroke( item.dotColor ).moveTo( startVector.x, startVector.y ).lineTo( endVector.x, endVector.y ).endStroke();
+    this.show = function( color ) {
+        this.hide();
+        if ( color == null ) color = this.item.dotColor;
+        this.dot.graphics.beginFill( color ).drawCircle( 0, 0, this.item.dotDiameter );
     }
 
     this.setup();

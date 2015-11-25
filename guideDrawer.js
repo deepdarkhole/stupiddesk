@@ -12,17 +12,19 @@ function GuideDrawer( item ) {
 
         this.dots = new Array();
         
-        for( var i = 0; i < this.item.alignment.allAlignments.length; i++ )
-        {
-            var aVector = this.item.alignment.allAlignments[i];
+        var horizontals = this.item.alignment.horizontalAlignmentPoints;
+        var verticals = this.item.alignment.verticalAlignmentPoints;
 
-            // Create dots.
-            var dot = new createjs.Shape();
-            dot.x = aVector.x;// + offset;
-            dot.y = aVector.y;// + offset;
-            dot.graphics.beginFill( this.item.dotColor ).drawCircle( 0, 0, this.item.dotDiameter );
-            this.item.addChild( dot );
-            this.dots.push( dot );
+        for( var h = 0; h < horizontals.length; h++ )
+        {
+            for( var v = 0; v < verticals.length; v++ )
+            {
+                var hAlignmentPoint = horizontals[h];
+                var vAlignmentPoint = verticals[v];
+
+                var dot = new GuideDot( this.item, hAlignmentPoint, vAlignmentPoint );
+                this.dots.push( dot );
+            }
         }
     }
 

@@ -132,8 +132,10 @@
             var stagePoint = new Vector( event.stageX - items.x, event.stageY - items.y );
             this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
             var dot = this.closestAlignmentDot;
-            dot.graphics.clear();
-            dot.graphics.beginFill( "red" ).drawCircle( 0, 0, this.dotDiameter );
+            if ( dot != null )
+            {
+                dot.show( "red" );
+            }
 
             this.guideDrawer.showGuides();
         } else {
@@ -162,8 +164,7 @@
         var dot = this.closestAlignmentDot;
         if ( dot != null )
         {
-            dot.graphics.clear();
-            dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
+            dot.show( this.dotColor );
         }
 
         this.guideDrawer.hideGuides();

@@ -139,8 +139,8 @@ function createItems()
         var color = randomColor();
         var button = new Button( i, color, images[i] );
         myButtons.push( button );
-        //button.rotation = Math.random() * 360;
         button.setAlignment();
+        button.rotation = Math.random() * 360;
         items.addChild( button );
     }
 

@@ -188,8 +188,8 @@
 
             // Create dots.
             var dot = new createjs.Shape();
-            dot.x = aVector.x - offset;
-            dot.y = aVector.y - offset;
+            dot.x = aVector.x;// + offset;
+            dot.y = aVector.y;// + offset;
             dot.graphics.beginFill( this.dotColor ).drawCircle( 0, 0, this.dotDiameter );
             this.addChild( dot );
             this.dots.push( dot );

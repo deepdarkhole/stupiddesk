@@ -171,7 +171,9 @@ function save()
 	//console.log(itemData);
 	//console.trace(itemData);
 	console.log(JSON.stringify(itemData));
+	alert((JSON.stringify(itemData) ));
 }
+
 
 function createItems()
 {

@@ -1,14 +1,11 @@
-var AlignmentPoint = {   "TopLeft":0, 
-                    "TopCenter":1,
-                    "TopRight":2,
-                    "MiddleLeft":3,
-                    "MiddleCenter":4,
-                    "MiddleRight":5,
-                    "BottomLeft":6,
-                    "BottomCenter":7,
-                    "BottomRight":8 }
+var AlignmentPoint = {   "Left":0, 
+                    "Center":1,
+                    "Right":2,
+                    "Top":3,
+                    "Middle":4,
+                    "Bottom":5 }
 
-Object.freeze( Alignment );
+Object.freeze( AlignmentPoint );
 
 function Alignment( item ) {
     

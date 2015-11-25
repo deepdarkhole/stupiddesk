@@ -57,13 +57,18 @@ function load()
 
 function exportCanvas()
 {
+	var header = document.getElementById(element_id.header);
+		header.style.visibility = "hidden";
+
  	var canvas = document.getElementById( element_id.canvas );
     var bitmap = new createjs.Bitmap( canvas );
     
     bitmap.cache( 0, 0, canvas.width, canvas.height, 1 );
     var base64 = bitmap.getCacheDataURL();
-
+    
     print(base64);
+
+    header.style.visibility = "visible";
     //return base64;
 }
 

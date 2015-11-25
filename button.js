@@ -53,7 +53,7 @@
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
-        this.on( "rollout", this.handleRollOver );
+        this.on( "rollout", this.handleRollOut );
 
         this.cursor = "pointer";
 
@@ -165,7 +165,12 @@
     p.handleRollOver = function( event ) {
     	if(this.pressing == true)
     		return;
+        this.guideDrawer.showGuides();
         this.parent.setChildIndex( this , this.parent.numChildren-1);
+    }
+
+    p.handleRollOut = function( event ) {
+        this.guideDrawer.hideGuides();
     }
 
     p.resize = function( event ) {

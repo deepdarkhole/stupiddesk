@@ -6,6 +6,7 @@
         this.dotDiameter = 2;
 
         this.setup( img , position);
+        this.setAlignment();
     }
 
     var p = createjs.extend( Item, createjs.Container );

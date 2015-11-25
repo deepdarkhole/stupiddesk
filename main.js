@@ -61,21 +61,39 @@ function exportCanvas()
 
 function create( data )
 {
-	items = new createjs.Container();
-	items.x = items.y = 0;	
-	for( var i = 0 ; i < data.length; i++)
+	itemContainer = new createjs.Container();
+	itemContainer.x = itemContainer.y = 0;
+
+	items = new Array();	
+
+	//didn't simplify state, because this will run faster and we're client-side
+	if(data == null)
 	{
-		var item = new Item( data[i].img, data[i] );
-       		item.setAlignment();
-        	items.addChild( item );		
+		var length = images.length;
+		if(debug)
+			length = 5;
+		for( var i = 0 ; i < length; i++)
+		{
+			var item = new Item( images[i], null );
+			items.push( item );  		
+    		itemContainer.addChild( item );	
+		}
+	}else{
+		for( var i = 0 ; i < data.length; i++)
+		{
+			var item = new Item( data[i].img, data[i] );
+			items.push( item );  		
+    		itemContainer.addChild( item );
+		}		
+
 	}
-    stage.addChild(items);
+    stage.addChild(itemContainer);
 }
 
 function stupid()
 {
 	removeItems();
-	createItems();
+	create( null );
 }
 
 function share()
@@ -87,9 +105,9 @@ function save()
 {
 	console.log("Save");
 	itemData = new Array();
-	for( var i = 0; i < items.children.length; i++)
+	for( var i = 0; i < itemContainer.children.length; i++)
 	{
-		var item = items.children[i];
+		var item = itemContainer.children[i];
 		var data = {
 			img: item.name,
 			x: item.x,
@@ -104,32 +122,12 @@ function save()
 	alert((JSON.stringify(itemData) ));
 }
 
-
-function createItems()
-{
-	items = new createjs.Container();
-	items.x = items.y = 0;
-	
-    var myItems = new Array();
-    var imageCount = images.length;
-    imageCount = 5; // Debugging.
-    for( var i = 0; i < imageCount; i++ )
-    {
-        var item = new Item( images[i], null );
-        myItems.push( item );
-        item.setAlignment();        
-        items.addChild( item );
-    }
-
-    stage.addChild(items);
-}
-
 function removeItems()
 {
-	if(!items)
+	if(!itemContainer)
 		return;
 
-	stage.removeChild( items );	
+	stage.removeChild( itemContainer );	
 }
 
 function tick( event ) {
@@ -140,11 +138,11 @@ function tick( event ) {
 
 function center()
 {
-	if(!items)
+	if(!itemContainer)
 		return;
 
-	items.x = window.innerWidth * 0.5;
-	items.y = window.innerHeight * 0.5;
+	itemContainer.x = window.innerWidth * 0.5;
+	itemContainer.y = window.innerHeight * 0.5;
 }
 
 function resize() {

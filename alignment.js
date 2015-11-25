@@ -25,11 +25,30 @@ function Alignment( item ) {
                                     this.bottomLeft,
                                     this.bottomCenter,
                                     this.bottomRight );
+    
 
+    this.getClosestIndexByRotation = function( index, rotation ) {
+        var indexArray = new Array( 0, 1, 2, 3, 4, 5, 6, 7, 8 );
 
+        switch( rotation )
+        {
+            case( 90 ):
+                indexArray = new Array( 6, 3, 0, 7, 4, 1, 8, 5, 2 );
+            break;
+
+            case( 180 ):
+                indexArray = new Array( 8, 7, 6, 5, 4, 3, 2, 1, 0 );
+            break;
+
+            case( 270 ):
+                indexArray = new Array( 2, 5, 8, 1, 4, 7, 0, 3, 6 );
+            break;
+        }
+
+        return indexArray[ index ];
+    }
 }
 
-//Alignment.prototype = {
 Object.defineProperties( Alignment.prototype, {
     // Sizing
     x : {
@@ -75,10 +94,152 @@ Object.defineProperties( Alignment.prototype, {
         }
     },
     
+    // Absolute
+    absTop : {
+        get : function() {
+            return - ( this.height * .5 );
+        }
+    },
+
+    absBottom : {
+        get : function() {
+            return ( this.height * .5 );
+        }
+    },
+
+    absLeft : {
+        get : function() {
+            return - ( this.width * .5 );
+        }
+    },
+
+    absRight : {
+        get : function() {
+            return ( this.width * .5 );
+        }
+    },
+
+    // Individual
+    top : {
+        get : function() {
+            var value; 
+            switch( this.item.rotation )
+            {
+                case ( 0 ):
+                    value = this.absTop;
+                break;
+
+                case ( 90 ):
+                    value = this.absLeft;
+                break;
+
+                case ( 180 ):
+                    value = this.absBottom;
+                break;
+
+                case ( 270 ):
+                    value = this.absRight;
+                break;
+            }
+            return value;
+        }
+    },
+
+    center : {
+        get : function() {
+            return 0;
+        }
+    }, 
+
+    bottom : {
+        get : function() {
+            var value; 
+            switch( this.item.rotation )
+            {
+                case ( 0 ):
+                    value = this.absBottom;
+                break;
+
+                case ( 90 ):
+                    value = this.absLeft;
+                break;
+
+                case ( 180 ):
+                    value = this.absTop;
+                break;
+
+                case ( 270 ):
+                    value = this.absRight;
+                break;
+            }
+
+            return value;
+        }
+    },
+
+    left : {
+        get : function() {
+            var value;
+            switch( this.item.rotation )
+            {
+                case ( 0 ):
+                    value = this.absLeft;
+                break;
+
+                case ( 90 ):
+                    value = this.absTop;
+                break;
+
+                case ( 180 ):
+                    value = this.absRight;
+                break;
+
+                case ( 270 ):
+                    value = this.absBottom;
+                break;
+            }
+
+            return value;
+        }
+    },
+
+    middle : {
+        get : function() {
+            return 0;
+        }
+    },
+
+    right : {
+        get : function() {
+            var value;
+            switch( this.item.rotation )
+            {
+                case ( 0 ):
+                    value = this.absRight;
+                break;
+
+                case ( 90 ):
+                    value = this.absBottom;
+                break;
+
+                case ( 180 ):
+                    value = this.absLeft;
+                break;
+
+                case ( 270 ):
+                    value = this.absTop;
+                break;
+            }
+
+            return value;
+        }
+    },
+
+    // combination.
     topLeft : {
         get : function() {
-            var x = - (this.width * .5);
-            var y = - (this.height * .5);
+            var x = this.left;
+            var y = this.top;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -86,8 +247,8 @@ Object.defineProperties( Alignment.prototype, {
 
     topCenter : {
         get : function() {
-            var x = 0;
-            var y = - (this.height * .5);
+            var x = this.center;
+            var y = this.top;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -95,8 +256,8 @@ Object.defineProperties( Alignment.prototype, {
 
     topRight : {
         get : function() {
-            var x = (this.width * .5);
-            var y = - (this.height * .5);
+            var x = this.right;
+            var y = this.top;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -104,8 +265,8 @@ Object.defineProperties( Alignment.prototype, {
 
     middleLeft : {
         get : function() {
-            var x = - ( this.width * .5 );
-            var y = 0;
+            var x = this.left;
+            var y = this.middle;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -113,8 +274,8 @@ Object.defineProperties( Alignment.prototype, {
 
     middleCenter : {
         get : function() {
-            var x = 0;
-            var y = 0;
+            var x = this.center;
+            var y = this.middle;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -122,8 +283,8 @@ Object.defineProperties( Alignment.prototype, {
 
     middleRight : {
         get : function() {
-            var x = ( this.width * .5 );
-            var y = 0;
+            var x = this.right;
+            var y = this.middle;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -131,8 +292,8 @@ Object.defineProperties( Alignment.prototype, {
 
     bottomLeft : {
         get : function() {
-            var x = - ( this.width * .5 );
-            var y = ( this.height * .5 );
+            var x = this.left;
+            var y = this.bottom;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -140,8 +301,8 @@ Object.defineProperties( Alignment.prototype, {
 
     bottomCenter : {
         get : function() {
-            var x = 0;
-            var y = (this.height * .5 );
+            var x = this.center;
+            var y = this.bottom;
             var vector = new Vector( x, y );
             return vector;
         }
@@ -149,8 +310,8 @@ Object.defineProperties( Alignment.prototype, {
     
     bottomRight : {
         get : function() {
-            var x = ( this.width * .5 );
-            var y = ( this.height * .5 );
+            var x = this.right;
+            var y = this.bottom;
             var vector = new Vector( x, y );
             return vector;
         }

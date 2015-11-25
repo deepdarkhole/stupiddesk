@@ -84,7 +84,6 @@ function create( data )
 			items.push( item );  		
     		itemContainer.addChild( item );
 		}		
-
 	}
     stage.addChild(itemContainer);
 }

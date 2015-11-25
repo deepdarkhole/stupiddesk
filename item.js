@@ -16,19 +16,19 @@
         this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
         this.name = img;
-        
-        var w = stage.canvas.width;
-        var h = stage.canvas.height;
 
-        if(position != null)
+        if(position == null)
         {
-            this.x = position.x;
-            this.y = position.y;
-            this.rotation = position.rotation;
-        }else{
+            var w = stage.canvas.width;
+            var h = stage.canvas.height;
+
             this.x = (w * Math.random()) - (w * 0.5);
             this.y = (h * Math.random()) - (h * 0.5);
-            this.rotation = Math.random() * 360;
+            this.rotation = Math.random() * 360;            
+        }else{
+            this.x = position.x;
+            this.y = position.y;
+            this.rotation = position.rotation;            
         }   
 
         this.tickEnabled = false;
@@ -36,6 +36,7 @@
         // Bitmap
         var bitmap = new createjs.Bitmap(imgPath + img);
         var bounds = bitmap.getBounds();
+
         this.scaleFactor = .7;
         bitmap.scaleX *= this.scaleFactor;
         bitmap.scaleY *= this.scaleFactor;
@@ -178,6 +179,7 @@
     p.handleRollOver = function( event ) {
     	if(this.pressing == true)
     		return;
+
         this.guideDrawer.showGuides();
         this.parent.setChildIndex( this , this.parent.numChildren-1);
     }

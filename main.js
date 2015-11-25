@@ -1,6 +1,12 @@
 var stage;
 var items;
 var gridSize;
+var element_id = {
+		intro: "intro",
+		header: "header",
+		content: "content",
+		footer: "footer"
+	};
 var images = [
 	"black notepaper.png",
 	"kraft notepaper.png",
@@ -100,7 +106,13 @@ function init()
 
 function start()
 {
+	var intro = document.getElementById(element_id.intro);
+		intro.parentNode.removeChild(intro);
 
+	var header = document.getElementById(element_id.header);
+		header.style.visibility = "visible";
+
+	stupid();
 }
 
 function stupid()

@@ -51,7 +51,7 @@
         this.bitmap = bitmap;
         this.addChild( bitmap );
 
-        // add shadow
+        // Dynamic Shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
         bitmap.scaleX = bitmap.scaleY = this.scaleFactor;
@@ -60,6 +60,7 @@
 
         this.resize();
 
+        // Event Listeners 
         this.on( "click", this.handleClick );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
@@ -138,13 +139,8 @@
 
             var stagePoint = new Vector( event.stageX - itemContainer.x, event.stageY - itemContainer.y );
             this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
-            var dot = this.closestAlignmentDot;
-            if ( dot != null )
-            {
-                dot.show( "red" );
-            }
+            this.guideDrawer.showActiveGuidesByDot( this.closestAlignmentDot );
 
-            this.guideDrawer.showGuides();
         } else {
             this.wasMoved = true;            
         }
@@ -168,13 +164,7 @@
         this.pressing = false;
         this.wasMoved = false;
 
-        var dot = this.closestAlignmentDot;
-        if ( dot != null )
-        {
-            dot.show( this.dotColor );
-        }
-
-        this.guideDrawer.hideGuides();
+        this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
     }
 
     p.handleRollOver = function( event ) {

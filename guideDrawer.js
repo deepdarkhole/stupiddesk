@@ -47,14 +47,36 @@ function GuideDrawer( item ) {
                                 new Vector( min.x, max.y ),
                                 new Vector( 0,     max.y ),
                                 new Vector( max.x, max.y ) );
-                                
 
-        // Draw Horizontal Guides.
+        var guideDotReferences = new Array( 6, 7, 8,
+                                            3, 4, 5,
+                                            0, 1, 2,
+                                            6, 3, 0,
+                                            7, 4, 1,
+                                            8, 5, 2 )
+
+        // Draw Guides.
+        var guideIndex = 0;
         for( var i = 0; i < starts.length; i++ )
         {
             var guideLine = new GuideLine( this.item, starts[i], ends[i] );
             this.guides.push( guideLine );
+
+            for( var j = 0; j < 3; j++ )
+            {
+                guideLine.addGuideDot( this.dots[ guideDotReferences[ guideIndex ] ] );
+                guideIndex++;
+            }
         }
+    }
+
+    this.hideActiveGuidesByDot = function( closestDot ) {
+        if ( closestDot != null )
+        {
+            closestDot.show( this.item.dotColor );
+        }
+
+        this.hideGuides();
     }
 
     this.hideGuides = function() {
@@ -64,10 +86,25 @@ function GuideDrawer( item ) {
         }
     }
 
-    this.showGuides = function() {
+    this.showActiveGuidesByDot = function( closestDot ) {
+        if ( closestDot != null ) 
+        {
+            closestDot.show( "red" );
+        }
+
+        this.showGuides( closestDot );
+    }
+
+    this.showGuides = function( dot ) {
         for( var i = 0; i < this.guides.length; i++ )
         {
-            this.guides[i].show();
+            var guideColor = this.item.dotColor;
+            if ( this.guides[i].containsDot( dot ) )
+            {
+                guideColor = "red";
+            }
+
+            this.guides[i].show( guideColor );
         }
     }
 

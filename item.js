@@ -1,5 +1,6 @@
 (function() {
-    function Item( img, position ) {
+    function Item( img, position )
+    {
         this.Container_constructor();
         // Dots Debugging
         this.dotColor = "#99FF00";
@@ -11,7 +12,8 @@
 
     var p = createjs.extend( Item, createjs.Container );
 
-    p.setup = function( img, position ) {
+    p.setup = function( img, position )
+    {
        // Bitmap        
         var bitmap = new createjs.Bitmap( itemQueue.getResult(img) );   //var bitmap = new createjs.Bitmap(imgPath + img);
         var bounds = bitmap.getBounds();
@@ -33,7 +35,6 @@
 
         this.bitmap = bitmap;
         this.addChild( bitmap );
-        //this.addChild( hitArea );
         this.hitArea = hitArea;
 
         // Dynamic Shadow
@@ -74,7 +75,8 @@
         this.wasMoved = false;    
     }
 
-    p.getClosestAlignmentDotToPoint = function( point ) {
+    p.getClosestAlignmentDotToPoint = function( point )
+    {
         var aPoints = this.alignment.allAlignments;
         var itemPosition = new Vector( this.x, this.y );
 
@@ -97,7 +99,8 @@
         return this.guideDrawer.dots[closestIndex];
     }
 
-    p.getClosestAlignmentPoint = function() {
+    p.getClosestAlignmentPoint = function()
+    {
         var closestDistance;
         var closestVector;
 
@@ -107,7 +110,8 @@
         }
     }
 
-    p.getNextRotationValue = function( rotation ) {
+    p.getNextRotationValue = function( rotation )
+    {
         var stepCount = 4;
         for( var i = 0; i < stepCount; i++ )
         {
@@ -119,16 +123,19 @@
         }
     }
 
-    p.getRoundedNumber = function( number ) { 
+    p.getRoundedNumber = function( number )
+    { 
         return Math.round( number / gridSize ) * gridSize; 
     }
 
-    p.handleClick = function( evt ) {
+    p.handleClick = function( evt )
+    {
         if ( this.wasMoved ) return;
         this.rotation = this.getNextRotationValue( this.rotation );
     }
 
-    p.handlePressMove = function( event ) {
+    p.handlePressMove = function( event )
+    {
         if ( !this.wasPressed )
         {
             this.offsetX = event.stageX - this.x;
@@ -158,7 +165,8 @@
         this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
-    p.handlePressUp = function( event ) {
+    p.handlePressUp = function( event )
+    {
         this.wasPressed = false;
         this.pressing = false;
         this.wasMoved = false;
@@ -166,7 +174,8 @@
         this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
     }
 
-    p.handleRollOver = function( event ) {
+    p.handleRollOver = function( event )
+    {
     	if(this.pressing == true)
     		return;
 
@@ -174,16 +183,19 @@
         this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
-    p.handleRollOut = function( event ) {
+    p.handleRollOut = function( event )
+    {
         this.guideDrawer.hideGuides();
     }
 
-    p.resize = function( event ) {
+    p.resize = function( event )
+    {
         this.x = Math.round( this.x );
         this.y = Math.round( this.y );
     }
 
-    p.setAlignment = function () {
+    p.setAlignment = function ()
+    {
         // Alignment
         this.alignment = new Alignment( this );
 

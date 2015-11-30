@@ -12,11 +12,36 @@
     var p = createjs.extend( Item, createjs.Container );
 
     p.setup = function( img, position ) {
-        var maxSpeed = 0;
-        this.xSpeed = -maxSpeed + Math.random() * maxSpeed * 2;
-        this.ySpeed = -maxSpeed + Math.random() * maxSpeed * 2;
-        this.name = img;
+       // Bitmap        
+        var bitmap = new createjs.Bitmap( itemQueue.getResult(img) );   //var bitmap = new createjs.Bitmap(imgPath + img);
+        var bounds = bitmap.getBounds();
+        var hitArea = new createjs.Shape();
+        var hitAreaGraphics = hitArea.graphics;
 
+        this.name = img;
+        this.scaleFactor = .7;
+        
+        bitmap.scaleX *= this.scaleFactor;
+        bitmap.scaleY *= this.scaleFactor;
+
+        if(bounds)
+        {
+            bitmap.x = -bounds.width * .5 * this.scaleFactor;
+            bitmap.y = -bounds.height * .5 * this.scaleFactor;
+            hitAreaGraphics.beginFill("#000000").drawRect(bitmap.x, bitmap.y, bounds.width * this.scaleFactor, bounds.height * this.scaleFactor).endFill();
+        }
+
+        this.bitmap = bitmap;
+        this.addChild( bitmap );
+        //this.addChild( hitArea );
+        this.hitArea = hitArea;
+
+        // Dynamic Shadow
+        var shadowSize = 5;
+        bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
+        bitmap.scaleX = bitmap.scaleY = this.scaleFactor;
+
+        // Set position
         if(position == null)
         {
             var w = stage.canvas.width;
@@ -32,32 +57,6 @@
         }   
 
         this.tickEnabled = false;
-
-        // Bitmap
-        //var bitmap = new createjs.Bitmap(imgPath + img);
-        var bitmap = new createjs.Bitmap( itemQueue.getResult(img) );
-        var bounds = bitmap.getBounds();
-
-        this.scaleFactor = .7;
-        bitmap.scaleX *= this.scaleFactor;
-        bitmap.scaleY *= this.scaleFactor;
-
-        if(bounds)
-        {
-        	bitmap.x = -bounds.width * .5 * this.scaleFactor;
-        	bitmap.y = -bounds.height * .5 * this.scaleFactor;
-    	}
-    	
-        this.bitmap = bitmap;
-        this.addChild( bitmap );
-
-        // Dynamic Shadow
-        var shadowSize = 5;
-        bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
-        bitmap.scaleX = bitmap.scaleY = this.scaleFactor;
-
-        var hit = new createjs.Shape();
-
         this.resize();
 
         // Event Listeners 
@@ -182,7 +181,6 @@
     p.resize = function( event ) {
         this.x = Math.round( this.x );
         this.y = Math.round( this.y );
-        
     }
 
     p.setAlignment = function () {

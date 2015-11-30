@@ -160,8 +160,6 @@
         var testY = event.stageY - this.offsetY;
         
         var snapOffset = this.handleProximitySnapping( this.closestAlignmentDot );
-        snapOffset = snapOffset.multiply( .5 );
-        console.log( snapOffset );
         this.x = testX + snapOffset.x;
         this.y = testY + snapOffset.y;
 

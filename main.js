@@ -84,7 +84,7 @@ function create( data )
 	{
 		var length = images.length;
 		if(debug)
-			length = 5;
+			length = 1;
 		for( var i = 0 ; i < length; i++)
 		{
 			var item = new Item( images[i], null );
@@ -100,6 +100,7 @@ function create( data )
 		}		
 	}
     stage.addChild(itemContainer);
+    center();
     stage.update();
 }
 
@@ -144,8 +145,8 @@ function removeItems()
 
 function tick( event ) {
     var deltaTime = event.delta/1000;
-    stage.update();
     center();
+    stage.update();    
 }
 
 function center()

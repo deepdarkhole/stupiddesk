@@ -69,7 +69,9 @@
         this.offset = Math.random() * 10;
         this.count = 0;
         this.pressing = false;
-        this.wasMoved = false;    
+        this.wasMoved = false; 
+
+        //console.log("x:" + this.x +" y:" + this.y);
     }
 
     p.getClosestAlignmentDotToPoint = function( point )

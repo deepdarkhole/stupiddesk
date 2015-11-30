@@ -27,7 +27,8 @@
         {
             bitmap.x = -bounds.width * .5 * itemScaleFactor;
             bitmap.y = -bounds.height * .5 * itemScaleFactor;
-            hitAreaGraphics.beginFill("#000000").drawRect(bitmap.x, bitmap.y, bounds.width * itemScaleFactor, bounds.height * itemScaleFactor).endFill();
+            var halfPadding = itemHitboxPadding * .5;
+            hitAreaGraphics.beginFill("rgba(0,0,0,0.2)").drawRect(bitmap.x - halfPadding, bitmap.y - halfPadding, bounds.width * itemScaleFactor + itemHitboxPadding, bounds.height * itemScaleFactor + itemHitboxPadding).endFill();
         }
 
         // Dynamic Shadow
@@ -58,9 +59,14 @@
         this.on( "rollout", this.handleRollOut );
 
         // Visual 
-        this.bitmap = bitmap;        
-        this.hitArea = hitArea;
+        this.bitmap = bitmap;   
         this.addChild( bitmap );
+        if(debug)
+        {
+            this.addChild(hitArea);            
+        }else{
+            this.hitArea = hitArea;
+        }          
 
         // Basics
         this.name = img;

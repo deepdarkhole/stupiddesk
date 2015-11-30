@@ -5,6 +5,7 @@ var items;
 var itemData = [{"img":"kraft notepaper.png","x":-56,"y":-117,"rotation":0},{"img":"sketch book.png","x":-313,"y":-108,"rotation":0},{"img":"old book.png","x":-301,"y":214,"rotation":180},{"img":"spatula.png","x":94,"y":239,"rotation":0},{"img":"black notepaper.png","x":186,"y":-175,"rotation":0}];
 var itemQueue;
 var itemScaleFactor = 0.7;
+var itemHitboxPadding = 10;
 var gridSize;
 var imgPath = "./imgs/items/";
 var element_id = {

@@ -20,27 +20,20 @@
         var hitArea = new createjs.Shape();
         var hitAreaGraphics = hitArea.graphics;
 
-        this.name = img;
-        this.scaleFactor = .7;
-        
-        bitmap.scaleX *= this.scaleFactor;
-        bitmap.scaleY *= this.scaleFactor;
+        bitmap.scaleX *= itemScaleFactor;
+        bitmap.scaleY *= itemScaleFactor;
 
         if(bounds)
         {
-            bitmap.x = -bounds.width * .5 * this.scaleFactor;
-            bitmap.y = -bounds.height * .5 * this.scaleFactor;
-            hitAreaGraphics.beginFill("#000000").drawRect(bitmap.x, bitmap.y, bounds.width * this.scaleFactor, bounds.height * this.scaleFactor).endFill();
+            bitmap.x = -bounds.width * .5 * itemScaleFactor;
+            bitmap.y = -bounds.height * .5 * itemScaleFactor;
+            hitAreaGraphics.beginFill("#000000").drawRect(bitmap.x, bitmap.y, bounds.width * itemScaleFactor, bounds.height * itemScaleFactor).endFill();
         }
-
-        this.bitmap = bitmap;
-        this.addChild( bitmap );
-        this.hitArea = hitArea;
 
         // Dynamic Shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
-        bitmap.scaleX = bitmap.scaleY = this.scaleFactor;
+        bitmap.scaleX = bitmap.scaleY = itemScaleFactor;
 
         // Set position
         if(position == null)
@@ -57,9 +50,6 @@
             this.rotation = position.rotation;            
         }   
 
-        this.tickEnabled = false;
-        this.resize();
-
         // Event Listeners 
         this.on( "click", this.handleClick );
         this.on( "pressmove", this.handlePressMove );
@@ -67,8 +57,15 @@
         this.on( "rollover", this.handleRollOver );
         this.on( "rollout", this.handleRollOut );
 
-        this.cursor = "pointer";
+        // Visual 
+        this.bitmap = bitmap;        
+        this.hitArea = hitArea;
+        this.addChild( bitmap );
 
+        // Basics
+        this.name = img;
+        this.tickEnabled = false;
+        this.cursor = "pointer";
         this.offset = Math.random() * 10;
         this.count = 0;
         this.pressing = false;
@@ -186,12 +183,6 @@
     p.handleRollOut = function( event )
     {
         this.guideDrawer.hideGuides();
-    }
-
-    p.resize = function( event )
-    {
-        this.x = Math.round( this.x );
-        this.y = Math.round( this.y );
     }
 
     p.setAlignment = function ()

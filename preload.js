@@ -1,6 +1,6 @@
 var preload = function()
 {
-	itemQueue = new createjs.LoadQueue(false);	
+	itemQueue = new createjs.LoadQueue( false );	
 
 	for(var i = 0; i < images.length; i++)
 	{
@@ -20,6 +20,9 @@ var itemLoadProgress = function( event )
 var itemLoaded = function( event )
 {
 	//console.log("File Loaded");
+
+	// need to hide now
+
 }
 
 var itemsLoaded = function( event )

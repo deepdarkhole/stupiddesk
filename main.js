@@ -100,6 +100,7 @@ function create( data )
 		}		
 	}
     stage.addChild(itemContainer);
+    stage.update();
 }
 
 function stupid()

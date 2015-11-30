@@ -101,17 +101,11 @@ Object.defineProperties( Alignment.prototype, {
         }
     },
 
-    scaleFactor : {
-        get : function() {
-            return this.item.scaleFactor;
-        }
-    },
-    
     height : {
         get : function() {
             var bounds = this.bitmap.getBounds();
             if(bounds)
-                return bounds.height * this.scaleFactor;
+                return bounds.height * itemScaleFactor;
             return 0;
         }
     },
@@ -120,7 +114,7 @@ Object.defineProperties( Alignment.prototype, {
         get : function() {
             var bounds = this.bitmap.getBounds();
             if(bounds)
-                return bounds.width * this.scaleFactor;
+                return bounds.width * itemScaleFactor;
             return 0;
         }
     },

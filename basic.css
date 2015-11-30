@@ -11,11 +11,6 @@ body
     min-height: 280px;  
 }
 
-img
-{
-    visibility: hidden;
-}
-
 a
 {
 	text-decoration: none;

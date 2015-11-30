@@ -159,12 +159,11 @@
         var testX = event.stageX - this.offsetX;
         var testY = event.stageY - this.offsetY;
         
-        /*
-        this.x = this.getRoundedNumber( testX );
-        this.y = this.getRoundedNumber( testY );
-        */
-        this.x = testX;
-        this.y = testY;
+        var snapOffset = this.handleProximitySnapping( this.closestAlignmentDot );
+        snapOffset = snapOffset.multiply( .5 );
+        console.log( snapOffset );
+        this.x = testX + snapOffset.x;
+        this.y = testY + snapOffset.y;
 
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
@@ -177,6 +176,57 @@
         this.wasMoved = false;
 
         this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
+    }
+    
+    p.handleProximitySnapping = function( dot ) {
+        var horizontalCheck = dot.horizontalAlignmentPoint;     // y val
+        var verticalCheck = dot.verticalAlignmentPoint;         // x val
+        var pointToCheck = dot.dot.localToGlobal( 0, 0 );
+
+        var snapThreshold = 10;
+        var offset = new Vector( 0, 0 );
+        var snap = new Vector( 0, 0 );
+        for( var i = 0; i < items.length; i++ )
+        {
+            var item = items[i];
+            if ( item == this ) continue;
+            
+            // Check horizontal alignments.
+            var horizontalArray = item.alignment.horizontalAlignmentValues;
+            for( var h = 0; h < horizontalArray.length; h++ )
+            {
+                var global = item.localToGlobal( 0, horizontalArray[h] );
+                var diff = global.y - pointToCheck.y;
+                var absDiff = Math.abs( diff );
+                if ( absDiff < snapThreshold ) 
+                {
+                    if ( absDiff < offset.y || offset.y == 0 )
+                    {
+                        offset.y = diff;
+                        snap.y = global.y;
+                    }
+                }
+            }
+
+            // Check vertical alignments.
+            var verticalArray = item.alignment.verticalAlignmentValues;
+            for( var v = 0; v < verticalArray.length; v++ )
+            {
+                var global = item.localToGlobal( verticalArray[v], 0 );
+                var diff = global.x - pointToCheck.x;
+                var absDiff = Math.abs( diff );
+                if ( absDiff < snapThreshold ) 
+                {
+                    if ( absDiff < offset.x || offset.x == 0 )
+                    {
+                        offset.x = diff;
+                        snap.x = global.x;
+                    }
+                }
+            }
+        }
+
+        return offset;
     }
 
     p.handleRollOver = function( event )

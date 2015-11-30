@@ -353,6 +353,23 @@ Object.defineProperties( Alignment.prototype, {
             var vector = new Vector( x, y );
             return vector;
         }
-    }
+    },
+
+    // Arrays
+    horizontalAlignmentValues : {
+        get : function() {
+            return new Array( this.getValueFromAlignmentPoint( this.horizontalAlignmentPoints[0] ),
+                                this.getValueFromAlignmentPoint( this.horizontalAlignmentPoints[1] ),
+                                this.getValueFromAlignmentPoint( this.horizontalAlignmentPoints[2] ) );
+        }
+    },
+
+    verticalAlignmentValues : {
+        get : function() {
+            return new Array( this.getValueFromAlignmentPoint( this.verticalAlignmentPoints[0] ),
+                                this.getValueFromAlignmentPoint( this.verticalAlignmentPoints[1] ),
+                                this.getValueFromAlignmentPoint( this.verticalAlignmentPoints[2] ) );
+        }
+    },
 });
 

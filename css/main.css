@@ -26,7 +26,14 @@
 }
 #intro h1
 {
-	font-size: 4em;
+	font-size: 5em;
+	font-family: "Clarendon Bold";
+
+
+	text-align: left;
+	max-width: 880px;
+	width: 70%;
+	margin: 10px auto;
 }
 #intro p
 {
@@ -35,6 +42,9 @@
 	font-size: 2em;
 	width: 70%;
 	max-width: 880px;
+	font-family: "Domine";
+	font-weight: 300;
+	text-align: left;
 }
 #intro button
 {
@@ -52,6 +62,8 @@
     border: none;
 	min-width: 430px;
 	visibility: hidden;
+	margin-left: -280px;
+	left: 50%;
 }
 #header ul
 {
@@ -75,6 +87,18 @@
 	padding:20px;
 	background-color: #f6f3e8;
 	border-radius: 24px 24px 0px 0px;
+	font-family: "CoreSans Light";
+
+	margin-left: -280px;
+	left: 50%;
+
+	min-width: 560px;
+}
+
+#footer a
+{
+	font-weight: normal;
+	font-family: "CoreSans Black";
 }
 
 .center
@@ -83,4 +107,15 @@
     left: 50%;
     margin-right: -50%;
     transform: translateX(-50%);
+}
+
+button
+{
+	font-family: 'CoreSans Black';
+	font-size: 14pt;
+}
+
+h1 span
+{
+	font-weight: normal;
 }

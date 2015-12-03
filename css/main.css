@@ -62,8 +62,6 @@
     border: none;
 	min-width: 430px;
 	visibility: hidden;
-	margin-left: -280px;
-	left: 50%;
 }
 #header ul
 {
@@ -89,10 +87,6 @@
 	border-radius: 24px 24px 0px 0px;
 	font-family: "CoreSans Light";
 
-	margin-left: -280px;
-	left: 50%;
-
-	min-width: 560px;
 }
 
 #footer a

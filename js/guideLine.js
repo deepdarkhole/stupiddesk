@@ -30,7 +30,7 @@ function GuideLine( item, startVector, endVector )
 
     this.show = function( color ) {
         if ( color == null ) color = this.item.dotColor;
-        this.line.graphics.setStrokeStyle( 1 ).beginStroke( color ).moveTo( startVector.x, startVector.y ).lineTo( endVector.x, endVector.y ).endStroke();
+        this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( color ).moveTo( startVector.x, startVector.y ).lineTo( endVector.x, endVector.y ).endStroke();
     }
 
     this.setup();

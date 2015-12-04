@@ -2,8 +2,9 @@
     function Item( img, position )
     {
         this.Container_constructor();
-        // Dots Debugging
-        this.dotColor = "#99FF00";
+        // Dots DebuggingFFDE00
+        this.dotColorActive = "#000000";
+        this.dotColor = "rgba(0,0,0,.2)";
         this.dotDiameter = 2;
         this.img = img;
         this.position = position;
@@ -49,6 +50,7 @@
 
         // Event Listeners 
         this.on( "click", this.handleClick );
+        this.on( "mousedown", this.handlePressDown );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
@@ -162,7 +164,15 @@
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
 
+        this.guideDrawer.showGuidesActive();
+
     }
+
+    p.handlePressDown = function( event )
+    {
+       this.guideDrawer.showGuidesActive();
+    }
+    
 
     p.handlePressUp = function( event )
     {
@@ -170,7 +180,8 @@
         this.wasMoved = false;
 
         this.itemSnapper.clearDebugLines();
-        this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
+        this.guideDrawer.showGuides();
+        //this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
     }
     
 

@@ -5,6 +5,8 @@ function GuideDrawer( item ) {
     this.setup = function() {
         this.drawDots();
         this.drawGuides();
+        this.line = new createjs.Shape();
+        this.item.addChild( this.line );
     }
 
     this.drawDots = function() {
@@ -38,17 +40,17 @@ function GuideDrawer( item ) {
         //console.log("min:"+min.x+" max:"+max.x);
 
         var starts = new Array( new Vector( min.x, min.y ),
-                                new Vector( min.x, 0 ),
+                               // new Vector( min.x, 0 ),
                                 new Vector( min.x, max.y ),
                                 new Vector( min.x, min.y ),
-                                new Vector( 0,     min.y ),
+                               // new Vector( 0,     min.y ),
                                 new Vector( max.x, min.y ) );
 
         var ends   = new Array( new Vector( max.x, min.y ),
-                                new Vector( max.x, 0 ),
+                                //new Vector( max.x, 0 ),
                                 new Vector( max.x, max.y ),
                                 new Vector( min.x, max.y ),
-                                new Vector( 0,     max.y ),
+                              //  new Vector( 0,     max.y ),
                                 new Vector( max.x, max.y ) );
 
         var guideDotReferences = new Array( 6, 7, 8,
@@ -83,6 +85,8 @@ function GuideDrawer( item ) {
     }
 
     this.hideGuides = function() {
+        this.line.graphics.clear();
+
         for( var i = 0; i < this.guides.length; i++ )
         {
             this.guides[i].hide();
@@ -98,18 +102,40 @@ function GuideDrawer( item ) {
         this.showGuides( closestDot );
     }
 
-    this.showGuides = function( dot ) {
-
+    this.showGuides = function( dot ) 
+    {
+/*
         for( var i = 0; i < this.guides.length; i++ )
         {
             var guideColor = this.item.dotColor;
-            if ( this.guides[i].containsDot( dot ) )
-            {
-                guideColor = "red";
-            }
-
+            this.guides[i].hide();
             this.guides[i].show( guideColor );
         }
+        */
+
+        var alignment = this.item.alignment;
+
+        this.line.graphics.clear();
+        this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( this.item.dotColor )
+            .rect(-alignment.width/2, -alignment.height/2, alignment.width, alignment.height );
+
+
+    }
+
+    this.showGuidesActive = function() 
+    {
+      /*  for( var i = 0; i < this.guides.length; i++ )
+        {
+            var guideColor = this.item.dotColorActive;
+            this.guides[i].hide();
+            this.guides[i].show( guideColor );
+        }*/
+
+        var alignment = this.item.alignment;
+
+        this.line.graphics.clear();
+        this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( this.item.dotColorActive )
+            .rect(-alignment.width/2, -alignment.height/2, alignment.width, alignment.height );
     }
 
 

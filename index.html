@@ -20,6 +20,7 @@
     <script src="js/preload.js"></script>
     <script src="js/alignment.js"></script>
     <script src="js/item.js"></script>
+    <script src="js/itemSnapper.js"></script>
     <script src="js/guideDrawer.js"></script>
     <script src="js/guideDot.js"></script>
     <script src="js/guideLine.js"></script>
@@ -39,7 +40,11 @@
         <p>
             Knolling is the process of arranging related objects in parallel or 90-degree angles as a method of organization.
         </p>
-        <button type="button" name="start" class="green_btn" disabled onclick="start();">Get Stupid</button></li>
+
+        <button id="loading" type="button" name="start" class="green_btn" disabled onclick="start();">
+            <span class="bkg"></span>    
+            <span class="text">Get Stupid</span>
+        </button>
     </div>
     <div id="header" class="center">
         <ul>
@@ -56,7 +61,7 @@
     </div>
     <div id="footer" class="center">    
         <p>
-        Made in a <a href="http://www.deepdarkhole.com">Deep Dark Hole</a> using <a href="http://www.createjs.com">CreateJS</a>. Contribute on <a href="https://github.com/AndreiMarks/ddhknoll.git">GIT</a>.<br/>
+        Made in a <a href="http://www.deepdarkhole.com">Deep Dark Hole</a> using <a href="http://www.createjs.com">CreateJS</a>. Contribute on <a href="https://github.com/deepdarkhole/stupiddesk/">Github</a>.<br/>
         <a href="http://twitter.com/andreimarks/">@AndreiMarks</a> | <a href="http://twitter.com/willstall/">@WillStall</a>  | <a href="http://twitter.com/dainsaint/">@DainSaint</a> 
         </p>
 

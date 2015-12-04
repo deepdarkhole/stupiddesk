@@ -2,7 +2,8 @@ var debug = false;
 var stage;
 var itemContainer;
 var items;
-var itemData = [{"img":"kraft notepaper.png","x":-56,"y":-117,"rotation":0},{"img":"sketch book.png","x":-313,"y":-108,"rotation":0},{"img":"old book.png","x":-301,"y":214,"rotation":180},{"img":"spatula.png","x":94,"y":239,"rotation":0},{"img":"black notepaper.png","x":186,"y":-175,"rotation":0}];
+//var itemData = [{"img":"kraft notepaper.png","x":-56,"y":-117,"rotation":0},{"img":"sketch book.png","x":-313,"y":-108,"rotation":0},{"img":"old book.png","x":-301,"y":214,"rotation":180},{"img":"spatula.png","x":94,"y":239,"rotation":0},{"img":"black notepaper.png","x":186,"y":-175,"rotation":0}];
+var itemData = [{"img":"eraser.png","x":-440.60281000938267,"y":223.2956617709715,"rotation":323.52558759972453},{"img":"old clamp.png","x":71.07622845331207,"y":338.93742016283795,"rotation":284.1434608027339},{"img":"old clock.png","x":483.2037563584745,"y":40.07522344146855,"rotation":28.395620388910174},{"img":"old lighter.png","x":-65.5505667894613,"y":-634.1888129590079,"rotation":11.498988037928939},{"img":"ring.png","x":148.2131100324914,"y":-497.76993235736154,"rotation":163.24599486775696},{"img":"wood pen.png","x":39.65609960141592,"y":107.72485600993969,"rotation":216.904273359105},{"img":"brush.png","x":-342.0549948932603,"y":-197.90092500066385,"rotation":324.87316318787634},{"img":"clamp-1.png","x":306.74879568908364,"y":-348.17796626943164,"rotation":293.36913387291133},{"img":"glass.png","x":187.53157114307396,"y":-153.0444505554624,"rotation":155.53594959899783},{"img":"color pen-1.png","x":-170.40980210830458,"y":-308.7358282965142,"rotation":5.675822161138058},{"img":"kraft notepaper.png","x":-221.71429928089492,"y":-279.11100418982096,"rotation":307.09649437107146},{"img":"wood cubes.png","x":-371.0402355873957,"y":17.6219722724054,"rotation":115.94960217364132},{"img":"old book.png","x":220.2961888751015,"y":-342.5912233206909,"rotation":55.622998271137476},{"img":"clamp.png","x":262.8571395489853,"y":33.838609041878954,"rotation":240.73632490821183},{"img":"spatula.png","x":238.75033987569623,"y":-34.78147332323715,"rotation":283.19099463522434},{"img":"sharpener.png","x":375.8281528367661,"y":300.71418289025314,"rotation":322.1105526946485},{"img":"color pen.png","x":-189.67113967658952,"y":174.17660917621106,"rotation":271.5770211350173},{"img":"black notepaper.png","x":70.5301532689482,"y":150.55220999196172,"rotation":0},{"img":"old small mirror.png","x":-370.26382643030956,"y":-416.1608420130797,"rotation":288.55602412484586},{"img":"sketch book.png","x":-4.120844782330096,"y":-322.2591200901661,"rotation":0}];
 var itemQueue;
 var itemScaleFactor = 0.7;
 var itemHitboxPadding = 10;
@@ -13,7 +14,8 @@ var element_id = {
 		header: "header",
 		canvas: "canvas",
 		content: "content",
-		footer: "footer"
+		footer: "footer",
+		loading: "loading"
 	};
 var images = [
 	"black notepaper.png",

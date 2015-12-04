@@ -125,8 +125,10 @@
         //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
         var snapOffset = this.itemSnapper.getClosestSnapOffset();
 
+        /*
         this.offsetX -= snapOffset.x;
         this.offsetY -= snapOffset.y;
+        */
 
         var testX = event.stageX - itemContainer.x - this.offsetX;
         var testY = event.stageY - itemContainer.y - this.offsetY;

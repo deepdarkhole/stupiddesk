@@ -126,7 +126,7 @@ function ItemSnapper( item ) {
         }
 
         // Debug Alignment Lines
-        var lineColor = "red";
+        var lineColor = "black";
         var lineToPos = new Vector( 0, 0 );
 
         if ( closestHorizontalItem != null )
@@ -143,7 +143,10 @@ function ItemSnapper( item ) {
                 lineToPos.y = dot.dot.y;
             }
 
-            line.graphics.setStrokeStyle( 1 ).beginStroke( lineColor ).moveTo( dot.dot.x, dot.dot.y ).lineTo( lineToPos.x, lineToPos.y ).endStroke();
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5]).beginStroke( lineColor ).moveTo( dot.dot.x, dot.dot.y ).lineTo( lineToPos.x, lineToPos.y ).endStroke();
+
+            line.graphics.setStrokeStyle(0).beginFill(lineColor)
+                .drawCircle( lineToPos.x, lineToPos.y, 4 );
 
             this.alignLines.push( line );
             this.item.addChild( line );
@@ -163,7 +166,10 @@ function ItemSnapper( item ) {
                 lineToPos.y = verticalItemPos.y;
             }
 
-            line .graphics.setStrokeStyle( 1 ).beginStroke( lineColor ).moveTo( dot.dot.x, dot.dot.y ).lineTo( lineToPos.x, lineToPos.y ).endStroke();
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5]).beginStroke( lineColor ).moveTo( dot.dot.x, dot.dot.y ).lineTo( lineToPos.x, lineToPos.y ).endStroke();
+
+            line.graphics.setStrokeStyle(0).beginFill(lineColor)
+                .drawCircle( lineToPos.x, lineToPos.y, 4 );
 
             this.alignLines.push( line );
             this.item.addChild( line );

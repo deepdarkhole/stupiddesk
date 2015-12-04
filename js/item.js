@@ -5,10 +5,23 @@
         // Dots Debugging
         this.dotColor = "#99FF00";
         this.dotDiameter = 2;
-        this.setup( img , position);
+        this.img = img;
+        this.position = position;
+
+        if( itemQueue.getResult(img) )
+        {
+            this.setupWithAnimation();
+        }
     }
 
     var p = createjs.extend( Item, createjs.Container );
+
+    p.setupWithAnimation = function()
+    {
+        this.setup( this.img , this.position);
+        this.alpha = 0;
+        createjs.Tween.get(this).to({alpha: 1}, 1000);
+    }
 
     p.setup = function( img, position )
     {

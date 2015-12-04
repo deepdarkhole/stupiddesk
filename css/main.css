@@ -112,8 +112,7 @@ button
 
 button#loading:disabled
 {
-	background: none;
-	border: 1px solid #676767;
+	background: #000;
 }
 
 button#loading:disabled .bkg
@@ -126,14 +125,11 @@ button#loading:disabled .bkg
 	height: 100%;
 	background-color: #676767;
 	border-radius: 11px;
-	z-index: -10;
 }
 
 button#loading:disabled .text
 {
-	display: block;
-	z-index: 1;
-	color:#FFF;
+	
 }
 
 h1 span

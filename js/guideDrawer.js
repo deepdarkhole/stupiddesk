@@ -116,7 +116,7 @@ function GuideDrawer( item ) {
         var alignment = this.item.alignment;
 
         this.line.graphics.clear();
-        this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( this.item.dotColor )
+        this.line.graphics.setStrokeStyle( 5, "square" ).setStrokeDash([10,10]).beginStroke( this.item.dotColor )
             .rect(-alignment.width/2 - itemHitboxPadding, -alignment.height/2 - itemHitboxPadding, alignment.width + 2*itemHitboxPadding, alignment.height + 2*itemHitboxPadding );
 
 
@@ -134,8 +134,8 @@ function GuideDrawer( item ) {
         var alignment = this.item.alignment;
 
         this.line.graphics.clear();
-        this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( this.item.dotColorActive )
-            .rect(-alignment.width/2 - itemHitboxPadding, -alignment.height/2 - itemHitboxPadding, alignment.width + 2*itemHitboxPadding, alignment.height + 2*itemHitboxPadding );
+      //  this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( this.item.dotColor )
+     //       .rect(-alignment.width/2 - itemHitboxPadding, -alignment.height/2 - itemHitboxPadding, alignment.width + 2*itemHitboxPadding, alignment.height + 2*itemHitboxPadding );
     }
 
 

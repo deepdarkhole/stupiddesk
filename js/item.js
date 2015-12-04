@@ -4,7 +4,7 @@
         this.Container_constructor();
         // Dots DebuggingFFDE00
         this.dotColorActive = "#000000";
-        this.dotColor = "rgba(0,0,0,.2)";
+        this.dotColor = "#FFDE00";
         this.dotDiameter = 2;
         this.img = img;
         this.position = position;
@@ -50,7 +50,6 @@
 
         // Event Listeners 
         this.on( "click", this.handleClick );
-        this.on( "mousedown", this.handlePressDown );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
@@ -168,11 +167,6 @@
 
     }
 
-    p.handlePressDown = function( event )
-    {
-       this.guideDrawer.showGuidesActive();
-    }
-    
 
     p.handlePressUp = function( event )
     {

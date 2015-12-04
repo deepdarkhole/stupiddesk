@@ -141,11 +141,10 @@
 
     p.handlePressMove = function( event )
     {
-        if ( !this.wasPressed )
+        if ( !this.pressing )
         {
             this.offsetX = event.stageX - this.x;
             this.offsetY = event.stageY - this.y;
-            this.wasPressed = true;
             this.wasMoved = false;
 
             var stagePoint = new Vector( event.stageX - itemContainer.x, event.stageY - itemContainer.y );
@@ -169,7 +168,6 @@
 
     p.handlePressUp = function( event )
     {
-        this.wasPressed = false;
         this.pressing = false;
         this.wasMoved = false;
 

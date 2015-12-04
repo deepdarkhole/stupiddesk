@@ -34,6 +34,9 @@ function GuideDrawer( item ) {
 
         var min = alignment.bottomLeft;
         var max = alignment.topRight;
+
+        //console.log("min:"+min.x+" max:"+max.x);
+
         var starts = new Array( new Vector( min.x, min.y ),
                                 new Vector( min.x, 0 ),
                                 new Vector( min.x, max.y ),
@@ -96,6 +99,7 @@ function GuideDrawer( item ) {
     }
 
     this.showGuides = function( dot ) {
+
         for( var i = 0; i < this.guides.length; i++ )
         {
             var guideColor = this.item.dotColor;

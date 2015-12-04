@@ -103,19 +103,23 @@ Object.defineProperties( Alignment.prototype, {
 
     height : {
         get : function() {
+
             var bounds = this.bitmap.getBounds();
-            if(bounds)
-                return bounds.height * itemScaleFactor;
-            return 0;
+            //console.log("bounds:" + bounds);
+            return bounds.height * itemScaleFactor;
+            //return 0;
         }
     },
 
     width : { 
         get : function() {
+
             var bounds = this.bitmap.getBounds();
-            if(bounds)
-                return bounds.width * itemScaleFactor;
-            return 0;
+            //console.log(bounds);
+            //console.log(this.item.name);
+            //console.log("bounds:" + bounds);
+            return bounds.width * itemScaleFactor;
+            //return 0;
         }
     },
 

@@ -7,6 +7,9 @@
         this.dotDiameter = 2;
 
         this.setup( img , position);
+
+        //console.log(this.bitmap.getBounds());
+
         this.setAlignment();
     }
 
@@ -42,9 +45,10 @@
             var w = stage.canvas.width;
             var h = stage.canvas.height;
 
-            this.x = (w * Math.random()) - (w * 0.5);
-            this.y = (h * Math.random()) - (h * 0.5);
-            this.rotation = Math.random() * 360;            
+            console.log("w:"+w+" h:"+h);
+            this.x = 0;//(w * Math.random()) - (w * 0.5);
+            this.y = 0;//(h * Math.random()) - (h * 0.5);
+            this.rotation = 0;//Math.random() * 360;            
         }else{
             this.x = position.x;
             this.y = position.y;
@@ -152,6 +156,7 @@
     {
     	if(this.pressing == true)
     		return;
+
 
         this.guideDrawer.showGuides();
         this.parent.setChildIndex( this , this.parent.numChildren-1);

@@ -5,9 +5,7 @@
         // Dots Debugging
         this.dotColor = "#99FF00";
         this.dotDiameter = 2;
-
         this.setup( img , position);
-        this.setAlignment();
     }
 
     var p = createjs.extend( Item, createjs.Container );
@@ -34,22 +32,7 @@
         // Dynamic Shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
-        bitmap.scaleX = bitmap.scaleY = itemScaleFactor;
-
-        // Set position
-        if(position == null)
-        {
-            var w = stage.canvas.width;
-            var h = stage.canvas.height;
-
-            this.x = (w * Math.random()) - (w * 0.5);
-            this.y = (h * Math.random()) - (h * 0.5);
-            this.rotation = Math.random() * 360;            
-        }else{
-            this.x = position.x;
-            this.y = position.y;
-            this.rotation = position.rotation;            
-        }   
+        bitmap.scaleX = bitmap.scaleY = itemScaleFactor; 
 
         // Event Listeners 
         this.on( "click", this.handleClick );
@@ -64,6 +47,7 @@
         if(debug)
         {
             this.addChild(hitArea);            
+            this.hitArea = hitArea;
         }else{
             this.hitArea = hitArea;
         }          
@@ -77,42 +61,25 @@
         this.pressing = false;
         this.wasMoved = false; 
 
-        //console.log("x:" + this.x +" y:" + this.y);
-    }
-
-    p.getClosestAlignmentDotToPoint = function( point )
-    {
-        var aPoints = this.alignment.allAlignments;
-        var itemPosition = new Vector( this.x, this.y );
-
-        var closestIndex = 0;
-        var closestPoint = itemPosition.add( aPoints[closestIndex] );
-        var closestDistance = Vector.distance( closestPoint, point );
-
-        for( var i = 0; i < aPoints.length; i++ )
+        // Set position
+        if(position == null)
         {
-            var position = itemPosition.add( aPoints[i] );
-            var distance = Vector.distance( position, point );
-            if ( distance < closestDistance )
-            {
-                closestDistance = distance;
-                closestIndex = i;
-            }
-        }
-        
-        var closestIndex = this.alignment.getClosestIndexByRotation( closestIndex, this.rotation );
-        return this.guideDrawer.dots[closestIndex];
-    }
+            var w = stage.canvas.width;
+            var h = stage.canvas.height;
 
-    p.getClosestAlignmentPoint = function()
-    {
-        var closestDistance;
-        var closestVector;
+            this.x = (w * Math.random()) - (w * 0.5);
+            this.y = (h * Math.random()) - (h * 0.5);
+            this.setAlignment();
+            this.rotation = Math.random() * 360;            
+        }else{
+            this.x = position.x;
+            this.y = position.y;
+            this.setAlignment();
+            this.rotation = position.rotation;
+        }  
 
-        for( var i = 0; i < this.alignment.allAlignments.length; i++ )
-        {
-            var alignmentVector = this.alignment.allAlignments[i];
-        }
+        // Components
+        this.itemSnapper = new ItemSnapper( this );
     }
 
     p.getNextRotationValue = function( rotation )
@@ -141,27 +108,29 @@
 
     p.handlePressMove = function( event )
     {
-        if ( !this.wasPressed )
+        if ( !this.pressing )
         {
-            this.offsetX = event.stageX - this.x;
-            this.offsetY = event.stageY - this.y;
-            this.wasPressed = true;
+            this.offsetX = event.stageX - itemContainer.x - this.x;
+            this.offsetY = event.stageY - itemContainer.y - this.y;
             this.wasMoved = false;
 
             var stagePoint = new Vector( event.stageX - itemContainer.x, event.stageY - itemContainer.y );
-            this.closestAlignmentDot = this.getClosestAlignmentDotToPoint( stagePoint );
+            this.closestAlignmentDot = this.itemSnapper.getClosestAlignmentDotToPoint( stagePoint );
             this.guideDrawer.showActiveGuidesByDot( this.closestAlignmentDot );
 
         } else {
             this.wasMoved = true;            
         }
 
-        var testX = event.stageX - this.offsetX;
-        var testY = event.stageY - this.offsetY;
-        
-        var snapOffset = this.handleProximitySnapping( this.closestAlignmentDot );
-        this.x = testX + snapOffset.x;
-        this.y = testY + snapOffset.y;
+        var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
+        this.offsetX -= snapOffset.x;
+        this.offsetY -= snapOffset.y;
+
+        var testX = event.stageX - itemContainer.x - this.offsetX;
+        var testY = event.stageY - itemContainer.y - this.offsetY;
+
+        this.x = testX;
+        this.y = testY;
 
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
@@ -169,68 +138,19 @@
 
     p.handlePressUp = function( event )
     {
-        this.wasPressed = false;
         this.pressing = false;
         this.wasMoved = false;
 
+        this.itemSnapper.clearDebugLines();
         this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
     }
     
-    p.handleProximitySnapping = function( dot ) {
-        var horizontalCheck = dot.horizontalAlignmentPoint;     // y val
-        var verticalCheck = dot.verticalAlignmentPoint;         // x val
-        var pointToCheck = dot.dot.localToGlobal( 0, 0 );
-
-        var snapThreshold = 10;
-        var offset = new Vector( 0, 0 );
-        var snap = new Vector( 0, 0 );
-        for( var i = 0; i < items.length; i++ )
-        {
-            var item = items[i];
-            if ( item == this ) continue;
-            
-            // Check horizontal alignments.
-            var horizontalArray = item.alignment.horizontalAlignmentValues;
-            for( var h = 0; h < horizontalArray.length; h++ )
-            {
-                var global = item.localToGlobal( 0, horizontalArray[h] );
-                var diff = global.y - pointToCheck.y;
-                var absDiff = Math.abs( diff );
-                if ( absDiff < snapThreshold ) 
-                {
-                    if ( absDiff < offset.y || offset.y == 0 )
-                    {
-                        offset.y = diff;
-                        snap.y = global.y;
-                    }
-                }
-            }
-
-            // Check vertical alignments.
-            var verticalArray = item.alignment.verticalAlignmentValues;
-            for( var v = 0; v < verticalArray.length; v++ )
-            {
-                var global = item.localToGlobal( verticalArray[v], 0 );
-                var diff = global.x - pointToCheck.x;
-                var absDiff = Math.abs( diff );
-                if ( absDiff < snapThreshold ) 
-                {
-                    if ( absDiff < offset.x || offset.x == 0 )
-                    {
-                        offset.x = diff;
-                        snap.x = global.x;
-                    }
-                }
-            }
-        }
-
-        return offset;
-    }
 
     p.handleRollOver = function( event )
     {
     	if(this.pressing == true)
     		return;
+
 
         this.guideDrawer.showGuides();
         this.parent.setChildIndex( this , this.parent.numChildren-1);

@@ -103,23 +103,27 @@ Object.defineProperties( Alignment.prototype, {
 
     height : {
         get : function() {
+
             var bounds = this.bitmap.getBounds();
-            if(bounds)
-                return bounds.height * itemScaleFactor;
-            return 0;
+            return bounds.height * itemScaleFactor;
         }
     },
 
     width : { 
         get : function() {
+
             var bounds = this.bitmap.getBounds();
-            if(bounds)
-                return bounds.width * itemScaleFactor;
-            return 0;
+            return bounds.width * itemScaleFactor;
         }
     },
 
     // Orientation
+    isAtRightAngle : {
+        get : function() {
+            return this.isHorizontal || this.isVertical;
+        }
+    },
+
     isHorizontal : {
         get : function() {
             return this.item.rotation == 90 || this.item.rotation == 270; 

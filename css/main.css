@@ -107,6 +107,39 @@ button
 {
 	font-family: 'CoreSans Black';
 	font-size: 14pt;
+	position: relative;
+}
+
+button#loading:disabled
+{
+	background: #000;
+}
+
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+
+
+button#loading:disabled .bkg
+{
+	position: absolute;
+	display: block;
+	left: 0px;
+	top: 0px;
+	width: 50%;
+	height: 100%;
+	background: url("../imgs/chrome/stripe.png") #80C23C top left repeat;
+	border-radius: 11px;
+
+	animation: animatedBackground 1s linear infinite;
+
+}
+
+button#loading:disabled .text
+{
+	
 }
 
 h1 span

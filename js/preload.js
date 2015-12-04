@@ -15,7 +15,7 @@ var preload = function()
 	var width = window.getComputedStyle( loading ).getPropertyValue("width");
 	loading.setAttribute("style", "width: " + width);
 
-	setLoadingText( "0%" );
+	setLoadingText( "&nbsp;" );
 }
 
 var itemLoadProgress = function( event )
@@ -31,7 +31,7 @@ var itemLoadProgress = function( event )
 	if( event.progress == 1 )
 		setLoadingText("Get Stupid");
 	else
-		setLoadingText( percent.toFixed(0) + "%" );
+		setLoadingText( "&nbsp;" );
 }
 
 var itemLoaded = function( event )

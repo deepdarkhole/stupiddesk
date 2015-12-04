@@ -122,8 +122,9 @@
             this.wasMoved = true;            
         }
 
-        var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
-        //var snapOffest = this.itemSnapper.getClosestSnapOffset();
+        //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
+        var snapOffset = this.itemSnapper.getClosestSnapOffset();
+
         this.offsetX -= snapOffset.x;
         this.offsetY -= snapOffset.y;
 

@@ -24,8 +24,11 @@ function init()
     center();       
 
     // Update
+    createjs.Ticker.timingMode = createjs.Ticker.RAF;
     createjs.Ticker.addEventListener( "tick", tick );
-    createjs.Ticker.setFPS( 60 );
+    createjs.Ticker.setFPS( 30 );
+
+   // window.requestAnimationFrame(tick);
 
     // Debug
     if(debug)
@@ -157,9 +160,11 @@ function removeItems()
 }
 
 function tick( event ) {
-    var deltaTime = event.delta/1000;
+    
     center();
     stage.update();    
+
+//    window.requestAnimationFrame(tick);
 }
 
 function center()

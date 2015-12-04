@@ -83,12 +83,12 @@
             this.x = (w * Math.random()) - (w * 0.5);
             this.y = (h * Math.random()) - (h * 0.5);
             this.setAlignment();
-            this.rotation = Math.random() * 360;            
+            this.rotation = this.currentRotation = Math.random() * 360;            
         }else{
             this.x = position.x;
             this.y = position.y;
             this.setAlignment();
-            this.rotation = position.rotation;
+            this.rotation = this.currentRotation = position.rotation;
         }  
 
         // Components
@@ -116,7 +116,9 @@
     p.handleClick = function( evt )
     {
         if ( this.wasMoved ) return;
-        this.rotation = this.getNextRotationValue( this.rotation );
+        this.currentRotation = this.getNextRotationValue( this.currentRotation );
+
+        createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
     }
 
     p.handlePressMove = function( event )
@@ -136,7 +138,7 @@
         }
 
         //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
-        var snapOffset = this.itemSnapper.getClosestSnapOffset();
+      //  var snapOffset = this.itemSnapper.getClosestSnapOffset();
 
         /*
         this.offsetX -= snapOffset.x;
@@ -151,6 +153,7 @@
 
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
+
     }
 
     p.handlePressUp = function( event )

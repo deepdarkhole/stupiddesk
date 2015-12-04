@@ -24,7 +24,7 @@ var itemLoadProgress = function( event )
 		bar = loading.getElementsByTagName("SPAN")[0];
 
 
-	percent = event.progress * 100;
+	percent = Math.max(event.progress, .1) * 100;
 	bar.setAttribute("style", "width: " + percent + "%");
 
 	if( event.progress == 1 )

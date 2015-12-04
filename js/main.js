@@ -25,7 +25,8 @@ function init()
 
     // Update
     createjs.Ticker.addEventListener( "tick", tick );
-    createjs.Ticker.setFPS( 60 );
+    createjs.Ticker.timingMode = createjs.Ticker.RAF;
+    createjs.Ticker.setFPS( 30 );
 
     // Debug
     if(debug)

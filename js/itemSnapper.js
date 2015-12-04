@@ -74,7 +74,7 @@ function ItemSnapper( item ) {
         var verticalCheck = dot.verticalAlignmentPoint;         // x val
         var pointToCheck = dot.dot.localToGlobal( 0, 0 );
 
-        var snapThreshold = 1;
+        var snapThreshold = 5;
         var offset = new Vector( 0, 0 );
         var snap = new Vector( 0, 0 );
 

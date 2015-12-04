@@ -168,17 +168,12 @@
         }
 
         var snapOffset = this.handleProximitySnapping( this.closestAlignmentDot );
+        this.offsetX -= snapOffset.x;
+        this.offsetY -= snapOffset.y;
 
         var testX = event.stageX - itemContainer.x - this.offsetX;
         var testY = event.stageY - itemContainer.y - this.offsetY;
 
-        this.x = ( snapOffset.x != 0 ) ? snapOffset.x - itemContainer.x : testX;
-        this.y = ( snapOffset.y != 0 ) ? snapOffset.y - itemContainer.y : testY;
-
-        this.x = testX + snapOffset.x;
-        this.y = testY + snapOffset.y;
-
-        // Restore debug.
         this.x = testX;
         this.y = testY;
 

@@ -1,9 +1,17 @@
-function init()
+function initStage()
 {
 	// Setup Stage
     stage = new createjs.Stage( element_id.canvas );
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
+	stage.update();	
+}
+
+function init()
+{
+	// Stage
+	if(stage == null)
+		initStage();
 
     // Resize
     resize();
@@ -13,7 +21,7 @@ function init()
     createjs.Touch.enable(stage);
 
     // Center
-    center();   
+    center();       
 
     // Update
     createjs.Ticker.addEventListener( "tick", tick );
@@ -31,6 +39,7 @@ function init()
 
     stage.on( "stagemousemove", function( e ) {
         //console.log( e.stageX, e.stageY );
+        
     } );
 }
 

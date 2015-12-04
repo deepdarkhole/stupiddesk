@@ -39,13 +39,22 @@ function ItemSnapper( item ) {
         return this.item.guideDrawer.dots[closestIndex];
     }
 
+    this.getClosestSnapOffset = function()
+    {
+        var dots = this.item.guideDrawer.dots;
+        for( var i = 0 ; i < dots; i++ )
+        {
+            
+        }
+    }
+
     this.handleProximitySnapping = function( dot ) 
     {
         var horizontalCheck = dot.horizontalAlignmentPoint;     // y val
         var verticalCheck = dot.verticalAlignmentPoint;         // x val
         var pointToCheck = dot.dot.localToGlobal( 0, 0 );
 
-        var snapThreshold = 5;
+        var snapThreshold = 1;
         var offset = new Vector( 0, 0 );
         var snap = new Vector( 0, 0 );
 
@@ -56,7 +65,7 @@ function ItemSnapper( item ) {
         {
             var item = items[i];
             if ( item == this.item ) continue;
-            if ( !item.rotation.isAtRightAngle ) continue;
+            if ( !item.alignment.isAtRightAngle ) continue;
             
             // Check horizontal alignments.
             var horizontalArray = item.alignment.horizontalAlignmentValues;
@@ -112,7 +121,11 @@ function ItemSnapper( item ) {
             this.vAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
         }
         
-        return offset;
+        // Debug
+        var zeroOffset = new Vector( 0, 0 );
+        return zeroOffset;
+
+        //return offset;
     }
 
 }

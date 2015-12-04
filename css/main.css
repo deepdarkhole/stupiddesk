@@ -1,3 +1,5 @@
+html { -webkit-font-smoothing: antialiased; }
+
 #intros
 {
 	position: absolute;
@@ -23,6 +25,7 @@
 	top: 50%;
 	left:0px;	
 	transform: translateY(-50%);
+
 }
 #intro h1
 {
@@ -121,6 +124,11 @@ button#loading:disabled
 	to { background-position: 50px 0; }
 }
 
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 50px 0; }
+}
+
 
 button#loading:disabled .bkg
 {
@@ -134,6 +142,7 @@ button#loading:disabled .bkg
 	border-radius: 11px;
 
 	animation: animatedBackground 1s linear infinite;
+	-webkit-animation: animatedBackground 1s linear infinite;
 
 }
 

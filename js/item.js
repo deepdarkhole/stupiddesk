@@ -54,6 +54,15 @@
         this.on( "rollover", this.handleRollOver );
         this.on( "rollout", this.handleRollOut );
 
+        // Basics
+        this.name = img;
+        this.tickEnabled = false;
+        this.cursor = "pointer";
+        this.offset = Math.random() * 10;
+        this.count = 0;
+        this.pressing = false;
+        this.wasMoved = false; 
+
         // Visual 
         this.bitmap = bitmap;   
         this.addChild( bitmap );
@@ -64,22 +73,14 @@
             // show hitbox
             this.addChild(hitArea);
             // show image name
-             var text = new createjs.Text(this.name, "20px Arial", "#FFFFFFF");
-            text.x = 100;
+            var text = new createjs.Text(this.name, "20px Arial", "#FFFFFFF");
+            text.x = text.getBounds().width * -0.5;
+            text.y = bounds.height * 0.5;
             text.textBaseline = "alphabetic";
             this.addChild( text );
         }else{
             this.hitArea = hitArea;
-        }          
-
-        // Basics
-        this.name = img;
-        this.tickEnabled = false;
-        this.cursor = "pointer";
-        this.offset = Math.random() * 10;
-        this.count = 0;
-        this.pressing = false;
-        this.wasMoved = false; 
+        }  
 
         // Set position
         if(position == null)

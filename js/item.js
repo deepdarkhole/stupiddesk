@@ -138,7 +138,7 @@
         }
 
         //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
-      //  var snapOffset = this.itemSnapper.getClosestSnapOffset();
+        var snapOffset = this.itemSnapper.getClosestSnapOffset();
 
         /*
         this.offsetX -= snapOffset.x;

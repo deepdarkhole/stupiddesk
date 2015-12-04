@@ -1,5 +1,6 @@
 var preload = function()
 {
+	initStage();
 	cacheWidth();
 	setLoadingText( "&nbsp;" );
 
@@ -13,8 +14,6 @@ var preload = function()
 	itemQueue.on("progress", itemLoadProgress, this);
 	itemQueue.on("fileload", itemLoaded, this);
 	itemQueue.on("complete", itemsLoaded, this);
-
-	
 }
 
 var itemLoadProgress = function( event )

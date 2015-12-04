@@ -139,7 +139,6 @@ Object.defineProperties( Alignment.prototype, {
     trueRotation : {
         get : function() {
             return this.item.rotation;
-            return this.item.currentRotation % 360;
         }
     },
     

@@ -35,7 +35,7 @@ function ItemSnapper( item ) {
             }
         }
         
-        var closestIndex = this.item.alignment.getClosestIndexByRotation( closestIndex, this.rotation );
+        var closestIndex = this.item.alignment.getClosestIndexByRotation( closestIndex, this.item.rotation );
         return this.item.guideDrawer.dots[closestIndex];
     }
 
@@ -45,7 +45,7 @@ function ItemSnapper( item ) {
         var verticalCheck = dot.verticalAlignmentPoint;         // x val
         var pointToCheck = dot.dot.localToGlobal( 0, 0 );
 
-        var snapThreshold = 10;
+        var snapThreshold = 5;
         var offset = new Vector( 0, 0 );
         var snap = new Vector( 0, 0 );
 

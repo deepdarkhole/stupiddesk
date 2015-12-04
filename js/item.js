@@ -24,7 +24,7 @@
     }
 
     p.setup = function( img, position )
-    {
+    {        
        // Bitmap        
         var bitmap = new createjs.Bitmap( itemQueue.getResult(img) );   //var bitmap = new createjs.Bitmap(imgPath + img);
         var bounds = bitmap.getBounds();
@@ -59,8 +59,15 @@
         this.addChild( bitmap );
         if(debug)
         {
-            this.addChild(hitArea);            
+                        
             this.hitArea = hitArea;
+            // show hitbox
+            this.addChild(hitArea);
+            // show image name
+             var text = new createjs.Text(this.name, "20px Arial", "#FFFFFFF");
+            text.x = 100;
+            text.textBaseline = "alphabetic";
+            this.addChild( text );
         }else{
             this.hitArea = hitArea;
         }          

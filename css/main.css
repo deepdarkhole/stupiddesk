@@ -115,6 +115,13 @@ button#loading:disabled
 	background: #000;
 }
 
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+
+
 button#loading:disabled .bkg
 {
 	position: absolute;
@@ -123,8 +130,11 @@ button#loading:disabled .bkg
 	top: 0px;
 	width: 50%;
 	height: 100%;
-	background-color: #676767;
+	background: url("../imgs/chrome/stripe.png") #80C23C top left repeat;
 	border-radius: 11px;
+
+	animation: animatedBackground 1s linear infinite;
+
 }
 
 button#loading:disabled .text

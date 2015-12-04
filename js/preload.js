@@ -1,5 +1,8 @@
 var preload = function()
 {
+	cacheWidth();
+	setLoadingText( "&nbsp;" );
+
 	itemQueue = new createjs.LoadQueue( false );	
 
 	for(var i = 0; i < images.length; i++)
@@ -11,11 +14,7 @@ var preload = function()
 	itemQueue.on("fileload", itemLoaded, this);
 	itemQueue.on("complete", itemsLoaded, this);
 
-	var loading = document.getElementById(element_id.loading);
-	var width = window.getComputedStyle( loading ).getPropertyValue("width");
-	loading.setAttribute("style", "width: " + width);
-
-	setLoadingText( "&nbsp;" );
+	
 }
 
 var itemLoadProgress = function( event )
@@ -25,11 +24,14 @@ var itemLoadProgress = function( event )
 		bar = loading.getElementsByTagName("SPAN")[0];
 
 
-	percent = event.progress * 100;
+	percent = Math.max(event.progress, .1) * 100;
 	bar.setAttribute("style", "width: " + percent + "%");
 
 	if( event.progress == 1 )
+	{
+		uncacheWidth();
 		setLoadingText("Get Stupid");
+	}
 	else
 		setLoadingText( "&nbsp;" );
 }
@@ -55,4 +57,17 @@ var setLoadingText = function( t )
 		text = loading.getElementsByTagName("SPAN")[1];
 
 	text.innerHTML = t;
+}
+
+var cacheWidth = function()
+{
+	var loading = document.getElementById(element_id.loading);
+	var width = window.getComputedStyle( loading ).getPropertyValue("width");
+	loading.setAttribute("style", "width: " + width);
+}
+
+var uncacheWidth = function()
+{
+	var loading = document.getElementById(element_id.loading);
+	loading.removeAttribute("style");
 }

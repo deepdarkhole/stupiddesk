@@ -120,7 +120,7 @@ Object.defineProperties( Alignment.prototype, {
     // Orientation
     isAtRightAngle : {
         get : function() {
-            return isHorizontal || isVertical;
+            return this.isHorizontal || this.isVertical;
         }
     },
 

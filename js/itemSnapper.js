@@ -4,6 +4,7 @@ function ItemSnapper( item ) {
     this.item = item;
 
     // Debugging
+    this.alignLines = [];
     this.hAlignLine = new createjs.Shape();
     this.vAlignLine = new createjs.Shape();
     this.item.addChild( this.hAlignLine );
@@ -13,6 +14,13 @@ function ItemSnapper( item ) {
     {
         this.hAlignLine.graphics.clear();
         this.vAlignLine.graphics.clear();
+
+        for( var i = this.alignLines.length - 1; i >= 0; i-- )
+        {
+            this.alignLines[i].graphics.clear();
+            this.item.removeChild( this.alignLines[i] );
+        }
+        this.alignLines = [];
     }
 
     this.getClosestAlignmentDotToPoint = function( point )
@@ -41,11 +49,23 @@ function ItemSnapper( item ) {
 
     this.getClosestSnapOffset = function()
     {
+        this.clearDebugLines();
+
+        if ( !this.item.alignment.isAtRightAngle ) return new Vector( 0, 0 );
+        
         var dots = this.item.guideDrawer.dots;
-        for( var i = 0 ; i < dots; i++ )
+        var x;
+        var y;
+
+        for( var i = 0 ; i < dots.length; i++ )
         {
+            var offset = this.handleProximitySnapping( dots[i] );
             
+            if ( x == null || ( offset.x != 0 && Math.abs( offset.x ) < Math.abs( x ) ) ) x = offset.x;
+            if ( y == null || ( offset.y != 0 && Math.abs( offset.y ) < Math.abs( y ) ) ) y = offset.y;
         }
+
+        return new Vector( x, y );
     }
 
     this.handleProximitySnapping = function( dot ) 
@@ -105,27 +125,36 @@ function ItemSnapper( item ) {
         }
 
         // Debug Alignment Lines
-        this.clearDebugLines();
 
         if ( closestHorizontalItem != null )
         {
             var horizontalItemPos = closestHorizontalItem.localToLocal( 0, 0, this.item );
             var test = this.item.globalToLocal( 0, global.y );
-            this.hAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( horizontalItemPos.x, dot.dot.y ).endStroke();
+            
+            var line = new createjs.Shape();
+            line.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( horizontalItemPos.x, dot.dot.y ).endStroke();
+            this.alignLines.push( line );
+            this.item.addChild( line );
+            //this.hAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( horizontalItemPos.x, dot.dot.y ).endStroke();
         } 
 
         if ( closestVerticalItem != null )
         {
             var verticalItemPos = closestVerticalItem.localToLocal( 0, 0, this.item );
             var test = this.item.globalToLocal( global.x, 0 );
-            this.vAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
+
+            var line = new createjs.Shape();
+            line .graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
+            this.alignLines.push( line );
+            this.item.addChild( line );
+            //this.vAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
         }
         
         // Debug
-        var zeroOffset = new Vector( 0, 0 );
-        return zeroOffset;
+        //var zeroOffset = new Vector( 0, 0 );
+        //return zeroOffset;
 
-        //return offset;
+        return offset;
     }
 
 }

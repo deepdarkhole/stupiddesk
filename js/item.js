@@ -5,10 +5,23 @@
         // Dots Debugging
         this.dotColor = "#99FF00";
         this.dotDiameter = 2;
-        this.setup( img , position);
+        this.img = img;
+        this.position = position;
+
+        if( itemQueue.getResult(img) )
+        {
+            this.setupWithAnimation();
+        }
     }
 
     var p = createjs.extend( Item, createjs.Container );
+
+    p.setupWithAnimation = function()
+    {
+        this.setup( this.img , this.position);
+        this.alpha = 0;
+        createjs.Tween.get(this).to({alpha: 1}, 1000);
+    }
 
     p.setup = function( img, position )
     {
@@ -70,12 +83,12 @@
             this.x = (w * Math.random()) - (w * 0.5);
             this.y = (h * Math.random()) - (h * 0.5);
             this.setAlignment();
-            this.rotation = Math.random() * 360;            
+            this.rotation = this.currentRotation = Math.random() * 360;            
         }else{
             this.x = position.x;
             this.y = position.y;
             this.setAlignment();
-            this.rotation = position.rotation;
+            this.rotation = this.currentRotation = position.rotation;
         }  
 
         // Components
@@ -103,7 +116,9 @@
     p.handleClick = function( evt )
     {
         if ( this.wasMoved ) return;
-        this.rotation = this.getNextRotationValue( this.rotation );
+        this.currentRotation = this.getNextRotationValue( this.currentRotation );
+
+        createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
     }
 
     p.handlePressMove = function( event )
@@ -122,10 +137,13 @@
             this.wasMoved = true;            
         }
 
-        var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
-        //var snapOffest = this.itemSnapper.getClosestSnapOffset();
+        //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
+      //  var snapOffset = this.itemSnapper.getClosestSnapOffset();
+
+        /*
         this.offsetX -= snapOffset.x;
         this.offsetY -= snapOffset.y;
+        */
 
         var testX = event.stageX - itemContainer.x - this.offsetX;
         var testY = event.stageY - itemContainer.y - this.offsetY;
@@ -135,6 +153,7 @@
 
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
+
     }
 
     p.handlePressUp = function( event )

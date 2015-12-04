@@ -14,6 +14,8 @@ var preload = function()
 	itemQueue.on("progress", itemLoadProgress, this);
 	itemQueue.on("fileload", itemLoaded, this);
 	itemQueue.on("complete", itemsLoaded, this);
+
+	init();
 }
 
 var itemLoadProgress = function( event )
@@ -38,7 +40,15 @@ var itemLoadProgress = function( event )
 var itemLoaded = function( event )
 {
 	//console.log("File Loaded");
-
+	//console.log("Loaded: " , event );
+	for(var i = 0; i < items.length; i++)
+	{
+		item = items[i];
+		if( item.img == event.item.id )
+		{
+			item.setupWithAnimation();
+		}
+	}
 	// need to hide now
 
 }
@@ -47,7 +57,7 @@ var itemsLoaded = function( event )
 {
 	//console.log("All Loaded");
 
-	init();
+	//init();
 }
 
 var setLoadingText = function( t )

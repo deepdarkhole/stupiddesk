@@ -11,7 +11,7 @@ function GuideDot( item, horizontalAlignmentPoint, verticalAlignmentPoint )
 
         this.dot.x = xVal;
         this.dot.y = yVal;
-        this.dot.graphics.beginFill( this.item.dotColor ).drawCircle( 0, 0, this.item.dotDiameter );
+        //this.dot.graphics.beginFill( this.item.dotColor ).drawCircle( 0, 0, this.item.dotDiameter );
 
         this.show();
 
@@ -19,13 +19,13 @@ function GuideDot( item, horizontalAlignmentPoint, verticalAlignmentPoint )
     }
 
     this.hide = function() {
-        this.dot.graphics.clear(); 
+        //this.dot.graphics.clear(); 
     }
 
     this.show = function( color ) {
         this.hide();
         if ( color == null ) color = this.item.dotColor;
-        this.dot.graphics.beginFill( color ).drawCircle( 0, 0, this.item.dotDiameter );
+        //this.dot.graphics.beginFill( color ).drawCircle( 0, 0, this.item.dotDiameter );
     }
 
     this.setup();

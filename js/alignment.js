@@ -105,9 +105,7 @@ Object.defineProperties( Alignment.prototype, {
         get : function() {
 
             var bounds = this.bitmap.getBounds();
-            //console.log("bounds:" + bounds);
             return bounds.height * itemScaleFactor;
-            //return 0;
         }
     },
 
@@ -115,11 +113,7 @@ Object.defineProperties( Alignment.prototype, {
         get : function() {
 
             var bounds = this.bitmap.getBounds();
-            //console.log(bounds);
-            //console.log(this.item.name);
-            //console.log("bounds:" + bounds);
             return bounds.width * itemScaleFactor;
-            //return 0;
         }
     },
 

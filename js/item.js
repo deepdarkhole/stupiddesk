@@ -5,12 +5,7 @@
         // Dots Debugging
         this.dotColor = "#99FF00";
         this.dotDiameter = 2;
-
         this.setup( img , position);
-
-        //console.log(this.bitmap.getBounds());
-
-        this.setAlignment();
     }
 
     var p = createjs.extend( Item, createjs.Container );
@@ -37,23 +32,7 @@
         // Dynamic Shadow
         var shadowSize = 5;
         bitmap.shadow = new createjs.Shadow("rgba(0,0,0,0.2)", 2, 2, shadowSize); //"#c5c2bb"
-        bitmap.scaleX = bitmap.scaleY = itemScaleFactor;
-
-        // Set position
-        if(position == null)
-        {
-            var w = stage.canvas.width;
-            var h = stage.canvas.height;
-
-            console.log("w:"+w+" h:"+h);
-            this.x = 0;//(w * Math.random()) - (w * 0.5);
-            this.y = 0;//(h * Math.random()) - (h * 0.5);
-            this.rotation = 0;//Math.random() * 360;            
-        }else{
-            this.x = position.x;
-            this.y = position.y;
-            this.rotation = position.rotation;            
-        }   
+        bitmap.scaleX = bitmap.scaleY = itemScaleFactor; 
 
         // Event Listeners 
         this.on( "click", this.handleClick );
@@ -82,7 +61,22 @@
         this.pressing = false;
         this.wasMoved = false; 
 
-        //console.log("x:" + this.x +" y:" + this.y);
+        // Set position
+        if(position == null)
+        {
+            var w = stage.canvas.width;
+            var h = stage.canvas.height;
+
+            this.x = (w * Math.random()) - (w * 0.5);
+            this.y = (h * Math.random()) - (h * 0.5);
+            this.setAlignment();
+            this.rotation = Math.random() * 360;            
+        }else{
+            this.x = position.x;
+            this.y = position.y;
+            this.setAlignment();
+            this.rotation = position.rotation;
+        }  
 
         // Components
         this.itemSnapper = new ItemSnapper( this );

@@ -118,7 +118,7 @@ button#loading:disabled
 
 @keyframes animatedBackground {
 	from { background-position: 0 0; }
-	to { background-position: 100% 0; }
+	to { background-position: 50px 0; }
 }
 
 
@@ -128,7 +128,7 @@ button#loading:disabled .bkg
 	display: block;
 	left: 0px;
 	top: 0px;
-	width: 50%;
+	width: 10%;
 	height: 100%;
 	background: url("../imgs/chrome/stripe.png") #80C23C top left repeat;
 	border-radius: 11px;

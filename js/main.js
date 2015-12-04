@@ -31,6 +31,7 @@ function init()
 
     stage.on( "stagemousemove", function( e ) {
         //console.log( e.stageX, e.stageY );
+        
     } );
 }
 

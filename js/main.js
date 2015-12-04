@@ -88,7 +88,7 @@ function create( data )
 	{
 		var length = images.length;
 		if(debug)
-			length = 5;
+			length = 20;
 		for( var i = 0 ; i < length; i++)
 		{
 			var item = new Item( images[i], null );

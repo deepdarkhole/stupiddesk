@@ -56,6 +56,7 @@ function ItemSnapper( item ) {
         {
             var item = items[i];
             if ( item == this.item ) continue;
+            if ( !item.rotation.isAtRightAngle ) continue;
             
             // Check horizontal alignments.
             var horizontalArray = item.alignment.horizontalAlignmentValues;

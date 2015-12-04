@@ -118,6 +118,12 @@ Object.defineProperties( Alignment.prototype, {
     },
 
     // Orientation
+    isAtRightAngle : {
+        get : function() {
+            return isHorizontal || isVertical;
+        }
+    },
+
     isHorizontal : {
         get : function() {
             return this.item.rotation == 90 || this.item.rotation == 270; 

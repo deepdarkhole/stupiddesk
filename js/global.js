@@ -14,7 +14,8 @@ var element_id = {
 		header: "header",
 		canvas: "canvas",
 		content: "content",
-		footer: "footer"
+		footer: "footer",
+		loading: "loading"
 	};
 var images = [
 	"black notepaper.png",

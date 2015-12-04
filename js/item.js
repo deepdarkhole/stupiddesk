@@ -64,6 +64,7 @@
         if(debug)
         {
             this.addChild(hitArea);            
+            this.hitArea = hitArea;
         }else{
             this.hitArea = hitArea;
         }          

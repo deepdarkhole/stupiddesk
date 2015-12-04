@@ -28,6 +28,10 @@ function init()
     	enableStart();
     	create( itemData );	
     }
+
+    stage.on( "stagemousemove", function( e ) {
+        //console.log( e.stageX, e.stageY );
+    } );
 }
 
 function enableStart()
@@ -169,3 +173,4 @@ function resize() {
 
     gridSize = ( xGridSize < yGridSize ) ? xGridSize : yGridSize;
 }
+

@@ -78,6 +78,18 @@
         this.wasMoved = false; 
 
         //console.log("x:" + this.x +" y:" + this.y);
+
+        // Debugging
+        this.hAlignLine = new createjs.Shape();
+        this.vAlignLine = new createjs.Shape();
+        this.addChild( this.hAlignLine );
+        this.addChild( this.vAlignLine );
+    }
+
+    p.clearDebugLines = function()
+    {
+        this.hAlignLine.graphics.clear();
+        this.vAlignLine.graphics.clear();
     }
 
     p.getClosestAlignmentDotToPoint = function( point )
@@ -143,8 +155,8 @@
     {
         if ( !this.pressing )
         {
-            this.offsetX = event.stageX - this.x;
-            this.offsetY = event.stageY - this.y;
+            this.offsetX = event.stageX - itemContainer.x - this.x;
+            this.offsetY = event.stageY - itemContainer.y - this.y;
             this.wasMoved = false;
 
             var stagePoint = new Vector( event.stageX - itemContainer.x, event.stageY - itemContainer.y );
@@ -155,12 +167,20 @@
             this.wasMoved = true;            
         }
 
-        var testX = event.stageX - this.offsetX;
-        var testY = event.stageY - this.offsetY;
-        
         var snapOffset = this.handleProximitySnapping( this.closestAlignmentDot );
+
+        var testX = event.stageX - itemContainer.x - this.offsetX;
+        var testY = event.stageY - itemContainer.y - this.offsetY;
+
+        this.x = ( snapOffset.x != 0 ) ? snapOffset.x - itemContainer.x : testX;
+        this.y = ( snapOffset.y != 0 ) ? snapOffset.y - itemContainer.y : testY;
+
         this.x = testX + snapOffset.x;
         this.y = testY + snapOffset.y;
+
+        // Restore debug.
+        this.x = testX;
+        this.y = testY;
 
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
@@ -171,10 +191,12 @@
         this.pressing = false;
         this.wasMoved = false;
 
+        this.clearDebugLines();
         this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
     }
     
-    p.handleProximitySnapping = function( dot ) {
+    p.handleProximitySnapping = function( dot ) 
+    {
         var horizontalCheck = dot.horizontalAlignmentPoint;     // y val
         var verticalCheck = dot.verticalAlignmentPoint;         // x val
         var pointToCheck = dot.dot.localToGlobal( 0, 0 );
@@ -182,6 +204,10 @@
         var snapThreshold = 10;
         var offset = new Vector( 0, 0 );
         var snap = new Vector( 0, 0 );
+
+        var closestHorizontalItem;
+        var closestVerticalItem;
+
         for( var i = 0; i < items.length; i++ )
         {
             var item = items[i];
@@ -200,6 +226,7 @@
                     {
                         offset.y = diff;
                         snap.y = global.y;
+                        closestHorizontalItem = item;
                     }
                 }
             }
@@ -217,11 +244,29 @@
                     {
                         offset.x = diff;
                         snap.x = global.x;
+                        closestVerticalItem = item;
                     }
                 }
             }
         }
 
+        // Debug Alignment Lines
+        this.clearDebugLines();
+
+        if ( closestHorizontalItem != null )
+        {
+            var horizontalItemPos = closestHorizontalItem.localToLocal( 0, 0, this );
+            var test = this.globalToLocal( 0, global.y );
+            this.hAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( horizontalItemPos.x, dot.dot.y ).endStroke();
+        } 
+
+        if ( closestVerticalItem != null )
+        {
+            var verticalItemPos = closestVerticalItem.localToLocal( 0, 0, this );
+            var test = this.globalToLocal( global.x, 0 );
+            this.vAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
+        }
+        
         return offset;
     }
 

@@ -125,6 +125,7 @@ function ItemSnapper( item ) {
             }
         }
 
+
         // Debug Alignment Lines
         var lineColor = "black";
         var lineToPos = new Vector( 0, 0 );

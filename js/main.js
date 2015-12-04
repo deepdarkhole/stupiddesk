@@ -98,15 +98,21 @@ function create( data )
 	//didn't simplify state, because this will run faster and we're client-side
 	if(data == null)
 	{
-		var length = images.length;
-		if(debug)
-			length = 20;
+		var imagesCopy = images.slice();
+		var length = Math.floor( Math.random() * ( randomMax - randomMin ) + randomMin );
+		console.log( length );
 		for( var i = 0 ; i < length; i++)
 		{
-			var item = new Item( images[i], null );
+			var j = Math.floor( Math.random() * imagesCopy.length );
+
+			var item = new Item( imagesCopy[j], null );
 			items.push( item );  		
     		itemContainer.addChild( item );	
+
+    		imagesCopy.splice(j,1);
 		}
+
+
 	}else{
 		for( var i = 0 ; i < data.length; i++)
 		{

@@ -8,6 +8,10 @@ var itemQueue;
 var itemScaleFactor = 0.7;
 var itemHitboxPadding = 10;
 var gridSize;
+
+var randomMin = 7;
+var randomMax = 20;
+
 var imgPath = "./imgs/items/";
 var element_id = {
 		intro: "intro",

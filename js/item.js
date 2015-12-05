@@ -50,6 +50,7 @@
 
         // Event Listeners 
         this.on( "click", this.handleClick );
+        this.on( "mousedown", this.handlePressDown );
         this.on( "mouseover", this.handleMouseOver );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
@@ -108,13 +109,18 @@
     p.getNextRotationValue = function( rotation )
     {
         var stepCount = 4;
-        for( var i = 0; i < stepCount; i++ )
+        if( rotation % (360/stepCount) != 0 )
         {
-            var stepAngle = ( 360 / stepCount ) * (i+1);
-            if ( rotation >= stepAngle ) continue;
+            for( var i = 0; i < stepCount; i++ )
+            {
+                var stepAngle = ( 360 / stepCount ) * (i+1);
+                if ( rotation >= stepAngle ) continue;
 
-            if ( i == stepCount - 1 ) return 0;
-            return stepAngle;
+                if ( i == stepCount - 1 ) return 0;
+                return stepAngle;
+            }
+        } else {
+            return rotation + 360 /stepCount;
         }
     }
 
@@ -135,6 +141,11 @@
     {
         this.guideDrawer.showGuides();
         console.log("mouseover");
+    }
+
+    p.handlePressDown = function( event )
+    {
+        this.cursor = "move";
     }
 
     p.handlePressMove = function( event )
@@ -162,6 +173,7 @@
         this.y = testY;
 
         this.pressing = true;
+        this.hovering = false;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
 
         this.guideDrawer.showGuidesActive();
@@ -172,8 +184,10 @@
     p.handlePressUp = function( event )
     {
         this.pressing = false;
+        this.hovering = true;
         this.wasMoved = false;
-
+        this.cursor = "pointer";
+        
         this.itemSnapper.clearDebugLines();
         this.guideDrawer.showGuides();
         //this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
@@ -186,7 +200,6 @@
         {
     		return;
         }
-
 
         this.hovering = true;
         this.guideDrawer.showGuides();
@@ -212,7 +225,7 @@
     p.testMouseOver = function ()
     {
         if ( !this.hovering ) return; 
-        this.guideDrawer.showGuides();
+        this.guideDrawer.showGuides( );
     }
 
     window.Item = createjs.promote( Item, "Container" );

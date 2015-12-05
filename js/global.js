@@ -19,7 +19,8 @@ var element_id = {
 		canvas: "canvas",
 		content: "content",
 		footer: "footer",
-		loading: "loading"
+		loading: "loading",
+		export: "export"
 	};
 var images = [
 	"black notepaper.png",

@@ -22,7 +22,68 @@ function ItemSnapper( item ) {
         }
         this.alignLines = [];
     }
+    
+    this.drawDebugAlignmentLines = function( dot, closestHorizontalItem, closestVerticalItem )
+    {
+        var lineColor = "black";
+        var lineToPos = new Vector( 0, 0 );
 
+        if ( closestHorizontalItem != null )
+        {
+            var horizontalItemPos = closestHorizontalItem.localToLocal( 0, 0, this.item );
+            
+            var line = new createjs.Shape();
+            if ( this.item.alignment.isHorizontal )
+            {
+                lineToPos.x = dot.dot.x;
+                lineToPos.y = horizontalItemPos.y;
+            } else {
+                lineToPos.x = horizontalItemPos.x;
+                lineToPos.y = dot.dot.y;
+            }
+
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                            .beginStroke( lineColor )
+                            .moveTo( dot.dot.x, dot.dot.y )
+                            .lineTo( lineToPos.x, lineToPos.y )
+                            .endStroke();
+
+            line.graphics.setStrokeStyle(0).beginFill(lineColor)
+                .drawCircle( lineToPos.x, lineToPos.y, 4 );
+
+            this.alignLines.push( line );
+            this.item.addChild( line );
+        } 
+
+        if ( closestVerticalItem != null )
+        {
+            var verticalItemPos = closestVerticalItem.localToLocal( 0, 0, this.item );
+
+            var line = new createjs.Shape();
+            if ( this.item.alignment.isHorizontal )
+            {
+                lineToPos.x = verticalItemPos.x;
+                lineToPos.y = dot.dot.y;
+            } else {
+                lineToPos.x = dot.dot.x;
+                lineToPos.y = verticalItemPos.y;
+            }
+
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                            .beginStroke( lineColor )
+                            .moveTo( dot.dot.x, dot.dot.y )
+                            .lineTo( lineToPos.x, lineToPos.y )
+                            .endStroke();
+
+            line.graphics.setStrokeStyle(0).beginFill(lineColor)
+                .drawCircle( lineToPos.x, lineToPos.y, 4 );
+
+            this.alignLines.push( line );
+            this.item.addChild( line );
+        }
+
+    }
+    
     this.getClosestAlignmentDotToPoint = function( point )
     {
         var aPoints = this.item.alignment.allAlignments;
@@ -125,65 +186,9 @@ function ItemSnapper( item ) {
             }
         }
 
-
         // Debug Alignment Lines
-        var lineColor = "black";
-        var lineToPos = new Vector( 0, 0 );
-
-        if ( closestHorizontalItem != null )
-        {
-            var horizontalItemPos = closestHorizontalItem.localToLocal( 0, 0, this.item );
-            
-            var line = new createjs.Shape();
-            if ( this.item.alignment.isHorizontal )
-            {
-                lineToPos.x = dot.dot.x;
-                lineToPos.y = horizontalItemPos.y;
-            } else {
-                lineToPos.x = horizontalItemPos.x;
-                lineToPos.y = dot.dot.y;
-            }
-
-            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
-                            .beginStroke( lineColor )
-                            .moveTo( dot.dot.x, dot.dot.y )
-                            .lineTo( lineToPos.x, lineToPos.y )
-                            .endStroke();
-
-            line.graphics.setStrokeStyle(0).beginFill(lineColor)
-                .drawCircle( lineToPos.x, lineToPos.y, 4 );
-
-            this.alignLines.push( line );
-            this.item.addChild( line );
-        } 
-
-        if ( closestVerticalItem != null )
-        {
-            var verticalItemPos = closestVerticalItem.localToLocal( 0, 0, this.item );
-
-            var line = new createjs.Shape();
-            if ( this.item.alignment.isHorizontal )
-            {
-                lineToPos.x = verticalItemPos.x;
-                lineToPos.y = dot.dot.y;
-            } else {
-                lineToPos.x = dot.dot.x;
-                lineToPos.y = verticalItemPos.y;
-            }
-
-            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
-                            .beginStroke( lineColor )
-                            .moveTo( dot.dot.x, dot.dot.y )
-                            .lineTo( lineToPos.x, lineToPos.y )
-                            .endStroke();
-
-            line.graphics.setStrokeStyle(0).beginFill(lineColor)
-                .drawCircle( lineToPos.x, lineToPos.y, 4 );
-
-            this.alignLines.push( line );
-            this.item.addChild( line );
-        }
-        
+        this.drawDebugAlignmentLines( dot, closestHorizontalItem, closestVerticalItem );
+                
         return offset;
     }
 

@@ -140,7 +140,6 @@
     p.handleMouseOver = function( event )
     {
         this.guideDrawer.showGuides();
-        console.log("mouseover");
     }
 
     p.handlePressDown = function( event )

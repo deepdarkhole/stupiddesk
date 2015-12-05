@@ -84,30 +84,6 @@ function ItemSnapper( item ) {
 
     }
     
-    this.getClosestAlignmentDotToPoint = function( point )
-    {
-        var aPoints = this.item.alignment.allAlignments;
-        var itemPosition = new Vector( item.x, item.y );
-
-        var closestIndex = 0;
-        var closestPoint = itemPosition.add( aPoints[closestIndex] );
-        var closestDistance = Vector.distance( closestPoint, point );
-
-        for( var i = 0; i < aPoints.length; i++ )
-        {
-            var position = itemPosition.add( aPoints[i] );
-            var distance = Vector.distance( position, point );
-            if ( distance < closestDistance )
-            {
-                closestDistance = distance;
-                closestIndex = i;
-            }
-        }
-        
-        var closestIndex = this.item.alignment.getClosestIndexByRotation( closestIndex, this.item.rotation );
-        return this.item.guideDrawer.dots[closestIndex];
-    }
-
     this.getClosestSnapOffset = function()
     {
         this.clearDebugLines();

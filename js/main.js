@@ -44,7 +44,8 @@ function init()
         //console.log( e.stageX, e.stageY );
         for( var i = 0; i < items.length; i++ )
         {
-            items[i].testMouseOver();
+            items[i].testMouseOver( );
+            items[i].testMouseOver( );
         }
         
     });

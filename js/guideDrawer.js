@@ -8,7 +8,7 @@ function GuideDrawer( item ) {
         this.line = new createjs.Shape();
         this.item.addChild( this.line );
         this.dashOffset = 0;
-        this.offsetAdvanceSpeed = 1;
+        this.offsetAdvanceSpeed = .5;
         this.offsetLimit = 100000;
     }
 

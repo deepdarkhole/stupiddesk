@@ -48,6 +48,12 @@ function init()
         }
         
     });
+
+    // Parse
+    Parse.initialize("AeLWidTlB5fwyEf5BxDN90MMmSGIF9RpI3WDc8SI", "7IVEuZFFlpO2U6f5p8UF0q8doUX5w1DDS8adOvgQ");
+
+    // Test
+    loadFromURL();
 }
 
 function enableStart()
@@ -67,12 +73,6 @@ function start()
 		header.style.visibility = "visible";
 
 	stupid();
-}
-
-function load()
-{
-	removeItems();
-	create( itemData );
 }
 
 function exportCanvas()
@@ -146,9 +146,62 @@ function tweet()
 	window.location = "https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=Tidy%20up%20this%20%23StupidDesk!&tw_p=tweetbutton&url=http%3A%2F%2Fstupiddesk.com";
 }
 
+function GET(name){
+  var url = window.location.search;
+  var num = url.search(name);
+  var namel = name.length;
+  var frontlength = namel+num+1; //length of everything before the value 
+  var front = url.substring(0, frontlength);  
+  url = url.replace(front, "");  
+  num = url.search("&");
+
+ if(num>=0) return url.substr(0,num); 
+ if(num<0)  return url;             
+}
+
+function loadFromURL()
+{
+	var id = window.location.search;//GET("id");
+		id = id.substring(1,id.length);
+		//id = GET("?");
+
+	if(id == null)
+		return;
+
+	console.log("load:" + id);
+
+	//id = "oAEUDaXhPc";
+
+	var LoadObject = Parse.Object.extend("Knoll");
+	var query = new Parse.Query(LoadObject);
+		query.get(id, {
+		  success: function(obj)
+		  {
+		    // The object was retrieved successfully.		    
+		    var data = obj.get("data");
+
+		    //console.log(data);
+		    removeItems();
+		    create( JSON.parse(data) );
+		  },
+		  error: function(obj, error)
+		  {
+		    // The object was not retrieved successfully.
+		    // error is a Parse.Error with an error code and message.
+		    console.log( error );
+		  }
+		});
+}
+
+function load()
+{
+	removeItems();
+	create( itemData );
+}
+
 function save()
 {
-	console.log("Save");
+	//console.log("Save");
 	itemData = new Array();
 	for( var i = 0; i < itemContainer.children.length; i++)
 	{
@@ -161,8 +214,24 @@ function save()
 		}
 		itemData[i] = data;
 	}
-	console.log(JSON.stringify(itemData));
-	alert((JSON.stringify(itemData) ));
+	var data = JSON.stringify(itemData);
+	var SaveObject = Parse.Object.extend("Knoll");
+	var saveObject = new SaveObject();
+		saveObject.set("data", data)
+		saveObject.save(null, {
+		  success: function(obj) {	  
+		    console.log( obj.id );
+		  },
+		  error: function(obj, error) {
+		    // Execute any logic that should take place if the save fails.
+		    // error is a Parse.Error with an error code and message.
+		    console.log('Failed to create new object, with error code: ' + error.message);
+		  }
+		});
+
+	if(debug)
+		console.log(data);
+	//alert((JSON.stringify(itemData) ));
 }
 
 function removeItems()

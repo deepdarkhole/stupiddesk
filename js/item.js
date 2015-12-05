@@ -140,7 +140,6 @@
     p.handleMouseOver = function( event )
     {
         this.guideDrawer.showGuides();
-        console.log("mouseover");
     }
 
     p.handlePressDown = function( event )
@@ -157,7 +156,6 @@
             this.wasMoved = false;
 
             var stagePoint = new Vector( event.stageX - itemContainer.x, event.stageY - itemContainer.y );
-            this.closestAlignmentDot = this.itemSnapper.getClosestAlignmentDotToPoint( stagePoint );
             this.guideDrawer.showActiveGuidesByDot( this.closestAlignmentDot );
 
         } else {

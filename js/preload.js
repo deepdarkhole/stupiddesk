@@ -35,6 +35,7 @@ var itemLoadProgress = function( event )
 	{
 		uncacheWidth();
 		setLoadingText("Get Stupid");
+		  enableStart();
 	}
 	else
 		setLoadingText( "&nbsp;" );

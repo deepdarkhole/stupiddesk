@@ -36,7 +36,6 @@ function init()
     	start();
     }else{
     	// Create
-    	enableStart();
     	create( itemData );	
     }
 

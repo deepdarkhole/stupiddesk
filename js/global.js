@@ -9,8 +9,8 @@ var itemScaleFactor = 0.7;
 var itemHitboxPadding = 10;
 var gridSize;
 
-var randomMin = 7;
-var randomMax = 20;
+var randomMin = 11;
+var randomMax = 23;
 
 var imgPath = "./imgs/items/";
 var element_id = {

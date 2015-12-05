@@ -1,4 +1,4 @@
-var debug = true;
+var debug = false;
 var stage;
 var itemContainer;
 var items;

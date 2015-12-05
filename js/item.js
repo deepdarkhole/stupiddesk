@@ -9,6 +9,7 @@
         this.img = img;
         this.position = position;
 
+
         if( itemQueue.getResult(img) )
         {
             this.setupWithAnimation();
@@ -50,6 +51,7 @@
 
         // Event Listeners 
         this.on( "click", this.handleClick );
+        this.on( "mousedown", this.handlePressDown );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
@@ -167,11 +169,16 @@
 
     }
 
+    p.handlePressDown = function( event )
+    {
+        this.cursor = "move";
+    }
 
     p.handlePressUp = function( event )
     {
         this.pressing = false;
         this.wasMoved = false;
+        this.cursor = "pointer";
 
         this.itemSnapper.clearDebugLines();
         this.guideDrawer.showGuides();

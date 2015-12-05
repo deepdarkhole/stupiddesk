@@ -109,13 +109,19 @@
     p.getNextRotationValue = function( rotation )
     {
         var stepCount = 4;
-        for( var i = 0; i < stepCount; i++ )
-        {
-            var stepAngle = ( 360 / stepCount ) * (i+1);
-            if ( rotation >= stepAngle ) continue;
 
-            if ( i == stepCount - 1 ) return 0;
-            return stepAngle;
+        if( rotation % (360/stepCount) != 0 )
+        {
+            for( var i = 0; i < stepCount; i++ )
+            {
+                var stepAngle = ( 360 / stepCount ) * (i+1);
+                if ( rotation >= stepAngle ) continue;
+
+                if ( i == stepCount - 1 ) return 0;
+                return stepAngle;
+            }
+        } else {
+            return rotation + 360 /stepCount;
         }
     }
 
@@ -130,6 +136,7 @@
         this.currentRotation = this.getNextRotationValue( this.currentRotation );
 
         createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
+
     }
 
     p.handlePressMove = function( event )

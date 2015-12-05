@@ -74,7 +74,7 @@
                         
             this.hitArea = hitArea;
             // show hitbox
-            this.addChild(hitArea);
+            //this.addChild(hitArea);
             // show image name
             var text = new createjs.Text(this.name, "20px Arial", "#FFFFFFF");
             text.x = text.getBounds().width * -0.5;

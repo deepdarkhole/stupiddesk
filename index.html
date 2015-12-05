@@ -17,6 +17,8 @@
     <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
 
+    <script src="http://www.parsecdn.com/js/parse-1.6.7.min.js"></script>
+
     <script src="js/global.js"></script>
     <script src="js/preload.js"></script>
     <script src="js/alignment.js"></script>
@@ -33,7 +35,7 @@
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-71028554-1', 'auto');
       ga('send', 'pageview');
@@ -61,17 +63,15 @@
     <div id="header" class="center">
         <ul>
             <li><button type="button" name="stupid" class="green_btn" onclick="stupid();">Make Stupid</button></li>
+            <!--
             <li><button type="button" name="share" class="blue_btn" onclick="tweet();">Share</button></li>
             <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';">Learn More</button></li>
 
-            <!--
+            -->
             <li><button type="button" name="save" class="grey_btn" onclick="save();">Save</button></li>
             <li><button type="button" name="load" class="grey_btn" onclick="load();">Load</button></li>
-
-            
-
             <li><button id="export" type="button" name="export" class="grey_btn" onclick="exportCanvas();">Export</button></li>
-            -->
+            
         </ul>
     </div>
     <div id="content">

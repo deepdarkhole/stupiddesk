@@ -21,6 +21,9 @@ var preload = function()
 var itemLoadProgress = function( event )
 {
 	//console.log("Progress:", event.progress);
+	if(debug)
+		return;
+	
 	var loading = document.getElementById(element_id.loading);
 		bar = loading.getElementsByTagName("SPAN")[0];
 

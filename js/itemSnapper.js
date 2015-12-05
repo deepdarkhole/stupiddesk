@@ -50,7 +50,7 @@ function ItemSnapper( item ) {
     this.getClosestSnapOffset = function()
     {
         this.clearDebugLines();
-
+    
         if ( !this.item.alignment.isAtRightAngle ) return new Vector( 0, 0 );
         
         var dots = this.item.guideDrawer.dots;
@@ -74,7 +74,7 @@ function ItemSnapper( item ) {
         var verticalCheck = dot.verticalAlignmentPoint;         // x val
         var pointToCheck = dot.dot.localToGlobal( 0, 0 );
 
-        var snapThreshold = 1;
+        var snapThreshold = 5;
         var offset = new Vector( 0, 0 );
         var snap = new Vector( 0, 0 );
 
@@ -89,6 +89,8 @@ function ItemSnapper( item ) {
             
             // Check horizontal alignments.
             var horizontalArray = item.alignment.horizontalAlignmentValues;
+            var verticalArray = item.alignment.verticalAlignmentValues;
+            
             for( var h = 0; h < horizontalArray.length; h++ )
             {
                 var global = item.localToGlobal( 0, horizontalArray[h] );
@@ -106,7 +108,6 @@ function ItemSnapper( item ) {
             }
 
             // Check vertical alignments.
-            var verticalArray = item.alignment.verticalAlignmentValues;
             for( var v = 0; v < verticalArray.length; v++ )
             {
                 var global = item.localToGlobal( verticalArray[v], 0 );
@@ -124,36 +125,65 @@ function ItemSnapper( item ) {
             }
         }
 
+
         // Debug Alignment Lines
+        var lineColor = "black";
+        var lineToPos = new Vector( 0, 0 );
 
         if ( closestHorizontalItem != null )
         {
             var horizontalItemPos = closestHorizontalItem.localToLocal( 0, 0, this.item );
-            var test = this.item.globalToLocal( 0, global.y );
             
             var line = new createjs.Shape();
-            line.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( horizontalItemPos.x, dot.dot.y ).endStroke();
+            if ( this.item.alignment.isHorizontal )
+            {
+                lineToPos.x = dot.dot.x;
+                lineToPos.y = horizontalItemPos.y;
+            } else {
+                lineToPos.x = horizontalItemPos.x;
+                lineToPos.y = dot.dot.y;
+            }
+
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                            .beginStroke( lineColor )
+                            .moveTo( dot.dot.x, dot.dot.y )
+                            .lineTo( lineToPos.x, lineToPos.y )
+                            .endStroke();
+
+            line.graphics.setStrokeStyle(0).beginFill(lineColor)
+                .drawCircle( lineToPos.x, lineToPos.y, 4 );
+
             this.alignLines.push( line );
             this.item.addChild( line );
-            //this.hAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( horizontalItemPos.x, dot.dot.y ).endStroke();
         } 
 
         if ( closestVerticalItem != null )
         {
             var verticalItemPos = closestVerticalItem.localToLocal( 0, 0, this.item );
-            var test = this.item.globalToLocal( global.x, 0 );
 
             var line = new createjs.Shape();
-            line .graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
+            if ( this.item.alignment.isHorizontal )
+            {
+                lineToPos.x = verticalItemPos.x;
+                lineToPos.y = dot.dot.y;
+            } else {
+                lineToPos.x = dot.dot.x;
+                lineToPos.y = verticalItemPos.y;
+            }
+
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                            .beginStroke( lineColor )
+                            .moveTo( dot.dot.x, dot.dot.y )
+                            .lineTo( lineToPos.x, lineToPos.y )
+                            .endStroke();
+
+            line.graphics.setStrokeStyle(0).beginFill(lineColor)
+                .drawCircle( lineToPos.x, lineToPos.y, 4 );
+
             this.alignLines.push( line );
             this.item.addChild( line );
-            //this.vAlignLine.graphics.setStrokeStyle( 1 ).beginStroke( "red" ).moveTo( dot.dot.x, dot.dot.y ).lineTo( dot.dot.x, verticalItemPos.y ).endStroke();
         }
         
-        // Debug
-        //var zeroOffset = new Vector( 0, 0 );
-        //return zeroOffset;
-
         return offset;
     }
 

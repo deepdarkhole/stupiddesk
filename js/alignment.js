@@ -126,13 +126,19 @@ Object.defineProperties( Alignment.prototype, {
 
     isHorizontal : {
         get : function() {
-            return this.item.rotation == 90 || this.item.rotation == 270; 
+            return this.trueRotation == 90 || this.trueRotation == 270; 
         }
     },
 
     isVertical : {
         get : function() {
-            return this.item.rotation == 0 || this.item.rotation == 180; 
+            return this.trueRotation == 0 || this.trueRotation == 180; 
+        }
+    },
+
+    trueRotation : {
+        get : function() {
+            return this.item.rotation;
         }
     },
     
@@ -165,7 +171,7 @@ Object.defineProperties( Alignment.prototype, {
     top : {
         get : function() {
             var value; 
-            switch( this.item.rotation )
+            switch( this.trueRotation )
             {
                 case ( 0 ):
                     value = this.absTop;
@@ -196,7 +202,7 @@ Object.defineProperties( Alignment.prototype, {
     bottom : {
         get : function() {
             var value; 
-            switch( this.item.rotation )
+            switch( this.trueRotation )
             {
                 case ( 0 ):
                     value = this.absBottom;
@@ -222,7 +228,7 @@ Object.defineProperties( Alignment.prototype, {
     left : {
         get : function() {
             var value;
-            switch( this.item.rotation )
+            switch( this.trueRotation )
             {
                 case ( 0 ):
                     value = this.absLeft;
@@ -254,7 +260,7 @@ Object.defineProperties( Alignment.prototype, {
     right : {
         get : function() {
             var value;
-            switch( this.item.rotation )
+            switch( this.trueRotation )
             {
                 case ( 0 ):
                     value = this.absRight;

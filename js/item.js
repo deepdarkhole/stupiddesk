@@ -2,8 +2,9 @@
     function Item( img, position )
     {
         this.Container_constructor();
-        // Dots Debugging
-        this.dotColor = "#99FF00";
+        // Dots DebuggingFFDE00
+        this.dotColorActive = "#000000";
+        this.dotColor = "#FFDE00";
         this.dotDiameter = 2;
         this.img = img;
         this.position = position;
@@ -24,7 +25,7 @@
     }
 
     p.setup = function( img, position )
-    {
+    {        
        // Bitmap        
         var bitmap = new createjs.Bitmap( itemQueue.getResult(img) );   //var bitmap = new createjs.Bitmap(imgPath + img);
         var bounds = bitmap.getBounds();
@@ -49,21 +50,11 @@
 
         // Event Listeners 
         this.on( "click", this.handleClick );
+        this.on( "mouseover", this.handleMouseOver );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
         this.on( "rollout", this.handleRollOut );
-
-        // Visual 
-        this.bitmap = bitmap;   
-        this.addChild( bitmap );
-        if(debug)
-        {
-            this.addChild(hitArea);            
-            this.hitArea = hitArea;
-        }else{
-            this.hitArea = hitArea;
-        }          
 
         // Basics
         this.name = img;
@@ -73,6 +64,25 @@
         this.count = 0;
         this.pressing = false;
         this.wasMoved = false; 
+
+        // Visual 
+        this.bitmap = bitmap;   
+        this.addChild( bitmap );
+        if(debug)
+        {
+                        
+            this.hitArea = hitArea;
+            // show hitbox
+            this.addChild(hitArea);
+            // show image name
+            var text = new createjs.Text(this.name, "20px Arial", "#FFFFFFF");
+            text.x = text.getBounds().width * -0.5;
+            text.y = bounds.height * 0.5;
+            text.textBaseline = "alphabetic";
+            this.addChild( text );
+        }else{
+            this.hitArea = hitArea;
+        }  
 
         // Set position
         if(position == null)
@@ -121,6 +131,12 @@
         createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
     }
 
+    p.handleMouseOver = function( event )
+    {
+        this.guideDrawer.showGuides();
+        console.log("mouseover");
+    }
+
     p.handlePressMove = function( event )
     {
         if ( !this.pressing )
@@ -137,13 +153,7 @@
             this.wasMoved = true;            
         }
 
-        //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
-      //  var snapOffset = this.itemSnapper.getClosestSnapOffset();
-
-        /*
-        this.offsetX -= snapOffset.x;
-        this.offsetY -= snapOffset.y;
-        */
+        var snapOffset = this.itemSnapper.getClosestSnapOffset();
 
         var testX = event.stageX - itemContainer.x - this.offsetX;
         var testY = event.stageY - itemContainer.y - this.offsetY;
@@ -154,7 +164,10 @@
         this.pressing = true;
         this.parent.setChildIndex( this , this.parent.numChildren-1);
 
+        this.guideDrawer.showGuidesActive();
+
     }
+
 
     p.handlePressUp = function( event )
     {
@@ -162,22 +175,27 @@
         this.wasMoved = false;
 
         this.itemSnapper.clearDebugLines();
-        this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
+        this.guideDrawer.showGuides();
+        //this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
     }
     
 
     p.handleRollOver = function( event )
     {
     	if(this.pressing == true)
+        {
     		return;
+        }
 
 
+        this.hovering = true;
         this.guideDrawer.showGuides();
         this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
     p.handleRollOut = function( event )
     {
+        this.hovering = false;
         this.guideDrawer.hideGuides();
     }
 
@@ -189,6 +207,12 @@
         // Guides
         this.guideDrawer = new GuideDrawer( this );
         this.guideDrawer.hideGuides();
+    }
+
+    p.testMouseOver = function ()
+    {
+        if ( !this.hovering ) return; 
+        this.guideDrawer.showGuides();
     }
 
     window.Item = createjs.promote( Item, "Container" );

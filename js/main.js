@@ -87,7 +87,7 @@ function exportCanvas()
     bitmap.cache( 0, 0, canvas.width, canvas.height, 1 );
     var base64 = bitmap.getCacheDataURL();
     
-    print(base64);
+    print(base64); 
 
     header.style.visibility = "visible";
     //return base64;
@@ -140,6 +140,11 @@ function stupid()
 function share()
 {
 	alert("Shared");
+}
+
+function tweet()
+{
+	window.location = "https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=Tidy%20up%20this%20%23StupidDesk!&tw_p=tweetbutton&url=http%3A%2F%2Fstupiddesk.com";
 }
 
 function save()

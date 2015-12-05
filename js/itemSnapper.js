@@ -144,7 +144,11 @@ function ItemSnapper( item ) {
                 lineToPos.y = dot.dot.y;
             }
 
-            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5]).beginStroke( lineColor ).moveTo( dot.dot.x, dot.dot.y ).lineTo( lineToPos.x, lineToPos.y ).endStroke();
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                            .beginStroke( lineColor )
+                            .moveTo( dot.dot.x, dot.dot.y )
+                            .lineTo( lineToPos.x, lineToPos.y )
+                            .endStroke();
 
             line.graphics.setStrokeStyle(0).beginFill(lineColor)
                 .drawCircle( lineToPos.x, lineToPos.y, 4 );
@@ -167,7 +171,11 @@ function ItemSnapper( item ) {
                 lineToPos.y = verticalItemPos.y;
             }
 
-            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5]).beginStroke( lineColor ).moveTo( dot.dot.x, dot.dot.y ).lineTo( lineToPos.x, lineToPos.y ).endStroke();
+            line.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                            .beginStroke( lineColor )
+                            .moveTo( dot.dot.x, dot.dot.y )
+                            .lineTo( lineToPos.x, lineToPos.y )
+                            .endStroke();
 
             line.graphics.setStrokeStyle(0).beginFill(lineColor)
                 .drawCircle( lineToPos.x, lineToPos.y, 4 );

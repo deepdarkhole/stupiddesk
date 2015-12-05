@@ -42,8 +42,12 @@ function init()
 
     stage.on( "stagemousemove", function( e ) {
         //console.log( e.stageX, e.stageY );
+        for( var i = 0; i < items.length; i++ )
+        {
+            items[i].testMouseOver();
+        }
         
-    } );
+    });
 }
 
 function enableStart()
@@ -168,6 +172,7 @@ function removeItems()
 function tick( event ) {
     
     center();
+    updateAnimation();
     stage.update();    
 
 //    window.requestAnimationFrame(tick);
@@ -194,3 +199,10 @@ function resize() {
     gridSize = ( xGridSize < yGridSize ) ? xGridSize : yGridSize;
 }
 
+function updateAnimation() 
+{
+    for( var i = 0; i < items.length; i++ )
+    {
+        items[i].testMouseOver();
+    }
+}

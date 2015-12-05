@@ -9,7 +9,6 @@
         this.img = img;
         this.position = position;
 
-
         if( itemQueue.getResult(img) )
         {
             this.setupWithAnimation();
@@ -51,7 +50,7 @@
 
         // Event Listeners 
         this.on( "click", this.handleClick );
-        this.on( "mousedown", this.handlePressDown );
+        this.on( "mouseover", this.handleMouseOver );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
@@ -109,19 +108,13 @@
     p.getNextRotationValue = function( rotation )
     {
         var stepCount = 4;
-
-        if( rotation % (360/stepCount) != 0 )
+        for( var i = 0; i < stepCount; i++ )
         {
-            for( var i = 0; i < stepCount; i++ )
-            {
-                var stepAngle = ( 360 / stepCount ) * (i+1);
-                if ( rotation >= stepAngle ) continue;
+            var stepAngle = ( 360 / stepCount ) * (i+1);
+            if ( rotation >= stepAngle ) continue;
 
-                if ( i == stepCount - 1 ) return 0;
-                return stepAngle;
-            }
-        } else {
-            return rotation + 360 /stepCount;
+            if ( i == stepCount - 1 ) return 0;
+            return stepAngle;
         }
     }
 
@@ -136,7 +129,12 @@
         this.currentRotation = this.getNextRotationValue( this.currentRotation );
 
         createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
+    }
 
+    p.handleMouseOver = function( event )
+    {
+        this.guideDrawer.showGuides();
+        console.log("mouseover");
     }
 
     p.handlePressMove = function( event )
@@ -155,13 +153,7 @@
             this.wasMoved = true;            
         }
 
-        //var snapOffset = this.itemSnapper.handleProximitySnapping( this.closestAlignmentDot );
         var snapOffset = this.itemSnapper.getClosestSnapOffset();
-
-        /*
-        this.offsetX -= snapOffset.x;
-        this.offsetY -= snapOffset.y;
-        */
 
         var testX = event.stageX - itemContainer.x - this.offsetX;
         var testY = event.stageY - itemContainer.y - this.offsetY;
@@ -176,16 +168,11 @@
 
     }
 
-    p.handlePressDown = function( event )
-    {
-        this.cursor = "move";
-    }
 
     p.handlePressUp = function( event )
     {
         this.pressing = false;
         this.wasMoved = false;
-        this.cursor = "pointer";
 
         this.itemSnapper.clearDebugLines();
         this.guideDrawer.showGuides();
@@ -196,15 +183,19 @@
     p.handleRollOver = function( event )
     {
     	if(this.pressing == true)
+        {
     		return;
+        }
 
 
+        this.hovering = true;
         this.guideDrawer.showGuides();
         this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
     p.handleRollOut = function( event )
     {
+        this.hovering = false;
         this.guideDrawer.hideGuides();
     }
 
@@ -216,6 +207,12 @@
         // Guides
         this.guideDrawer = new GuideDrawer( this );
         this.guideDrawer.hideGuides();
+    }
+
+    p.testMouseOver = function ()
+    {
+        if ( !this.hovering ) return; 
+        this.guideDrawer.showGuides();
     }
 
     window.Item = createjs.promote( Item, "Container" );

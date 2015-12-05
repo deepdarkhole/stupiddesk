@@ -7,6 +7,9 @@ function GuideDrawer( item ) {
         this.drawGuides();
         this.line = new createjs.Shape();
         this.item.addChild( this.line );
+        this.dashOffset = 0;
+        this.offsetAdvanceSpeed = 1;
+        this.offsetLimit = 100000;
     }
 
     this.drawDots = function() {
@@ -104,19 +107,14 @@ function GuideDrawer( item ) {
 
     this.showGuides = function( dot ) 
     {
-/*
-        for( var i = 0; i < this.guides.length; i++ )
-        {
-            var guideColor = this.item.dotColor;
-            this.guides[i].hide();
-            this.guides[i].show( guideColor );
-        }
-        */
-
         var alignment = this.item.alignment;
 
         this.line.graphics.clear();
-        this.line.graphics.setStrokeStyle( 5, "square" ).setStrokeDash([10,10]).beginStroke( this.item.dotColor )
+        this.dashOffset += this.offsetAdvanceSpeed; 
+        if ( this.dashOffset > this.offsetLimit ) this.dashOffset = 0;
+        var offset = this.dashOffset;
+
+        this.line.graphics.setStrokeStyle( 5, "square" ).setStrokeDash([10,10], offset).beginStroke( this.item.dotColor )
             .rect(-alignment.width/2 - itemHitboxPadding, -alignment.height/2 - itemHitboxPadding, alignment.width + 2*itemHitboxPadding, alignment.height + 2*itemHitboxPadding );
 
 

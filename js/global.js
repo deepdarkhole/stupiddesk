@@ -23,7 +23,8 @@ var element_id = {
 		footer: "footer",
 		loading: "loading",
 		export: "export",
-		confirm: "confirm"
+		confirm: "confirm",
+		share: "share"
 	};
 var images = [
 	"black notepaper.png",

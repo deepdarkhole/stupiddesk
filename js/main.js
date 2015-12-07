@@ -69,9 +69,7 @@ function start()
 	var intro = document.getElementById(element_id.intro);
 		intro.parentNode.removeChild(intro);
 
-	var header = document.getElementById(element_id.header);
-		header.style.visibility = "visible";
-
+	show( element_id.header );
 	stupid();
 }
 
@@ -132,6 +130,21 @@ function create( data )
     knollChanged = false;
 }
 
+
+
+function hide(id)
+{
+	var element = document.getElementById(id);
+		element.style.visibility = "hidden";
+}
+
+function show(id)
+{
+	var element = document.getElementById(id);
+		element.style.visibility = "visible";
+}
+
+
 function stupid()
 {
 	cancel();
@@ -141,12 +154,11 @@ function stupid()
 
 function cancel()
 {
-	var confirm = document.getElementById(element_id.confirm);
-		confirm.setAttribute("style", "display: none;");
-
-	var header = document.getElementById(element_id.header);
-		header.style.visibility = "visible";
+	hide( element_id.confirm );
+	hide( element_id.share );
+	show( element_id.header );
 }
+
 
 function confirm()
 {
@@ -154,19 +166,20 @@ function confirm()
 	{
 		stupid();
 		return;
-	}
+	}	
 
-	var confirm = document.getElementById(element_id.confirm);
-		confirm.setAttribute("style", "display: block;");
-
-
-	var header = document.getElementById(element_id.header);
-		header.style.visibility = "hidden";
+	show( element_id.confirm );
+	hide( element_id.header );
 }
 
 function share()
 {
-	alert("Shared");
+	hide( element_id.header );
+	show( element_id.share );
+
+	var modal = document.getElementById(element_id.share);
+		input = intro.getElementsByTagName("INPUT")[0];
+		input.select();
 }
 
 function tweet()

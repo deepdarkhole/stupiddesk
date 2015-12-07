@@ -71,19 +71,29 @@
         <button id="loading" type="button" name="start" class="grey_btn" onclick="cancel();">Cancel</button>
     </div>
 
+    <div id="share" class="center modal">
+        <h1>Share Your Desk!?</h1>
+        <input readonly value="http://stupiddesk.com/?oAEUDaXhPc" >
+        <br/>
+
+        <button id="loading" type="button" name="start" class="blue_btn" onclick="tweet();">Twitter</button>
+        <button id="loading" type="button" name="start" class="blue_facebook_btn" onclick="facebook();">Facebook</button>
+        <button id="loading" type="button" name="start" class="red_btn" onclick="copylink();">Copy Link</button>
+        <button id="loading" type="button" name="start" class="grey_btn" onclick="cancel()">Close</button>
+    </div>
 
     <div id="header" class="center">
         <ul>
             <li><button type="button" name="stupid" class="green_btn" onclick="confirm();">Make Stupid</button></li>
-            <!--
-            <li><button type="button" name="share" class="blue_btn" onclick="tweet();">Share</button></li>
+            
+            <li><button type="button" name="share" class="blue_btn" onclick="share();">Share</button></li>
             <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';">Learn More</button></li>
 
-            -->
+            <!--
             <li><button type="button" name="save" class="grey_btn" onclick="save();">Save</button></li>
             <li><button type="button" name="load" class="grey_btn" onclick="load();">Load</button></li>
             <li><button id="export" type="button" name="export" class="grey_btn" onclick="exportCanvas();">Export</button></li>
-
+-->
             
         </ul>
     </div>

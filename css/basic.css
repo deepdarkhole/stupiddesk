@@ -68,6 +68,25 @@ button:disabled
 	background-color: #77DDF8;
 }
 
+.blue_facebook_btn
+{
+    background-color: #3b5998;
+}
+
+.blue_facebook_btn:hover
+{
+    background-color: #6c8ac9;
+}
+
+.red_btn
+{
+    background-color: #E62117;
+}
+.red_btn:hover
+{
+    background-color: #FF5248;
+}
+
 .disable-selection
 {
     -moz-user-select: none; /* Firefox */

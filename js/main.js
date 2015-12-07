@@ -128,6 +128,8 @@ function create( data )
     stage.addChild(itemContainer);
     center();
     stage.update();
+
+    knollChanged = false;
 }
 
 function stupid()
@@ -148,6 +150,12 @@ function cancel()
 
 function confirm()
 {
+	if( !knollChanged )
+	{
+		stupid();
+		return;
+	}
+
 	var confirm = document.getElementById(element_id.confirm);
 		confirm.setAttribute("style", "display: block;");
 

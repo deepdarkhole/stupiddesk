@@ -12,6 +12,8 @@ var gridSize;
 var randomMin = 11;
 var randomMax = 23;
 
+var knollChanged = false;
+
 var imgPath = "./imgs/items/";
 var element_id = {
 		intro: "intro",

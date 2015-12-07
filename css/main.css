@@ -46,6 +46,16 @@ html { -webkit-font-smoothing: antialiased; }
 	display: none;
 }
 
+#confirm.modal h1
+{
+	text-align: center;
+}
+
+#confirm.modal p
+{
+	text-align: center;
+}
+
 #header
 {
 	position: absolute;

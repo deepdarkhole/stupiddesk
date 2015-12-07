@@ -135,6 +135,7 @@
         this.currentRotation = this.getNextRotationValue( this.currentRotation );
 
         createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
+        knollChanged = true;
     }
 
     p.handleMouseOver = function( event )
@@ -175,6 +176,7 @@
         this.parent.setChildIndex( this , this.parent.numChildren-1);
 
         this.guideDrawer.showGuidesActive();
+        knollChanged = true;
 
     }
 

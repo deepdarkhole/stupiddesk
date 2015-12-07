@@ -107,6 +107,17 @@
         this.itemSnapper = new ItemSnapper( this );
     }
 
+    p.offsetBy = function( x, y )
+    {
+        var tX = this.x + x;
+        var tY = this.y + y;
+
+
+        console.log(this.x, this.y, tX, tY);
+
+        createjs.Tween.get(this).to({x: tX, y: tY}, 200);
+    }
+
     p.getNextRotationValue = function( rotation )
     {
         var stepCount = 4;

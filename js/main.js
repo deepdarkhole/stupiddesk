@@ -131,6 +131,27 @@ function create( data )
 }
 
 
+function centerKnoll()
+{
+	var bounds = itemContainer.getBounds();
+
+	cX = bounds.x + bounds.width/2;
+	cY = bounds.y + bounds.height/2;
+
+	tX = 0;
+	tY = 0;
+
+	console.log( bounds );
+	console.log( tX - cX, tY - cY );
+
+	for( var i = 0; i < items.length; i++ )
+	{
+		var item = items[i];
+		item.offsetBy( tX - cX, tY - cY );
+	}
+
+}
+
 
 function hide(id)
 {
@@ -180,13 +201,20 @@ function confirm()
 
 function share()
 {
+	centerKnoll();
+
 	var button = document.getElementById("share_button");
 		button.setAttribute("disabled", "disabled");// = "false";
 
-	if( knollChanged || last_id == null )
-		save( showShare );
-	else
-		showShare( last_id );
+
+	setTimeout(function(){
+		if( knollChanged || last_id == null )
+			save( showShare );
+		else
+			showShare( last_id );
+	}, 210);
+
+
 }
 
 

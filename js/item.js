@@ -107,7 +107,7 @@
         this.itemSnapper = new ItemSnapper( this );
     }
 
-    p.offsetBy = function( x, y )
+    p.offsetBy = function( x, y, callback )
     {
         var tX = this.x + x;
         var tY = this.y + y;
@@ -115,7 +115,7 @@
 
         console.log(this.x, this.y, tX, tY);
 
-        createjs.Tween.get(this).to({x: tX, y: tY}, 200);
+        createjs.Tween.get(this).to({x: tX, y: tY}, 200).call( callback );
     }
 
     p.getNextRotationValue = function( rotation )

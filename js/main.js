@@ -131,7 +131,7 @@ function create( data )
 }
 
 
-function centerKnoll()
+function centerKnoll( callback )
 {
 	var bounds = itemContainer.getBounds();
 
@@ -144,10 +144,16 @@ function centerKnoll()
 	console.log( bounds );
 	console.log( tX - cX, tY - cY );
 
+	var counter = items.length;
+
 	for( var i = 0; i < items.length; i++ )
 	{
 		var item = items[i];
-		item.offsetBy( tX - cX, tY - cY );
+		item.offsetBy( tX - cX, tY - cY, function(){
+			counter--;
+			if( counter == 0 )
+				callback();
+		} );
 	}
 
 }
@@ -201,18 +207,19 @@ function confirm()
 
 function share()
 {
-	centerKnoll();
+	
 
 	var button = document.getElementById("share_button");
 		button.setAttribute("disabled", "disabled");// = "false";
 
 
-	setTimeout(function(){
+	centerKnoll( function(){
 		if( knollChanged || last_id == null )
 			save( showShare );
 		else
 			showShare( last_id );
-	}, 210);
+
+	} );
 
 
 }

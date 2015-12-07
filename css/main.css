@@ -98,15 +98,7 @@ html { -webkit-font-smoothing: antialiased; }
 	min-width: 430px;
 	visibility: hidden;
 }
-#header ul
-{
-	list-style-type: none;     
-}
-#header li
-{
-	display: inline;
-	padding: 5px;
-}
+
 
 #content
 {

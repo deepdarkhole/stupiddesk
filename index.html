@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/basic.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <script src="https://code.createjs.com/preloadjs-0.6.1.min.js"></script>
     <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+    
 
     <script src="http://www.parsecdn.com/js/parse-1.6.7.min.js"></script>
 
@@ -71,8 +73,10 @@
             This will clear your current knoll.
         </p>
 
-        <button id="loading" type="button" name="stupid" class="green_btn" onclick="stupid();">Make Stupid</button>
-        <button id="loading" type="button" name="cancel" class="grey_btn" onclick="cancel();">Cancel</button>
+<ul>
+        <li><button id="loading" type="button" name="stupid" class="green_btn" onclick="stupid();"><i class="fa fa-random"></i> Make Stupid</button></li>
+        <li><button id="loading" type="button" name="cancel" class="grey_btn" onclick="cancel();">Cancel</button></li>
+        </ul>
     </div>
 
     <div id="share" class="center modal">
@@ -80,18 +84,26 @@
         <input readonly value="http://stupiddesk.com/?" >
         <br/>
 
-        <button id="loading" type="button" name="tweet" class="blue_btn" onclick="tweet();">Twitter</button>
-        <button id="loading" type="button" name="facebook" class="blue_facebook_btn" onclick="facebook();">Facebook</button>
-        <button id="loading" type="button" name="close" class="grey_btn" onclick="cancel()">Close</button>
+        <ul>
 
+            <li><button id="loading" type="button" name="tweet" class="blue_btn" onclick="tweet();"><i class="fa fa-twitter-square"></i> Twitter</button>
+            </li>
+
+        <li>
+        <button id="loading" type="button" name="facebook" class="blue_facebook_btn" onclick="facebook();"><i class="fa fa-facebook-square"></i> Facebook</button>
+        </li>
+
+        <li><button id="loading" type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Close</button></li>
+
+        </ul>
 
     </div>
 
     <div id="header" class="center">
         <ul>
-            <li><button type="button" name="stupid" class="green_btn" onclick="confirm();">Make Stupid</button></li>
-            <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();">Share</button></li>
-            <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';">Learn More</button></li>
+            <li><button type="button" name="stupid" class="green_btn" onclick="confirm();"><i class="fa fa-random"></i> Make Stupid</button></li>
+            <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i> Done</button></li>
+            <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';"><i class="fa fa-info-circle"></i> Learn More</button></li>
 
             <!--
             <li><button type="button" name="save" class="grey_btn" onclick="save();">Save</button></li>

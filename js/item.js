@@ -65,6 +65,7 @@
         this.count = 0;
         this.pressing = false;
         this.wasMoved = false; 
+        this.quickRotated = false;
 
         // Visual 
         this.bitmap = bitmap;   
@@ -131,11 +132,14 @@
 
     p.handleClick = function( evt )
     {
-        if ( this.wasMoved ) return;
+        if ( this.wasMoved || this.quickRotated) return;
+
+
         this.currentRotation = this.getNextRotationValue( this.currentRotation );
 
         createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
         knollChanged = true;
+
     }
 
     p.handleMouseOver = function( event )
@@ -146,6 +150,13 @@
     p.handlePressDown = function( event )
     {
         this.cursor = "move";
+
+        if( this.currentRotation % (360/4) != 0 )
+        {
+            this.currentRotation = this.getNextRotationValue( this.currentRotation );
+            createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
+            this.quickRotated = true;
+        }
     }
 
     p.handlePressMove = function( event )
@@ -191,6 +202,9 @@
         this.itemSnapper.clearDebugLines();
         this.guideDrawer.showGuides();
         //this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
+
+
+        this.quickRotated = false;
     }
     
 

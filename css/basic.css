@@ -23,6 +23,17 @@ a:hover
 	background-color: #505050;
 }
 
+
+ul
+{
+    list-style-type: none;     
+}
+li
+{
+    display: inline;
+    padding: 5px;
+}
+
 button
 {
     padding: 14px 20px;
@@ -49,6 +60,8 @@ button:disabled
     color: #222222; 
     cursor: not-allowed; 
 }
+
+
 
 .green_btn
 {

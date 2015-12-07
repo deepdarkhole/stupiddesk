@@ -29,7 +29,7 @@ var element_id = {
 		share: "share"
 	};
 var images = [
-	"andrei.png",
+"andrei.png",
 "black notepaper.png",
 "box.png",
 "brush box.png",
@@ -41,6 +41,8 @@ var images = [
 "brush-6.png",
 "brush.png",
 "business card box.png",
+"card back.png",
+"card front.png",
 "circle pail.png",
 "circle pair.png",
 "clamp-1.png",
@@ -54,7 +56,6 @@ var images = [
 "cutter.png",
 "cxutting mat.png",
 "dain.png",
-"ddh notebook.png",
 "earphones.png",
 "Envelope C6 - Vertical.png",
 "eraser.png",
@@ -71,7 +72,7 @@ var images = [
 "laptop.png",
 "mouse.png",
 "needle.png",
-"notebook open.png",
+"Notebook - Large - 180°.png",
 "old book.png",
 "Old Box-1.png",
 "old box-2.png",
@@ -106,6 +107,7 @@ var images = [
 "sketch book.png",
 "small pairs.png",
 "soft pastel.png",
+"stupid desk.png",
 "tablet pen box.png",
 "tablet pen.png",
 "tablet.png",

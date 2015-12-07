@@ -49,6 +49,8 @@
 </head>
 
 <body onload="preload();" class="disable-selection">
+
+
     <div id="intro" class="center modal">
         <h1>Knoll (verb)</h1>
         <p>
@@ -59,6 +61,8 @@
             <span class="bkg"></span>    
             <span class="text">Get Stupid</span>
         </button>
+
+        
     </div>
 
     <div id="confirm" class="center modal">
@@ -72,14 +76,15 @@
     </div>
 
     <div id="share" class="center modal">
-        <h1>Share Your Desk!?</h1>
-        <input readonly value="http://stupiddesk.com/?oAEUDaXhPc" >
+        <h1>Share Your <span class="strikethrough">Stupid</span> Desk!?</h1>
+        <input readonly value="http://stupiddesk.com/?" >
         <br/>
 
         <button id="loading" type="button" name="start" class="blue_btn" onclick="tweet();">Twitter</button>
         <button id="loading" type="button" name="start" class="blue_facebook_btn" onclick="facebook();">Facebook</button>
-        <button id="loading" type="button" name="start" class="red_btn" onclick="copylink();">Copy Link</button>
         <button id="loading" type="button" name="start" class="grey_btn" onclick="cancel()">Close</button>
+
+
     </div>
 
     <div id="header" class="center">
@@ -106,6 +111,8 @@
         </p>
 
     </div>
+
+
 </body>
 </html>
  

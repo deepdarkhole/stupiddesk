@@ -87,6 +87,11 @@ button:disabled
     background-color: #FF5248;
 }
 
+.strikethrough
+{
+    text-decoration: line-through;
+}
+
 .disable-selection
 {
     -moz-user-select: none; /* Firefox */

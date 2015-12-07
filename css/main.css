@@ -62,6 +62,11 @@ html { -webkit-font-smoothing: antialiased; }
 	visibility: hidden;
 }
 
+#share h1
+{
+	font-size: 4em;
+}
+
 #share input
 {
 	background: rgba(0,0,0,.5);

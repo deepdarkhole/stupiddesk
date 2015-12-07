@@ -174,17 +174,42 @@ function confirm()
 
 function share()
 {
+	save( showShare );
+}
+
+
+function showShare( id )
+{
+
+	knollChanged = false;
+
 	hide( element_id.header );
 	show( element_id.share );
 
 	var modal = document.getElementById(element_id.share);
-		input = intro.getElementsByTagName("INPUT")[0];
+		input = modal.getElementsByTagName("INPUT")[0];
+		input.value = "http://stupiddesk.com/?" + id;
 		input.select();
+	
 }
 
 function tweet()
 {
-	window.location = "https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=Tidy%20up%20this%20%23StupidDesk!&tw_p=tweetbutton&url=http%3A%2F%2Fstupiddesk.com";
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+
+	var text = "My%20%23StupidDesk%20brings%20all%20the%20boys%20to%20the%20yard%0AAnd%20they%27re%20like%2C%20it%27s%20better%20than%20yours%0A";
+
+	window.open("https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=" + text + "&tw_p=tweetbutton&url=" + escape(input.value) , '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;;
+}
+
+
+function facebook()
+{
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+
+	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value)+"&t="+"STOOPIDDESK", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
 }
 
 function GET(name){
@@ -240,7 +265,7 @@ function load()
 	create( itemData );
 }
 
-function save()
+function save( callback )
 {
 	//console.log("Save");
 	itemData = new Array();
@@ -261,7 +286,7 @@ function save()
 		saveObject.set("data", data)
 		saveObject.save(null, {
 		  success: function(obj) {	  
-		    console.log( obj.id );
+		    callback( obj.id );
 		  },
 		  error: function(obj, error) {
 		    // Execute any logic that should take place if the save fails.

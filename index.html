@@ -49,7 +49,7 @@
 </head>
 
 <body onload="preload();" class="disable-selection">
-    <div id="intro" class="center">
+    <div id="intro" class="center modal">
         <h1>Knoll (verb)</h1>
         <p>
             Knolling is the process of arranging related objects in parallel or 90-degree angles as a method of organization.
@@ -60,9 +60,21 @@
             <span class="text">Get Stupid</span>
         </button>
     </div>
+
+    <div id="confirm" class="center modal">
+        <h1>Are you sure?</h1>
+        <p>
+            This will clear your current knoll.
+        </p>
+
+        <button id="loading" type="button" name="start" class="green_btn" onclick="stupid();">Make Stupid</button>
+        <button id="loading" type="button" name="start" class="grey_btn" onclick="cancel();">Cancel</button>
+    </div>
+
+
     <div id="header" class="center">
         <ul>
-            <li><button type="button" name="stupid" class="green_btn" onclick="stupid();">Make Stupid</button></li>
+            <li><button type="button" name="stupid" class="green_btn" onclick="confirm();">Make Stupid</button></li>
             <!--
             <li><button type="button" name="share" class="blue_btn" onclick="tweet();">Share</button></li>
             <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';">Learn More</button></li>

@@ -132,8 +132,28 @@ function create( data )
 
 function stupid()
 {
+	cancel();
 	removeItems();
 	create( null );
+}
+
+function cancel()
+{
+	var confirm = document.getElementById(element_id.confirm);
+		confirm.setAttribute("style", "display: none;");
+
+	var header = document.getElementById(element_id.header);
+		header.style.visibility = "visible";
+}
+
+function confirm()
+{
+	var confirm = document.getElementById(element_id.confirm);
+		confirm.setAttribute("style", "display: block;");
+
+
+	var header = document.getElementById(element_id.header);
+		header.style.visibility = "hidden";
 }
 
 function share()

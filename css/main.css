@@ -1,20 +1,7 @@
 html { -webkit-font-smoothing: antialiased; }
 
-#intros
-{
-	position: absolute;
-	top:50%;
-	background-color: rgba(0, 0, 0, 0.8);
-	width: 100%;
-	min-height: 285px;
-	bottom: -50%;
-	color: #FFFFFF;
-	padding: 30px 0px;
-	overflow: visible;
-	align-items: center;
-  	justify-content: center; 
-}
-#intro
+
+.modal
 {
 	background-color: rgba(0, 0, 0, 0.8);
 	width: 100%;
@@ -24,10 +11,10 @@ html { -webkit-font-smoothing: antialiased; }
 	position: absolute;
 	top: 50%;
 	left:0px;	
-	transform: translateY(-50%);
+	transform: translate(-50%, -50%) !important;
 
 }
-#intro h1
+.modal h1
 {
 	font-size: 5em;
 	font-family: "Clarendon Bold";
@@ -38,7 +25,7 @@ html { -webkit-font-smoothing: antialiased; }
 	width: 70%;
 	margin: 10px auto;
 }
-#intro p
+.modal p
 {
 	margin: 10px auto;
 	font-style: italic;
@@ -49,9 +36,14 @@ html { -webkit-font-smoothing: antialiased; }
 	font-weight: 300;
 	text-align: left;
 }
-#intro button
+.modal button
 {
 	margin-top:10px;
+}
+
+#confirm
+{
+	display: none;
 }
 
 #header

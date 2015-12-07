@@ -150,6 +150,7 @@ function stupid()
 	cancel();
 	removeItems();
 	create( null );
+	last_id = null;
 }
 
 function cancel()
@@ -157,6 +158,11 @@ function cancel()
 	hide( element_id.confirm );
 	hide( element_id.share );
 	show( element_id.header );
+
+	var button = document.getElementById("share_button");
+		attr = button.getAttributeNode("disabled");// = "false";
+		if( attr )
+			button.removeAttributeNode(attr);  
 }
 
 
@@ -174,12 +180,20 @@ function confirm()
 
 function share()
 {
-	save( showShare );
+	var button = document.getElementById("share_button");
+		button.setAttribute("disabled", "disabled");// = "false";
+
+	if( knollChanged || last_id == null )
+		save( showShare );
+	else
+		showShare( last_id );
 }
 
 
 function showShare( id )
 {
+
+	last_id = id;
 
 	knollChanged = false;
 

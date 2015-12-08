@@ -56,16 +56,9 @@ function enableStart()
 
 function start()
 {
-	var intro = document.getElementById(element_id.intro);
-		intro.parentNode.removeChild(intro);
-
+	hide( element_id.intro );
 	show( element_id.header );
-/*
-	var id = window.location.search;//GET("id");
-		id = id.substring(1,id.length);
-
-	if( id == null )
-		stupid();*/
+	stupid();
 }
 
 function exportCanvas()
@@ -179,6 +172,7 @@ function cancel()
 {
 	hide( element_id.confirm );
 	hide( element_id.share );
+	hide( element_id.intro );
 	show( element_id.header );
 
 	var button = document.getElementById("share_button");

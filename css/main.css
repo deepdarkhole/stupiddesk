@@ -3,7 +3,7 @@ html { -webkit-font-smoothing: antialiased; }
 
 .modal
 {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.7);
 	width: 100%;
 	min-height: 240px;
 	color: #FFFFFF;
@@ -14,6 +14,13 @@ html { -webkit-font-smoothing: antialiased; }
 	transform: translate(-50%, -50%) !important;
 	text-align: center;
 
+	transition: background .5s;
+
+}
+
+.modal:hover
+{
+	background-color: rgba(0, 0,0,.8);
 }
 .modal h1
 {
@@ -56,6 +63,7 @@ html { -webkit-font-smoothing: antialiased; }
 {
 	text-align: left;
 }
+
 
 #share
 {

@@ -102,10 +102,10 @@ function GuideDrawer( item ) {
             closestDot.show( "red" );
         }
 
-        this.showGuides( closestDot );
+        this.showSelection( closestDot );
     }
 
-    this.showGuides = function( dot ) 
+    this.showSelection = function( dot ) 
     {
         var alignment = this.item.alignment;
 
@@ -120,20 +120,10 @@ function GuideDrawer( item ) {
 
     }
 
-    this.showGuidesActive = function() 
+    this.showSelectionActive = function() 
     {
-      /*  for( var i = 0; i < this.guides.length; i++ )
-        {
-            var guideColor = this.item.dotColorActive;
-            this.guides[i].hide();
-            this.guides[i].show( guideColor );
-        }*/
-
         var alignment = this.item.alignment;
-
         this.line.graphics.clear();
-      //  this.line.graphics.setStrokeStyle( 5, "square" ).beginStroke( this.item.dotColor )
-     //       .rect(-alignment.width/2 - itemHitboxPadding, -alignment.height/2 - itemHitboxPadding, alignment.width + 2*itemHitboxPadding, alignment.height + 2*itemHitboxPadding );
     }
 
 

@@ -113,6 +113,23 @@ html { -webkit-font-smoothing: antialiased; }
 
 }
 
+#audio
+{
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 2em;
+	color: black;
+}
+
+#audio a
+{
+	border-radius: 12px;
+	cursor: pointer;
+	padding: 8px;
+}
+
 #footer
 {
 	position: absolute;

@@ -66,7 +66,7 @@ function AlignmentDrawer( item ) {
                                 .lineTo( lineToPos.x, lineToPos.y )
                                 .endStroke();
 
-                lineDisplay.graphics.setStrokeStyle(0).beginFill(lineColor)
+                lineDisplay.graphics.setStrokeStyle(0).setStrokeDash(0).beginFill(lineColor)
                     .drawCircle( lineToPos.x, lineToPos.y, 4 );
 
                 this.alignLines.push( lineDisplay );

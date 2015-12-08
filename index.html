@@ -52,6 +52,11 @@
 
 <body onload="preload();" class="disable-selection">
 
+    <div id="audio">
+        <button id="audio_on" onclick="toggleAudio();"><i class="fa fa-volume-up"></i> audio on</button>
+        <button id="audio_off" onclick="toggleAudio();" style="display: none;"><i class="fa fa-volume-off"></i> audio off</button>
+        <audio id="bgm" src="mp3/ipanema.mp3" preload="auto" loop>
+    </div>
 
     <div id="intro" class="center modal">
         <h1>Knoll (verb)</h1>
@@ -68,7 +73,7 @@
         </li>
 
 
-        <li><button id="loading" type="button" name="cancel" class="grey_btn" onclick="cancel();"><i class="fa fa-eye"></i> View</button></li>
+        <li><button id="loading" type="button" name="cancel" class="grey_btn" disabled onclick="cancel();"><i class="fa fa-eye"></i> View</button></li>
         </ul>
 
         
@@ -130,6 +135,8 @@
         </p>
 
     </div>
+
+    
 
 
 </body>

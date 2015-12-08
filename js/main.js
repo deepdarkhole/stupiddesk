@@ -5,6 +5,8 @@ function initStage()
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 	stage.update();	
+
+	updateAudio();
 }
 
 function init()
@@ -383,4 +385,70 @@ function updateAnimation()
     {
         items[i].animateGuides();
     }
+}
+
+
+
+
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+	
+}
+
+function readCookie(name) {
+	console.log( document.cookie );
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+function toggleAudio()
+{
+	var audioState = readCookie("audio");
+
+	if( audioState == "on" )
+	{
+		eraseCookie("audio");
+		createCookie("audio", "off", 365);
+	} else {
+		eraseCookie("audio");
+		createCookie("audio", "on", 365);
+	}
+	
+	updateAudio();
+}
+
+function updateAudio()
+{
+	var audio = document.getElementById( "bgm" );
+	var audioState = readCookie("audio");
+
+
+
+	if( audioState == "on" )
+	{
+		audio.pause();
+		document.getElementById("audio_off").setAttribute("style", "display: block");
+		document.getElementById("audio_on").setAttribute("style", "display: none");
+	} else {
+		audio.play();
+		document.getElementById("audio_off").setAttribute("style", "display: none");
+		document.getElementById("audio_on").setAttribute("style", "display: block");
+	}
 }

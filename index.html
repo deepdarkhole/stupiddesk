@@ -67,7 +67,7 @@
         </li>
 
 
-        <li><button id="intro_view" type="button" name="view" class="grey_btn" disabled onclick="cancel();"><i class="fa fa-eye"></i> View</button></li>
+        <li><button id="intro_view" type="button" name="view" class="grey_btn" disabled onclick="view();"><i class="fa fa-eye"></i> View</button></li>
         </ul>
 
         
@@ -109,12 +109,12 @@
         <ul>
             <li><button type="button" name="stupid" class="green_btn" onclick="confirm();"><i class="fa fa-magic"></i> Make Stupid</button></li>
             <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i> Done</button></li>
-            <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';"><i class="fa fa-info-circle"></i> Learn More</button></li>
+            <li><button type="button" name="learn" class="grey_btn" onclick="window.open('https://en.wikipedia.org/wiki/Knoll_(verb)');"><i class="fa fa-info-circle"></i> Learn More</button></li>
 
          
             <li>
                 <button type="button"  class="red_btn" onclick="toggleAudio();">
-                    <i id="audio_on" class="fa fa-volume-up"></i><i id="audio_off" class="fa fa-volume-off"></i>
+                    <i id="audio_on" class="fa fa-volume-up"></i><i id="audio_off" class="fa fa-volume-off" style="display: none;"></i>
                 </button>
             </li>
 
@@ -139,7 +139,7 @@
 
     
 
-                <audio id="bgm" src="mp3/ipanema.mp3" preload="auto" loop />
+    <audio id="bgm" src="mp3/ipanema.mp3" loop />
 </body>
 </html>
  

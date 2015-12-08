@@ -70,6 +70,12 @@ function start()
 	updateAudio();
 }
 
+function view()
+{
+	updateAudio();
+	cancel();
+}
+
 function exportCanvas()
 {
 	var header = document.getElementById(element_id.header);

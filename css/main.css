@@ -91,6 +91,7 @@ html { -webkit-font-smoothing: antialiased; }
 	font-family: "CoreSans Light";
 	text-align: center;
 	margin-bottom: 1em;
+	cursor: text;
 }
 
 #share input::selection

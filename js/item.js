@@ -123,7 +123,6 @@
                 var stepAngle = ( 360 / stepCount ) * (i+1);
                 if ( rotation >= stepAngle ) continue;
 
-                if ( i == stepCount - 1 ) return 0;
                 return stepAngle;
             }
         } else {

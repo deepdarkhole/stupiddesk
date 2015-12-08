@@ -48,7 +48,7 @@ var itemLoadProgress = function( event )
 	{
 		uncacheWidth();
 		setLoadingText('<i class="fa fa-magic"></i> Get Stupid');
-		  enableStart();
+		enableStart();
 	}
 	else
 		setLoadingText( "&nbsp;" );

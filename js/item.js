@@ -146,6 +146,7 @@
             this.currentRotation = this.getNextRotationValue( this.currentRotation );
             createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
             this.quickRotated = true;
+            knollChanged = true;
         }
     }
 

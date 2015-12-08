@@ -206,12 +206,24 @@
     p.handlePressUp = function( event )
     {
         this.pressing = false;
-        this.hovering = true;
+       
         this.wasMoved = false;
         this.cursor = "pointer";
         
         this.itemSnapper.clearDebugLines();
-        this.guideDrawer.showGuides();
+        
+        var pt = this.globalToLocal(stage.mouseX, stage.mouseY);
+
+
+        if( this.hitTest(pt.x, pt.y) )
+        {
+            this.hovering = true;
+            this.guideDrawer.showGuides( );
+
+        } else {
+            this.hovering = false;
+        }
+
         //this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
 
 
@@ -247,7 +259,7 @@
         this.guideDrawer.hideGuides();
     }
 
-    p.testMouseOver = function ()
+    p.animateGuides = function ()
     {
         if ( !this.hovering ) return; 
         this.guideDrawer.showGuides( );

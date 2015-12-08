@@ -39,16 +39,6 @@ function init()
     	create( itemData );	
     }
 
-    stage.on( "stagemousemove", function( e ) {
-        //console.log( e.stageX, e.stageY );
-        for( var i = 0; i < items.length; i++ )
-        {
-            items[i].testMouseOver( );
-            items[i].testMouseOver( );
-        }
-        
-    });
-
     // Parse
     Parse.initialize("AeLWidTlB5fwyEf5BxDN90MMmSGIF9RpI3WDc8SI", "7IVEuZFFlpO2U6f5p8UF0q8doUX5w1DDS8adOvgQ");
 
@@ -397,6 +387,6 @@ function updateAnimation()
 {
     for( var i = 0; i < items.length; i++ )
     {
-        items[i].testMouseOver();
+        items[i].animateGuides();
     }
 }

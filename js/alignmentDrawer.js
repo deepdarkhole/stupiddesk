@@ -5,6 +5,7 @@ function AlignmentDrawer( item ) {
 
     // Variables
     this.snapThreshold = 5;
+    this.shouldShowLongest = false;
 
     // Display
     this.alignLines = [];
@@ -83,11 +84,11 @@ function AlignmentDrawer( item ) {
         for( var i = 0; i < alignments.length; i++ )
         {
            var a = alignments[i];
-           if ( alignmentArrays[a.colinearAssignment] == null )
+           if ( alignmentArrays[a.colinearAssignmentKey] == null )
            {
-                alignmentArrays[a.colinearAssignment] = []; 
+                alignmentArrays[a.colinearAssignmentKey] = []; 
            } 
-            alignmentArrays[a.colinearAssignment].push( a );
+            alignmentArrays[a.colinearAssignmentKey].push( a );
         }
 
         return alignmentArrays;
@@ -117,6 +118,7 @@ function AlignmentDrawer( item ) {
         {
             var item = items[i];
             if ( item == this.item ) continue;
+            if ( item.alignment == null ) console.log( "Why is this item's alignment undefined?" );
             if ( item.alignment == null || !item.alignment.isAtRightAngle ) continue;
             
             // Check horizontal alignments.
@@ -162,9 +164,37 @@ function AlignmentDrawer( item ) {
         var alignmentArrays = this.getAllAlignmentArrays( alignments );
 
         // for each collinear set, choose the longest line and discard the rest
+        if ( this.shouldShowLongest ) alignmentArrays = this.selectLongestAlignmentLines( alignmentArrays );
 
         // display
         this.drawAlignmentLines( alignmentArrays );
+    }
+
+    this.selectLongestAlignmentLines = function( alignmentArrays )
+    {
+        var colinearityKeys = Object.keys( alignmentArrays );
+        var longestArrays = {};
+        for ( var i = 0; i < colinearityKeys.length; i++ )
+        {
+            var lineArray = alignmentArrays[colinearityKeys[i]];
+
+            var longestArray = [];
+            var longestLine = lineArray[0];
+            var longestLength = lineArray[0].length;
+
+            for( var l = 1; l < lineArray.length; l++ )
+            {
+                if ( lineArray[l].length > longestLength )
+                {
+                    longestLine = lineArray[l];
+                    longestLength = lineArray[l].length;
+                }
+            }
+
+            longestArray.push( longestLine );
+            longestArrays[colinearityKeys[i]] = longestArray;
+        }
+        return longestArrays;
     }
 }
 
@@ -173,13 +203,16 @@ function AlignmentLine( startDot, endItem, startPoint, endPoint )
     this.dot = startDot;
     this.endItem = endItem;
     this.startPoint = startPoint;
-    this.endPoint = endPoint;
+    this.endPoint = new Vector( endPoint.x, endPoint.y );
 
     this.setup = function()
     {
         this.direction = this.getDirection( startPoint, endPoint );
         this.plane = this.getPlane( this.dot, this.direction );
         this.colinearAssignment = new ColinearAssignment( this.direction, this.plane );
+        this.colinearAssignmentKey = this.colinearAssignment.direction + "," + this.colinearAssignment.plane ;
+
+        this.length = Vector.distance( this.endPoint, this.startPoint );
     }
 
     this.getDirection = function( start, end )

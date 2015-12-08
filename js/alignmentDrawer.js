@@ -23,7 +23,7 @@ function AlignmentDrawer( item ) {
     
     this.drawAlignmentLines = function( allLineArrays ) //dot, closestHorizontalItem, closestVerticalItem )
     {
-        var lineColor = "black";
+        var lineColor = "#5298EB";
         var lineToPos = new Vector( 0, 0 );
 
         var colinearityKeys = Object.keys( allLineArrays );
@@ -60,14 +60,22 @@ function AlignmentDrawer( item ) {
                     }
                 }
 
-                lineDisplay.graphics.setStrokeStyle( 1 ).setStrokeDash([5,5])
+                lineDisplay.graphics.setStrokeStyle( 1 )
                                 .beginStroke( lineColor )
                                 .moveTo( dot.x, dot.y )
                                 .lineTo( lineToPos.x, lineToPos.y )
                                 .endStroke();
 
-                lineDisplay.graphics.setStrokeStyle(0).setStrokeDash(0).beginFill(lineColor)
-                    .drawCircle( lineToPos.x, lineToPos.y, 4 );
+                lineDisplay.graphics.setStrokeStyle(1).setStrokeDash(0).beginStroke("white").beginFill(lineColor)
+                    .drawCircle( lineToPos.x, lineToPos.y, 4 )
+                    .endStroke()
+                    .endFill()
+                    .beginStroke("white").beginFill(lineColor)
+                    .drawCircle( dot.x, dot.y, 4 )
+                    .endStroke()
+                    .endFill();
+
+                
 
                 this.alignLines.push( lineDisplay );
                 this.item.addChild( lineDisplay );

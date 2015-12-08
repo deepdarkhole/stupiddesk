@@ -54,6 +54,11 @@ html { -webkit-font-smoothing: antialiased; }
 	visibility: hidden;
 }
 
+#intro_view
+{
+	display: none;
+}
+
 #intro.modal h1
 {
 	text-align: left;
@@ -63,7 +68,6 @@ html { -webkit-font-smoothing: antialiased; }
 {
 	text-align: left;
 }
-
 
 #share
 {

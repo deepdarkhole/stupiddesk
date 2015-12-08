@@ -272,7 +272,7 @@ function loadFromURL()
 		id = id.substring(1,id.length);
 		//id = GET("?");
 
-	if(id == null)
+	if(id == "")
 		return;
 
 	console.log("load:" + id);

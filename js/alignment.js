@@ -5,7 +5,13 @@ var AlignmentPoint = {   "Left":0,
                     "Middle":4,
                     "Bottom":5 }
 
+var AlignmentDirection = {  "Up":0,
+                            "Right":1,
+                            "Down":2,
+                            "Left":3 }
+                    
 Object.freeze( AlignmentPoint );
+Object.freeze( AlignmentDirection );
 
 function Alignment( item ) {
     

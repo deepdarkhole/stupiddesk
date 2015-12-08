@@ -43,6 +43,13 @@ Vector.prototype = {
   unit: function() {
     return this.divide(this.length());
   },
+  unitRounded: function() {
+    var vector = this.divide(this.length());
+    vector.x = Math.round( vector.x );
+    vector.y = Math.round( vector.y );
+    vector.z = Math.round( vector.z );
+    return vector;
+  },
   min: function() {
     return Math.min(Math.min(this.x, this.y), this.z);
   },

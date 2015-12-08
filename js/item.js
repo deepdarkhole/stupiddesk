@@ -49,9 +49,8 @@
         bitmap.scaleX = bitmap.scaleY = itemScaleFactor; 
 
         // Event Listeners 
-        this.on( "click", this.handleClick );
+
         this.on( "mousedown", this.handlePressDown );
-        this.on( "mouseover", this.handleMouseOver );
         this.on( "pressmove", this.handlePressMove );
         this.on( "pressup", this.handlePressUp );
         this.on( "rollover", this.handleRollOver );
@@ -65,6 +64,7 @@
         this.count = 0;
         this.pressing = false;
         this.wasMoved = false; 
+        this.quickRotated = false;
 
         // Visual 
         this.bitmap = bitmap;   
@@ -103,7 +103,14 @@
         }  
 
         // Components
-        this.itemSnapper = new ItemSnapper( this );
+        this.alignmentDrawer = new AlignmentDrawer( this );
+    }
+
+    p.offsetBy = function( x, y, callback )
+    {
+        var tX = this.x + x;
+        var tY = this.y + y;
+        createjs.Tween.get(this).to({x: tX, y: tY}, 200).call( callback );
     }
 
     p.getNextRotationValue = function( rotation )
@@ -120,7 +127,7 @@
                 return stepAngle;
             }
         } else {
-            return rotation + 360 /stepCount;
+            return rotation + 360 / stepCount;
         }
     }
 
@@ -129,22 +136,18 @@
         return Math.round( number / gridSize ) * gridSize; 
     }
 
-    p.handleClick = function( evt )
-    {
-        if ( this.wasMoved ) return;
-        this.currentRotation = this.getNextRotationValue( this.currentRotation );
 
-        createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
-    }
-
-    p.handleMouseOver = function( event )
-    {
-        this.guideDrawer.showGuides();
-    }
 
     p.handlePressDown = function( event )
     {
         this.cursor = "move";
+
+        if( this.currentRotation % (360/4) != 0 )
+        {
+            this.currentRotation = this.getNextRotationValue( this.currentRotation );
+            createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
+            this.quickRotated = true;
+        }
     }
 
     p.handlePressMove = function( event )
@@ -162,33 +165,58 @@
             this.wasMoved = true;            
         }
 
-        var snapOffset = this.itemSnapper.getClosestSnapOffset();
+        this.alignmentDrawer.handleAlignmentLines();
 
-        var testX = event.stageX - itemContainer.x - this.offsetX;
-        var testY = event.stageY - itemContainer.y - this.offsetY;
-
-        this.x = testX;
-        this.y = testY;
+        this.x = event.stageX - itemContainer.x - this.offsetX;
+        this.y = event.stageY - itemContainer.y - this.offsetY;
 
         this.pressing = true;
         this.hovering = false;
-        this.parent.setChildIndex( this , this.parent.numChildren-1);
+        
+        this.guideDrawer.showSelectionActive();
 
-        this.guideDrawer.showGuidesActive();
+        knollChanged = true;
 
     }
 
 
     p.handlePressUp = function( event )
     {
+
+
+        if ( !this.wasMoved && !this.quickRotated )
+        {
+            this.currentRotation = this.getNextRotationValue( this.currentRotation );
+
+            createjs.Tween.get(this).to({rotation: this.currentRotation}, 200, createjs.Ease.backOut);
+            knollChanged = true;
+        }
+
+
+
+
+
+
         this.pressing = false;
-        this.hovering = true;
+       
         this.wasMoved = false;
         this.cursor = "pointer";
         
-        this.itemSnapper.clearDebugLines();
-        this.guideDrawer.showGuides();
-        //this.guideDrawer.hideActiveGuidesByDot( this.closestAlignmentDot );
+        this.alignmentDrawer.clearAlignmentLines();
+        
+        //still hovering?
+        var pt = this.globalToLocal(stage.mouseX, stage.mouseY);
+
+        if( this.hitTest(pt.x, pt.y) )
+        {
+            this.hovering = true;
+            this.guideDrawer.showSelection( );
+
+        } else {
+            this.hovering = false;
+        }
+
+        this.quickRotated = false;
     }
     
 
@@ -200,7 +228,7 @@
         }
 
         this.hovering = true;
-        this.guideDrawer.showGuides();
+        this.guideDrawer.showSelection();
         this.parent.setChildIndex( this , this.parent.numChildren-1);
     }
 
@@ -220,11 +248,18 @@
         this.guideDrawer.hideGuides();
     }
 
-    p.testMouseOver = function ()
+    p.animateGuides = function ()
     {
         if ( !this.hovering ) return; 
-        this.guideDrawer.showGuides( );
+        this.guideDrawer.showSelection( );
     }
+
+
+
+
+
+
+
 
     window.Item = createjs.promote( Item, "Container" );
 

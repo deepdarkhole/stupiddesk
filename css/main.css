@@ -1,22 +1,9 @@
 html { -webkit-font-smoothing: antialiased; }
 
-#intros
+
+.modal
 {
-	position: absolute;
-	top:50%;
-	background-color: rgba(0, 0, 0, 0.8);
-	width: 100%;
-	min-height: 285px;
-	bottom: -50%;
-	color: #FFFFFF;
-	padding: 30px 0px;
-	overflow: visible;
-	align-items: center;
-  	justify-content: center; 
-}
-#intro
-{
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.7);
 	width: 100%;
 	min-height: 240px;
 	color: #FFFFFF;
@@ -24,21 +11,29 @@ html { -webkit-font-smoothing: antialiased; }
 	position: absolute;
 	top: 50%;
 	left:0px;	
-	transform: translateY(-50%);
+	transform: translate(-50%, -50%) !important;
+	text-align: center;
+
+	transition: background .5s;
 
 }
-#intro h1
+
+.modal:hover
+{
+	background-color: rgba(0, 0,0,.8);
+}
+.modal h1
 {
 	font-size: 5em;
 	font-family: "Clarendon Bold";
 
 
-	text-align: left;
+
 	max-width: 880px;
 	width: 70%;
 	margin: 10px auto;
 }
-#intro p
+.modal p
 {
 	margin: 10px auto;
 	font-style: italic;
@@ -47,11 +42,60 @@ html { -webkit-font-smoothing: antialiased; }
 	max-width: 880px;
 	font-family: "Domine";
 	font-weight: 300;
-	text-align: left;
+
 }
-#intro button
+.modal button
 {
 	margin-top:10px;
+}
+
+#confirm
+{
+	visibility: hidden;
+}
+
+#intro_view
+{
+	display: none;
+}
+
+#intro.modal h1
+{
+	text-align: left;
+}
+
+#intro.modal p
+{
+	text-align: left;
+}
+
+#share
+{
+	visibility: hidden;
+}
+
+#share h1
+{
+	font-size: 4em;
+}
+
+#share input
+{
+	background: rgba(0,0,0,.5);
+	color: #fff;
+	width: 800px;
+	padding: 12px;
+	font-size: 2em;
+	border-radius: 12px;
+	border: none;
+	font-family: "CoreSans Light";
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+#share input::selection
+{
+	background: #80C23C;
 }
 
 #header
@@ -63,22 +107,31 @@ html { -webkit-font-smoothing: antialiased; }
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0px 0px 24px 24px;
     border: none;
-	min-width: 430px;
+	min-width: 460px;
 	visibility: hidden;
 }
-#header ul
-{
-	list-style-type: none;     
-}
-#header li
-{
-	display: inline;
-	padding: 5px;
-}
+
 
 #content
 {
 
+}
+
+#audio
+{
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 2em;
+	color: black;
+}
+
+#audio a
+{
+	border-radius: 12px;
+	cursor: pointer;
+	padding: 8px;
 }
 
 #footer

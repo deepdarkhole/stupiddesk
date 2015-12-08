@@ -23,6 +23,17 @@ a:hover
 	background-color: #505050;
 }
 
+
+ul
+{
+    list-style-type: none;     
+}
+li
+{
+    display: inline;
+    padding: 5px;
+}
+
 button
 {
     padding: 14px 20px;
@@ -50,6 +61,8 @@ button:disabled
     cursor: not-allowed; 
 }
 
+
+
 .green_btn
 {
 	background-color: #80C23C;
@@ -66,6 +79,30 @@ button:disabled
 .blue_btn:hover
 {
 	background-color: #77DDF8;
+}
+
+.blue_facebook_btn
+{
+    background-color: #3b5998;
+}
+
+.blue_facebook_btn:hover
+{
+    background-color: #6c8ac9;
+}
+
+.red_btn
+{
+    background-color: #E62117;
+}
+.red_btn:hover
+{
+    background-color: #FF5248;
+}
+
+.strikethrough
+{
+    text-decoration: line-through;
 }
 
 .disable-selection

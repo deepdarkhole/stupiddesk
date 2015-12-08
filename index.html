@@ -12,18 +12,20 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/basic.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <script src="https://code.createjs.com/preloadjs-0.6.1.min.js"></script>
     <script src="https://code.createjs.com/easeljs-0.8.1.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+    
 
     <script src="http://www.parsecdn.com/js/parse-1.6.7.min.js"></script>
 
     <script src="js/global.js"></script>
     <script src="js/preload.js"></script>
     <script src="js/alignment.js"></script>
+    <script src="js/alignmentDrawer.js"></script>
     <script src="js/item.js"></script>
-    <script src="js/itemSnapper.js"></script>
     <script src="js/guideDrawer.js"></script>
     <script src="js/guideDot.js"></script>
     <script src="js/guideLine.js"></script>
@@ -49,28 +51,78 @@
 </head>
 
 <body onload="preload();" class="disable-selection">
-    <div id="intro" class="center">
+
+    <div id="intro" class="center modal">
         <h1>Knoll (verb)</h1>
         <p>
             Knolling is the process of arranging related objects in parallel or 90-degree angles as a method of organization.
         </p>
 
-        <button id="loading" type="button" name="start" class="green_btn" disabled onclick="start();">
-            <span class="bkg"></span>    
-            <span class="text">Get Stupid</span>
-        </button>
+        <ul>
+        <li>
+            <button id="loading" type="button" name="start" class="green_btn" disabled onclick="start();">
+                <span class="bkg"></span>    
+                <span class="text"><i class="fa fa-twitter-magic"></i> Get Stupid</span>
+            </button>
+        </li>
+
+
+        <li><button id="intro_view" type="button" name="view" class="grey_btn" disabled onclick="cancel();"><i class="fa fa-eye"></i> View</button></li>
+        </ul>
+
+        
     </div>
+
+    <div id="confirm" class="center modal">
+        <h1>Are you sure?</h1>
+        <p>
+            This will clear your current knoll.
+        </p>
+
+<ul>
+        <li><button id="loading" type="button" name="stupid" class="green_btn" onclick="stupid();"><i class="fa fa-magic"></i> Make Stupid</button></li>
+        <li><button id="loading" type="button" name="cancel" class="grey_btn" onclick="cancel();"><i class="fa fa-times"></i> Cancel</button></li>
+        </ul>
+    </div>
+
+    <div id="share" class="center modal">
+        <h1>Share Your <span class="strikethrough">Stupid</span> Desk!?</h1>
+        <input readonly value="http://stupiddesk.com/?" >
+        <br/>
+
+        <ul>
+
+            <li><button id="loading" type="button" name="tweet" class="blue_btn" onclick="tweet();"><i class="fa fa-twitter-square"></i> Twitter</button>
+            </li>
+
+        <li>
+        <button id="loading" type="button" name="facebook" class="blue_facebook_btn" onclick="facebook();"><i class="fa fa-facebook-square"></i> Facebook</button>
+        </li>
+
+        <li><button id="loading" type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Cancel</button></li>
+
+        </ul>
+
+    </div>
+
     <div id="header" class="center">
         <ul>
-            <li><button type="button" name="stupid" class="green_btn" onclick="stupid();">Make Stupid</button></li>
-            <!--
-            <li><button type="button" name="share" class="blue_btn" onclick="tweet();">Share</button></li>
-            <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';">Learn More</button></li>
+            <li><button type="button" name="stupid" class="green_btn" onclick="confirm();"><i class="fa fa-magic"></i> Make Stupid</button></li>
+            <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i> Done</button></li>
+            <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';"><i class="fa fa-info-circle"></i> Learn More</button></li>
 
-            -->
+         
+            <li>
+                <button type="button"  class="red_btn" onclick="toggleAudio();">
+                    <i id="audio_on" class="fa fa-volume-up"></i><i id="audio_off" class="fa fa-volume-off"></i>
+                </button>
+            </li>
+
+            <!--
             <li><button type="button" name="save" class="grey_btn" onclick="save();">Save</button></li>
             <li><button type="button" name="load" class="grey_btn" onclick="load();">Load</button></li>
             <li><button id="export" type="button" name="export" class="grey_btn" onclick="exportCanvas();">Export</button></li>
+            -->
             
         </ul>
     </div>
@@ -84,6 +136,10 @@
         </p>
 
     </div>
+
+    
+
+                <audio id="bgm" src="mp3/ipanema.mp3" preload="auto" loop />
 </body>
 </html>
  

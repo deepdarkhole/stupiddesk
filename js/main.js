@@ -5,6 +5,7 @@ function initStage()
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 	stage.update();	
+
 }
 
 function init()
@@ -39,16 +40,6 @@ function init()
     	create( itemData );	
     }
 
-    stage.on( "stagemousemove", function( e ) {
-        //console.log( e.stageX, e.stageY );
-        for( var i = 0; i < items.length; i++ )
-        {
-            items[i].testMouseOver( );
-            items[i].testMouseOver( );
-        }
-        
-    });
-
     // Parse
     Parse.initialize("AeLWidTlB5fwyEf5BxDN90MMmSGIF9RpI3WDc8SI", "7IVEuZFFlpO2U6f5p8UF0q8doUX5w1DDS8adOvgQ");
 
@@ -66,13 +57,11 @@ function enableStart()
 
 function start()
 {
-	var intro = document.getElementById(element_id.intro);
-		intro.parentNode.removeChild(intro);
-
-	var header = document.getElementById(element_id.header);
-		header.style.visibility = "visible";
-
+	hide( element_id.intro );
+	show( element_id.header );
 	stupid();
+
+	updateAudio();
 }
 
 function exportCanvas()
@@ -128,22 +117,140 @@ function create( data )
     stage.addChild(itemContainer);
     center();
     stage.update();
+
+    knollChanged = false;
 }
+
+
+function centerKnoll( callback )
+{
+	var bounds = itemContainer.getBounds();
+
+	cX = bounds.x + bounds.width/2;
+	cY = bounds.y + bounds.height/2;
+
+	tX = 0;
+	tY = 0;
+
+	console.log( bounds );
+	console.log( tX - cX, tY - cY );
+
+	var counter = items.length;
+
+	for( var i = 0; i < items.length; i++ )
+	{
+		var item = items[i];
+		item.offsetBy( tX - cX, tY - cY, function(){
+			counter--;
+			if( counter == 0 )
+				callback();
+		} );
+	}
+
+}
+
+
+function hide(id)
+{
+	var element = document.getElementById(id);
+		element.style.visibility = "hidden";
+}
+
+function show(id)
+{
+	var element = document.getElementById(id);
+		element.style.visibility = "visible";
+}
+
 
 function stupid()
 {
+	cancel();
 	removeItems();
 	create( null );
+	last_id = null;
+}
+
+function cancel()
+{
+	hide( element_id.confirm );
+	hide( element_id.share );
+	hide( element_id.intro );
+	show( element_id.header );
+
+	var button = document.getElementById("share_button");
+		attr = button.getAttributeNode("disabled");// = "false";
+		if( attr )
+			button.removeAttributeNode(attr);  
+}
+
+
+function confirm()
+{
+	if( !knollChanged )
+	{
+		stupid();
+		return;
+	}	
+
+	show( element_id.confirm );
+	hide( element_id.header );
 }
 
 function share()
 {
-	alert("Shared");
+	
+
+	var button = document.getElementById("share_button");
+		button.setAttribute("disabled", "disabled");// = "false";
+
+
+	centerKnoll( function(){
+		if( knollChanged || last_id == null )
+			save( showShare );
+		else
+			showShare( last_id );
+
+	} );
+
+
+}
+
+
+function showShare( id )
+{
+
+	last_id = id;
+
+	knollChanged = false;
+
+	hide( element_id.header );
+	show( element_id.share );
+
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+		input.value = "http://stupiddesk.com/?" + id;
+		input.select();
+	
 }
 
 function tweet()
 {
-	window.location = "https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=Tidy%20up%20this%20%23StupidDesk!&tw_p=tweetbutton&url=http%3A%2F%2Fstupiddesk.com";
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+
+	var text = "My%20%23StupidDesk%20brings%20all%20the%20boys%20to%20the%20yard%0AAnd%20they%27re%20like%2C%20it%27s%20better%20than%20yours%0A";
+
+	window.open("https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=" + text + "&tw_p=tweetbutton&url=" + escape(input.value) , '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;;
+}
+
+
+function facebook()
+{
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+
+	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value)+"&t="+"STOOPIDDESK", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
 }
 
 function GET(name){
@@ -165,7 +272,7 @@ function loadFromURL()
 		id = id.substring(1,id.length);
 		//id = GET("?");
 
-	if(id == null)
+	if(id == "")
 		return;
 
 	console.log("load:" + id);
@@ -199,7 +306,7 @@ function load()
 	create( itemData );
 }
 
-function save()
+function save( callback )
 {
 	//console.log("Save");
 	itemData = new Array();
@@ -220,7 +327,7 @@ function save()
 		saveObject.set("data", data)
 		saveObject.save(null, {
 		  success: function(obj) {	  
-		    console.log( obj.id );
+		    callback( obj.id );
 		  },
 		  error: function(obj, error) {
 		    // Execute any logic that should take place if the save fails.
@@ -277,6 +384,72 @@ function updateAnimation()
 {
     for( var i = 0; i < items.length; i++ )
     {
-        items[i].testMouseOver();
+        items[i].animateGuides();
     }
+}
+
+
+
+
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+	
+}
+
+function readCookie(name) {
+	console.log( document.cookie );
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+function toggleAudio()
+{
+	var audioState = readCookie("audio");
+
+	if( audioState == "on" )
+	{
+		eraseCookie("audio");
+		createCookie("audio", "off", 365);
+	} else {
+		eraseCookie("audio");
+		createCookie("audio", "on", 365);
+	}
+	
+	updateAudio();
+}
+
+function updateAudio()
+{
+	var audio = document.getElementById( "bgm" );
+	var audioState = readCookie("audio");
+
+
+
+	if( audioState == "on" )
+	{
+		audio.pause();
+		document.getElementById("audio_off").setAttribute("style", "display: inline-block");
+		document.getElementById("audio_on").setAttribute("style", "display: none");
+	} else {
+		audio.play();
+		document.getElementById("audio_off").setAttribute("style", "display: none");
+		document.getElementById("audio_on").setAttribute("style", "display: inline-block");
+	}
 }

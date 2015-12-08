@@ -30,3 +30,13 @@ function GuideDot( item, horizontalAlignmentPoint, verticalAlignmentPoint )
 
     this.setup();
 }
+
+Object.defineProperties( GuideDot.prototype, {
+
+    // Sizing
+    isCardinalDot : {
+        get : function() {
+            return this.item.alignmentbitmap.x;
+        }
+    }
+} );

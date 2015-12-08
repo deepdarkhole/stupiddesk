@@ -104,7 +104,7 @@
         }  
 
         // Components
-        this.itemSnapper = new ItemSnapper( this );
+        this.alignmentDrawer = new AlignmentDrawer( this );
     }
 
     p.offsetBy = function( x, y, callback )
@@ -185,7 +185,7 @@
             this.wasMoved = true;            
         }
 
-        var snapOffset = this.itemSnapper.getClosestSnapOffset();
+        this.alignmentDrawer.handleAlignmentLines();
 
         var testX = event.stageX - itemContainer.x - this.offsetX;
         var testY = event.stageY - itemContainer.y - this.offsetY;
@@ -210,7 +210,7 @@
         this.wasMoved = false;
         this.cursor = "pointer";
         
-        this.itemSnapper.clearDebugLines();
+        this.alignmentDrawer.clearAlignmentLines();
         
         var pt = this.globalToLocal(stage.mouseX, stage.mouseY);
 

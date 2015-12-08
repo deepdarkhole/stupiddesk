@@ -29,6 +29,10 @@ var element_id = {
 		share: "share",
 		intro_cancel: "intro_view"
 	};
+	
+var defaultImages = [
+"stupid desk.png"
+];
 var images = [
 "andrei.png",
 "black notepaper.png",
@@ -108,7 +112,6 @@ var images = [
 "sketch book.png",
 "small pairs.png",
 "soft pastel.png",
-"stupid desk.png",
 "tablet pen box.png",
 "tablet pen.png",
 "tablet.png",

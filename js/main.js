@@ -5,7 +5,6 @@ function initStage()
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
 	stage.update();	
-
 }
 
 function init()
@@ -103,10 +102,18 @@ function create( data )
 	//didn't simplify state, because this will run faster and we're client-side
 	if(data == null)
 	{
+		for(var i = 0; i< defaultImages.length; i++)
+		{
+			var item = new Item( defaultImages[i], null );
+			items.push( item );  		
+    		itemContainer.addChild( item );	
+    		console.log(item.name);
+		}
+
 		var imagesCopy = images.slice();
 		var length = Math.floor( Math.random() * ( randomMax - randomMin ) + randomMin );
 		
-		for( var i = 0 ; i < length; i++)
+		for( var i = 0; i < length; i++)
 		{
 			var j = Math.floor( Math.random() * imagesCopy.length );
 
@@ -117,8 +124,7 @@ function create( data )
     		imagesCopy.splice(j,1);
 		}
 
-
-	}else{
+	}else{		
 		for( var i = 0 ; i < data.length; i++)
 		{
 			var item = new Item( data[i].img, data[i] );
@@ -211,8 +217,6 @@ function confirm()
 
 function share()
 {
-	
-
 	var button = document.getElementById("share_button");
 		button.setAttribute("disabled", "disabled");// = "false";
 
@@ -224,8 +228,6 @@ function share()
 			showShare( last_id );
 
 	} );
-
-
 }
 
 
@@ -265,7 +267,8 @@ function facebook()
 	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value)+"&t="+"STOOPIDDESK", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
 }
 
-function GET(name){
+function GET(name)
+{
   var url = window.location.search;
   var num = url.search(name);
   var namel = name.length;
@@ -380,7 +383,8 @@ function center()
 	itemContainer.y = window.innerHeight * 0.5;
 }
 
-function resize() {
+function resize()
+{
     stage.clear();
     stage.canvas.width = window.innerWidth;
     stage.canvas.height = window.innerHeight;
@@ -403,7 +407,8 @@ function updateAnimation()
 
 
 
-function createCookie(name,value,days) {
+function createCookie(name,value,days)
+{
 	if (days) {
 		var date = new Date();
 		date.setTime(date.getTime()+(days*24*60*60*1000));
@@ -414,7 +419,8 @@ function createCookie(name,value,days) {
 	
 }
 
-function readCookie(name) {
+function readCookie(name)
+{
 	console.log( document.cookie );
 	var nameEQ = name + "=";
 	var ca = document.cookie.split(';');
@@ -427,7 +433,8 @@ function readCookie(name) {
 }
 
 
-function eraseCookie(name) {
+function eraseCookie(name)
+{
 	createCookie(name,"",-1);
 }
 

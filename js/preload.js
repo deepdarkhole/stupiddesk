@@ -11,6 +11,11 @@ var preload = function()
 		itemQueue.loadFile({id: images[i], src:imgPath + images[i]});
 	}
 
+	for(var i = 0; i < defaultImages.length; i++)
+	{
+		itemQueue.loadFile({id: defaultImages[i], src:imgPath + defaultImages[i]});
+	}
+	
 	itemQueue.on("progress", itemLoadProgress, this);
 	itemQueue.on("fileload", itemLoaded, this);
 	itemQueue.on("complete", itemsLoaded, this);

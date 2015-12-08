@@ -50,9 +50,15 @@ function init()
 function enableStart()
 {
 	var intro = document.getElementById(element_id.intro);
-		button = intro.getElementsByTagName("BUTTON")[0];
-		attr = button.getAttributeNode("disabled");// = "false";
-		button.removeAttributeNode(attr);  
+	var	buttons = intro.getElementsByTagName("BUTTON");
+
+	for( var i = 0; i < buttons.length; i++)
+	{
+		var button = buttons[i];
+		var attr = button.getAttributeNode("disabled");
+		if(attr)
+			button.removeAttributeNode(attr);
+	} 
 }
 
 function start()

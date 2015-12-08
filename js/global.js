@@ -120,6 +120,7 @@ var images = [
 "tablet pen.png",
 "tablet.png",
 "Tape 2.png",
+"wallet.png",
 "watercolor.png",
 "weve travled so far.png",
 "will.png",

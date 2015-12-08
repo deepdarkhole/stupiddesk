@@ -34,7 +34,7 @@ var itemLoadProgress = function( event )
 	if( event.progress == 1 )
 	{
 		uncacheWidth();
-		setLoadingText("Get Stupid");
+		setLoadingText('<i class="fa fa-magic"></i> Get Stupid');
 		  enableStart();
 	}
 	else

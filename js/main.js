@@ -70,7 +70,12 @@ function start()
 		intro.parentNode.removeChild(intro);
 
 	show( element_id.header );
-	stupid();
+/*
+	var id = window.location.search;//GET("id");
+		id = id.substring(1,id.length);
+
+	if( id == null )
+		stupid();*/
 }
 
 function exportCanvas()

@@ -52,12 +52,6 @@
 
 <body onload="preload();" class="disable-selection">
 
-    <div id="audio">
-        <button id="audio_on" onclick="toggleAudio();"><i class="fa fa-volume-up"></i> audio on</button>
-        <button id="audio_off" onclick="toggleAudio();" style="display: none;"><i class="fa fa-volume-off"></i> audio off</button>
-        <audio id="bgm" src="mp3/ipanema.mp3" preload="auto" loop>
-    </div>
-
     <div id="intro" class="center modal">
         <h1>Knoll (verb)</h1>
         <p>
@@ -117,6 +111,13 @@
             <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i> Done</button></li>
             <li><button type="button" name="learn" class="grey_btn" onclick="window.location='https://en.wikipedia.org/wiki/Knoll_(verb)';"><i class="fa fa-info-circle"></i> Learn More</button></li>
 
+         
+            <li>
+                <button type="button"  class="red_btn" onclick="toggleAudio();">
+                    <i id="audio_on" class="fa fa-volume-up"></i><i id="audio_off" class="fa fa-volume-off"></i>
+                </button>
+            </li>
+
             <!--
             <li><button type="button" name="save" class="grey_btn" onclick="save();">Save</button></li>
             <li><button type="button" name="load" class="grey_btn" onclick="load();">Load</button></li>
@@ -138,7 +139,7 @@
 
     
 
-
+                <audio id="bgm" src="mp3/ipanema.mp3" preload="auto" loop />
 </body>
 </html>
  

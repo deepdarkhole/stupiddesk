@@ -6,7 +6,6 @@ function initStage()
     stage.mouseMoveOutside = true;
 	stage.update();	
 
-	updateAudio();
 }
 
 function init()
@@ -61,6 +60,8 @@ function start()
 	hide( element_id.intro );
 	show( element_id.header );
 	stupid();
+
+	updateAudio();
 }
 
 function exportCanvas()
@@ -444,11 +445,11 @@ function updateAudio()
 	if( audioState == "on" )
 	{
 		audio.pause();
-		document.getElementById("audio_off").setAttribute("style", "display: block");
+		document.getElementById("audio_off").setAttribute("style", "display: inline-block");
 		document.getElementById("audio_on").setAttribute("style", "display: none");
 	} else {
 		audio.play();
 		document.getElementById("audio_off").setAttribute("style", "display: none");
-		document.getElementById("audio_on").setAttribute("style", "display: block");
+		document.getElementById("audio_on").setAttribute("style", "display: inline-block");
 	}
 }

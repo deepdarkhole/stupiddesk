@@ -103,7 +103,7 @@ html { -webkit-font-smoothing: antialiased; }
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0px 0px 24px 24px;
     border: none;
-	min-width: 430px;
+	min-width: 460px;
 	visibility: hidden;
 }
 

@@ -35,6 +35,10 @@ function loadFromURL()
 
 		    //console.log(data);
 		    removeItems();
+
+			var intro_cancel = document.getElementById( element_id.intro_cancel);
+			intro_cancel.setAttribute("style", "display: inline-block");
+					    
 		    create( JSON.parse(data) );
 		  },
 		  error: function(obj, error)

@@ -20,13 +20,9 @@ function Alignment( item ) {
     this.bitmap = item.bitmap;
 
     this.allAlignments = new Array( this.topLeft,
-                                    this.topCenter,
                                     this.topRight,
-                                    this.middleLeft,
                                     this.middleCenter,
-                                    this.middleRight,
                                     this.bottomLeft,
-                                    this.bottomCenter,
                                     this.bottomRight );
     
     this.horizontalAlignmentPoints = new Array( AlignmentPoint.Top,

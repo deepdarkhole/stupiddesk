@@ -33,6 +33,17 @@ html { -webkit-font-smoothing: antialiased; }
 	width: 70%;
 	margin: 10px auto;
 }
+
+.modal h2
+{
+	font-size: 3em;
+	font-family: "Clarendon Bold";
+
+
+	max-width: 880px;
+	width: 70%;
+	margin: 10px auto;
+}
 .modal p
 {
 	margin: 10px auto;
@@ -47,6 +58,11 @@ html { -webkit-font-smoothing: antialiased; }
 .modal button
 {
 	margin-top:10px;
+}
+
+.modal a
+{
+	color: #46D1F6;
 }
 
 #confirm
@@ -67,6 +83,32 @@ html { -webkit-font-smoothing: antialiased; }
 #intro.modal p
 {
 	text-align: left;
+
+}
+
+#about
+{
+	visibility: hidden;
+}
+
+#about.modal h1, #about.modal h2
+{
+	text-align: left;
+}
+
+#about.modal p
+{
+	text-align: left;
+	font-size: 1.5em;
+	margin-bottom: 1em;
+		font-style: normal; 
+
+}
+
+
+#about.modal:hover
+{
+	background-color: rgba(0, 0,0,.85);
 }
 
 #share
@@ -132,6 +174,9 @@ html { -webkit-font-smoothing: antialiased; }
 	padding: 8px;
 }
 
+
+
+
 #footer
 {
 	position: absolute;
@@ -142,6 +187,8 @@ html { -webkit-font-smoothing: antialiased; }
 	font-family: "CoreSans Light";
 
 }
+
+
 
 #footer a
 {

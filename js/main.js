@@ -85,6 +85,8 @@ function cancel()
 	hide( element_id.confirm );
 	hide( element_id.share );
 	hide( element_id.intro );
+	hide( element_id.about );
+
 	show( element_id.header );
 
 	var button = document.getElementById("share_button");
@@ -102,6 +104,12 @@ function confirm()
 	}	
 
 	show( element_id.confirm );
+	hide( element_id.header );
+}
+
+function about()
+{
+	show( element_id.about );
 	hide( element_id.header );
 }
 

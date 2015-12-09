@@ -28,7 +28,8 @@ var element_id = {
 		export: "export",
 		confirm: "confirm",
 		share: "share",
-		intro_cancel: "intro_view"
+		intro_cancel: "intro_view",
+		about: "about"
 	};
 	
 var defaultImages = [

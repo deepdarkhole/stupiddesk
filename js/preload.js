@@ -63,6 +63,9 @@ var itemLoaded = function( event )
 {
 	//console.log("File Loaded");
 	//console.log("Loaded: " , event );
+	if( items == null )
+		return;
+	
 	for(var i = 0; i < items.length; i++)
 	{
 		item = items[i];

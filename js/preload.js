@@ -30,7 +30,7 @@ var createReferallView = function()
 	if(id == "")
 		return;
 
-	console.log(id);
+	//console.log(id);
 
 	var intro_cancel = document.getElementById( element_id.intro_cancel);
 	intro_cancel.setAttribute("style", "display: inline-block");

@@ -22,7 +22,7 @@ function create( data )
 			var item = new Item( defaultImages[i], null );
 			items.push( item );  		
     		itemContainer.addChild( item );	
-    		console.log(item.name);
+    		//console.log(item.name);
 		}
 
 		var imagesCopy = images.slice();
@@ -64,8 +64,8 @@ function centerKnoll( callback )
 	tX = 0;
 	tY = 0;
 
-	console.log( bounds );
-	console.log( tX - cX, tY - cY );
+	//console.log( bounds );
+	//console.log( tX - cX, tY - cY );
 
 	var counter = items.length;
 

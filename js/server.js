@@ -21,7 +21,7 @@ function loadFromURL()
 	if(id == "")
 		return false;
 
-	console.log("load:" + id);
+	//console.log("load:" + id);
 
 	//id = "oAEUDaXhPc";
 

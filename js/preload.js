@@ -21,19 +21,6 @@ var preload = function()
 	itemQueue.on("complete", itemsLoaded, this);
 
 	init();
-	createReferallView();
-}
-
-var createReferallView = function()
-{
-	var id = window.location.search;
-	if(id == "")
-		return;
-
-	//console.log(id);
-
-	var intro_cancel = document.getElementById( element_id.intro_cancel);
-	intro_cancel.setAttribute("style", "display: inline-block");
 }
 
 var itemLoadProgress = function( event )

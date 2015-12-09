@@ -1,5 +1,9 @@
 function init()
 {
+
+	if( allowDelete )
+		enableDelete();
+
 	// Stage
 	if(stage == null)
 		initStage();

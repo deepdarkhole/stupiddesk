@@ -26,7 +26,7 @@ function create( data )
 		}
 
 		var imagesCopy = images.slice();
-		var length = Math.floor( Math.random() * ( randomMax - randomMin ) + randomMin );
+		var length = images.length; //Math.floor( Math.random() * ( randomMax - randomMin ) + randomMin );
 		
 		for( var i = 0; i < length; i++)
 		{
@@ -111,3 +111,53 @@ function resize()
     gridSize = ( xGridSize < yGridSize ) ? xGridSize : yGridSize;
 }
 
+
+function removeItems()
+{
+	if(!itemContainer)
+		return;
+
+	items = new Array();
+	stage.removeChild( itemContainer );	
+}
+
+
+
+function enableDelete()
+{
+
+	document.onkeydown = keyPressed;
+}
+
+function keyPressed( event )
+{
+	if( event.keyCode == 8 )
+	{
+		for (var i = 0; i < items.length; i++) {
+			if( items[i].hovering )
+			{
+				deleteItem( items[i] );
+				break;
+			}
+		};
+	}
+
+}
+
+function deleteItem( item )
+{
+	if(!itemContainer)
+		return;
+
+	itemContainer.removeChild( item );
+
+	for( var i = 0; i < items.length; i++ )
+	{
+		if( items[i] == item )
+		{
+			items.splice(i,1);
+			break;
+		}
+	}
+
+}

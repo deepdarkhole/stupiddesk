@@ -1,4 +1,5 @@
 var debug = false;
+var allowDelete = true;
 var stage;
 var itemContainer;
 var items;

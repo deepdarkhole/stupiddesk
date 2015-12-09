@@ -86,12 +86,3 @@ function save( callback )
 		console.log(data);
 	//alert((JSON.stringify(itemData) ));
 }
-
-function removeItems()
-{
-	if(!itemContainer)
-		return;
-
-	items = new Array();
-	stage.removeChild( itemContainer );	
-}

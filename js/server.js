@@ -19,7 +19,7 @@ function loadFromURL()
 		//id = GET("?");
 
 	if(id == "")
-		return;
+		return false;
 
 	console.log("load:" + id);
 
@@ -42,8 +42,11 @@ function loadFromURL()
 		    // The object was not retrieved successfully.
 		    // error is a Parse.Error with an error code and message.
 		    console.log( error );
+		    create( itemData );
 		  }
 		});
+
+	return true;
 }
 
 function load()

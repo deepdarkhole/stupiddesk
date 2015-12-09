@@ -1,0 +1,67 @@
+function exportCanvas()
+{
+	var header = document.getElementById(element_id.header);
+		header.style.visibility = "hidden";
+
+ 	var canvas = document.getElementById( element_id.canvas );
+    var bitmap = new createjs.Bitmap( canvas );
+    
+    bitmap.cache( 0, 0, canvas.width, canvas.height, 1 );
+    var base64 = bitmap.getCacheDataURL();
+    
+    print(base64); 
+
+    header.style.visibility = "visible";
+    //return base64;
+}
+
+function share()
+{
+	var button = document.getElementById("share_button");
+		button.setAttribute("disabled", "disabled");// = "false";
+
+
+	centerKnoll( function(){
+		if( knollChanged || last_id == null )
+			save( showShare );
+		else
+			showShare( last_id );
+
+	} );
+}
+
+function showShare( id )
+{
+
+	last_id = id;
+
+	knollChanged = false;
+
+	hide( element_id.header );
+	show( element_id.share );
+
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+		input.value = "http://stupiddesk.com/?" + id;
+		input.select();
+	
+}
+
+function tweet()
+{
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+
+	var text = "My%20%23StupidDesk%20brings%20all%20the%20boys%20to%20the%20yard%0AAnd%20they%27re%20like%2C%20it%27s%20better%20than%20yours%0A";
+
+	window.open("https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=" + text + "&tw_p=tweetbutton&url=" + escape(input.value) , '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;;
+}
+
+
+function facebook()
+{
+	var modal = document.getElementById(element_id.share);
+		input = modal.getElementsByTagName("INPUT")[0];
+
+	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value)+"&t="+"STOOPIDDESK", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+}

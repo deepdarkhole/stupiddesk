@@ -1,14 +1,9 @@
-function initStage()
-{
-	// Setup Stage
-    stage = new createjs.Stage( element_id.canvas );
-    stage.enableMouseOver();
-    stage.mouseMoveOutside = true;
-	stage.update();	
-}
-
 function init()
 {
+
+	if( allowDelete )
+		enableDelete();
+
 	// Stage
 	if(stage == null)
 		initStage();
@@ -75,99 +70,6 @@ function view()
 	cancel();
 }
 
-function exportCanvas()
-{
-	var header = document.getElementById(element_id.header);
-		header.style.visibility = "hidden";
-
- 	var canvas = document.getElementById( element_id.canvas );
-    var bitmap = new createjs.Bitmap( canvas );
-    
-    bitmap.cache( 0, 0, canvas.width, canvas.height, 1 );
-    var base64 = bitmap.getCacheDataURL();
-    
-    print(base64); 
-
-    header.style.visibility = "visible";
-    //return base64;
-}
-
-function create( data )
-{
-	itemContainer = new createjs.Container();
-	itemContainer.x = itemContainer.y = 0;
-
-	items = new Array();	
-
-	//didn't simplify state, because this will run faster and we're client-side
-	if(data == null)
-	{
-		for(var i = 0; i< defaultImages.length; i++)
-		{
-			var item = new Item( defaultImages[i], null );
-			items.push( item );  		
-    		itemContainer.addChild( item );	
-    		console.log(item.name);
-		}
-
-		var imagesCopy = images.slice();
-		var length = Math.floor( Math.random() * ( randomMax - randomMin ) + randomMin );
-		
-		for( var i = 0; i < length; i++)
-		{
-			var j = Math.floor( Math.random() * imagesCopy.length );
-
-			var item = new Item( imagesCopy[j], null );
-			items.push( item );  		
-    		itemContainer.addChild( item );	
-
-    		imagesCopy.splice(j,1);
-		}
-
-	}else{		
-		for( var i = 0 ; i < data.length; i++)
-		{
-			var item = new Item( data[i].img, data[i] );
-			items.push( item );  		
-    		itemContainer.addChild( item );
-		}		
-	}
-    stage.addChild(itemContainer);
-    center();
-    stage.update();
-
-    knollChanged = false;
-}
-
-
-function centerKnoll( callback )
-{
-	var bounds = itemContainer.getBounds();
-
-	cX = bounds.x + bounds.width/2;
-	cY = bounds.y + bounds.height/2;
-
-	tX = 0;
-	tY = 0;
-
-	console.log( bounds );
-	console.log( tX - cX, tY - cY );
-
-	var counter = items.length;
-
-	for( var i = 0; i < items.length; i++ )
-	{
-		var item = items[i];
-		item.offsetBy( tX - cX, tY - cY, function(){
-			counter--;
-			if( counter == 0 )
-				callback();
-		} );
-	}
-
-}
-
-
 function hide(id)
 {
 	var element = document.getElementById(id);
@@ -178,15 +80,6 @@ function show(id)
 {
 	var element = document.getElementById(id);
 		element.style.visibility = "visible";
-}
-
-
-function stupid()
-{
-	cancel();
-	removeItems();
-	create( null );
-	last_id = null;
 }
 
 function cancel()
@@ -202,7 +95,6 @@ function cancel()
 			button.removeAttributeNode(attr);  
 }
 
-
 function confirm()
 {
 	if( !knollChanged )
@@ -215,156 +107,6 @@ function confirm()
 	hide( element_id.header );
 }
 
-function share()
-{
-	var button = document.getElementById("share_button");
-		button.setAttribute("disabled", "disabled");// = "false";
-
-
-	centerKnoll( function(){
-		if( knollChanged || last_id == null )
-			save( showShare );
-		else
-			showShare( last_id );
-
-	} );
-}
-
-
-function showShare( id )
-{
-
-	last_id = id;
-
-	knollChanged = false;
-
-	hide( element_id.header );
-	show( element_id.share );
-
-	var modal = document.getElementById(element_id.share);
-		input = modal.getElementsByTagName("INPUT")[0];
-		input.value = "http://stupiddesk.com/?" + id;
-		input.select();
-	
-}
-
-function tweet()
-{
-	var modal = document.getElementById(element_id.share);
-		input = modal.getElementsByTagName("INPUT")[0];
-
-	var text = "My%20%23StupidDesk%20brings%20all%20the%20boys%20to%20the%20yard%0AAnd%20they%27re%20like%2C%20it%27s%20better%20than%20yours%0A";
-
-	window.open("https://twitter.com/intent/tweet?hashtags=deepdarkhole&ref_src=twsrc%5Etfw&text=" + text + "&tw_p=tweetbutton&url=" + escape(input.value) , '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;;
-}
-
-
-function facebook()
-{
-	var modal = document.getElementById(element_id.share);
-		input = modal.getElementsByTagName("INPUT")[0];
-
-	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value)+"&t="+"STOOPIDDESK", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
-}
-
-function GET(name)
-{
-  var url = window.location.search;
-  var num = url.search(name);
-  var namel = name.length;
-  var frontlength = namel+num+1; //length of everything before the value 
-  var front = url.substring(0, frontlength);  
-  url = url.replace(front, "");  
-  num = url.search("&");
-
- if(num>=0) return url.substr(0,num); 
- if(num<0)  return url;             
-}
-
-function loadFromURL()
-{
-	var id = window.location.search;//GET("id");
-		id = id.substring(1,id.length);
-		//id = GET("?");
-
-	if(id == "")
-		return;
-
-	console.log("load:" + id);
-
-	//id = "oAEUDaXhPc";
-
-	var LoadObject = Parse.Object.extend("Knoll");
-	var query = new Parse.Query(LoadObject);
-		query.get(id, {
-		  success: function(obj)
-		  {
-		    // The object was retrieved successfully.		    
-		    var data = obj.get("data");
-
-		    //console.log(data);
-		    removeItems();
-		    create( JSON.parse(data) );
-		  },
-		  error: function(obj, error)
-		  {
-		    // The object was not retrieved successfully.
-		    // error is a Parse.Error with an error code and message.
-		    console.log( error );
-		  }
-		});
-}
-
-function load()
-{
-	removeItems();
-	create( itemData );
-}
-
-function save( callback )
-{
-	//console.log("Save");
-	itemData = new Array();
-	for( var i = 0; i < itemContainer.children.length; i++)
-	{
-		var item = itemContainer.children[i];
-		var data = {
-			img: item.name,
-			x: item.x,
-			y: item.y,
-			rotation: item.rotation
-		}
-		itemData[i] = data;
-	}
-	var data = JSON.stringify(itemData);
-	var SaveObject = Parse.Object.extend("Knoll");
-	var saveObject = new SaveObject();
-		saveObject.set("data", data)
-		saveObject.save(null, {
-		  success: function(obj) {	  
-		    callback( obj.id );
-		  },
-		  error: function(obj, error) {
-		    // Execute any logic that should take place if the save fails.
-		    // error is a Parse.Error with an error code and message.
-		    console.log('Failed to create new object, with error code: ' + error.message);
-		  }
-		});
-
-	if(debug)
-		console.log(data);
-	//alert((JSON.stringify(itemData) ));
-}
-
-function removeItems()
-{
-	if(!itemContainer)
-		return;
-
-	items = new Array();
-	stage.removeChild( itemContainer );	
-}
-
 function tick( event ) {
     
     center();
@@ -372,28 +114,6 @@ function tick( event ) {
     stage.update();    
 
 //    window.requestAnimationFrame(tick);
-}
-
-function center()
-{
-	if(!itemContainer)
-		return;
-
-	itemContainer.x = window.innerWidth * 0.5;
-	itemContainer.y = window.innerHeight * 0.5;
-}
-
-function resize()
-{
-    stage.clear();
-    stage.canvas.width = window.innerWidth;
-    stage.canvas.height = window.innerHeight;
-
-    var units = 30;
-    var xGridSize = stage.canvas.height / units;
-    var yGridSize = stage.canvas.width / units;
-
-    gridSize = ( xGridSize < yGridSize ) ? xGridSize : yGridSize;
 }
 
 function updateAnimation() 
@@ -406,69 +126,3 @@ function updateAnimation()
 
 
 
-
-function createCookie(name,value,days)
-{
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-	
-}
-
-function readCookie(name)
-{
-	console.log( document.cookie );
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-
-
-function eraseCookie(name)
-{
-	createCookie(name,"",-1);
-}
-
-function toggleAudio()
-{
-	var audioState = readCookie("audio");
-
-	if( audioState == "on" )
-	{
-		eraseCookie("audio");
-		createCookie("audio", "off", 365);
-	} else {
-		eraseCookie("audio");
-		createCookie("audio", "on", 365);
-	}
-	
-	updateAudio();
-}
-
-function updateAudio()
-{
-	var audio = document.getElementById( "bgm" );
-	var audioState = readCookie("audio");
-
-
-
-	if( audioState == "on" )
-	{
-		audio.pause();
-		document.getElementById("audio_off").setAttribute("style", "display: inline-block");
-		document.getElementById("audio_on").setAttribute("style", "display: none");
-	} else {
-		audio.play();
-		document.getElementById("audio_off").setAttribute("style", "display: none");
-		document.getElementById("audio_on").setAttribute("style", "display: inline-block");
-	}
-}

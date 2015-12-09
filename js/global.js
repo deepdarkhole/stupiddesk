@@ -10,8 +10,8 @@ var itemScaleFactor = 1;
 var itemHitboxPadding = 10;
 var gridSize;
 
-var randomMin = 11;
-var randomMax = 23;
+var randomMin = 13;
+var randomMax = 30;
 
 
 var knollChanged = false;

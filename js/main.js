@@ -25,20 +25,18 @@ function init()
 
    // window.requestAnimationFrame(tick);
 
+    // Parse
+    Parse.initialize("AeLWidTlB5fwyEf5BxDN90MMmSGIF9RpI3WDc8SI", "7IVEuZFFlpO2U6f5p8UF0q8doUX5w1DDS8adOvgQ");
+
     // Debug
     if(debug)
     {
     	start();
     }else{
     	// Create
-    	create( itemData );	
+    	if(loadFromURL() == false)
+    		create( itemData );	
     }
-
-    // Parse
-    Parse.initialize("AeLWidTlB5fwyEf5BxDN90MMmSGIF9RpI3WDc8SI", "7IVEuZFFlpO2U6f5p8UF0q8doUX5w1DDS8adOvgQ");
-
-    // Test
-    loadFromURL();
 }
 
 function enableStart()

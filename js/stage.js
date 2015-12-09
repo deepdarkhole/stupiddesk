@@ -140,7 +140,11 @@ function keyPressed( event )
 				break;
 			}
 		};
+
+		knollChanged = true;
 	}
+
+
 
 }
 

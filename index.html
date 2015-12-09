@@ -113,14 +113,14 @@
 
         <ul>
 
-            <li><button id="loading" type="button" name="tweet" class="blue_btn" onclick="tweet();"><i class="fa fa-twitter-square"></i> Twitter</button>
+            <li><button ype="button" name="tweet" class="blue_btn" onclick="tweet();"><i class="fa fa-twitter-square"></i> Twitter</button>
             </li>
 
         <li>
         <button id="loading" type="button" name="facebook" class="blue_facebook_btn" onclick="facebook();"><i class="fa fa-facebook-square"></i> Facebook</button>
         </li>
 
-        <li><button id="loading" type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Cancel</button></li>
+        <li><button type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Cancel</button></li>
 
         </ul>
 
@@ -130,7 +130,7 @@
         <ul>
             <li><button type="button" name="stupid" class="green_btn" onclick="confirm();"><i class="fa fa-magic"></i> Make Stupid</button></li>
             <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i> Done</button></li>
-            <li><button type="button" name="learn" class="grey_btn" onclick="window.open('https://en.wikipedia.org/wiki/Knoll_(verb)');"><i class="fa fa-info-circle"></i> Learn More</button></li>
+            <li><button type="button" name="learn" class="grey_btn" onclick="about();"><i class="fa fa-info-circle"></i> Learn More</button></li>
 
          
             <li>
@@ -147,9 +147,43 @@
             
         </ul>
     </div>
+
+    <div id="about" class="center modal">
+        <h1>Knolling is natural.</h1>
+
+        <p>
+            Try and explain it to someone and it’s hard. Take a moment and show someone and it becomes very simple.
+        </p>
+        <p>
+            StupidDesk is our humble attempt to teach knolling. Consider this your first design assignment&mdash;or just a peaceful way to the pass the time.
+        </p>
+
+        <p>
+            The word Knolling was coined by Andrew Kromelow as he worked under Frank Gehry while he designed chairs for Knoll Furniture. 
+        </p>
+
+        <p>
+            Feel free to ask <a href="http://twitter.com/willstall">@willstall</a> any stupid design questions you might have ;)
+        </p>
+
+        <h2>Additional resources:</h2>
+        <p>
+            <a href="https://en.wikipedia.org/wiki/Knoll_(verb)">Wikipedia</a> <br/>
+            <a href="http://www.minimallyminimal.com/blog/90degrees">90&deg; by Andrew Kim</a> <br/>
+            <a href="http://tidyingup.com">The Life-Changing Magic of Tidying Up by Marie Kondo</a>
+        </p>
+
+        <ul>
+            <li><button type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Close</button></li>
+        </ul>
+
+
+    </div>
+    
     <div id="content">
         <canvas id="canvas" width="500" height="300"></canvas>
     </div>
+
     <div id="footer" class="center">    
         <p>
         Made in a <a href="http://www.deepdarkhole.com">Deep Dark Hole</a> using <a href="http://www.createjs.com">CreateJS</a>. Contribute on <a href="https://github.com/deepdarkhole/stupiddesk/">Github</a>.<br/>

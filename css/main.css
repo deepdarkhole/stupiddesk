@@ -118,7 +118,8 @@
 {
 	background: rgba(0,0,0,.5);
 	color: #fff;
-	width: 800px;
+	width: 70%;
+	max-width: 800px;
 	padding: 12px;
 	font-size: 2em;
 	border-radius: 12px;
@@ -254,18 +255,25 @@ h1 span
 
 @media only screen and (max-width: 1300px) {
 
-	.modal, button
+	.modal, #header
 	{
 		font-size: 60%;
+	}
+
+	button
+	{
+		font-size: 14px;
+		padding: 10px 8px;
 	}
 
 }
 
 @media only screen and (max-width: 900px) {
 
-	.modal, button
+	.modal
 	{
 		font-size: 40%;
 	}
+
 
 }

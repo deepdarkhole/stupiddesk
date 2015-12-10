@@ -111,6 +111,12 @@ function about()
 {
 	show( element_id.about );
 	hide( element_id.header );
+
+	ga('send', {
+	  hitType: 'event',
+	  eventCategory: 'action',
+	  eventAction: 'about'
+	});
 }
 
 function tick( event ) {

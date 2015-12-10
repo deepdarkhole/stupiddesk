@@ -107,12 +107,24 @@
 	background-color: rgba(0, 0,0,.85);
 }
 
+
+#intro
+{
+	visibility: visible;
+}
+
 #share
 {
 	visibility: hidden;
 }
 
-
+.share_content
+{
+	width: 70%;
+	
+	border: 1px solid red;
+	margin: 0px auto;
+}
 
 #share input
 {
@@ -133,6 +145,18 @@
 #share input::selection
 {
 	background: #80C23C;
+}
+
+#share .ad
+{
+	display: block;
+	float:right;
+	width: 336px;
+	height: 280px;
+	background: #E93A60;
+	color: #FFF;
+	line-height: 280px;
+	text-align: center;
 }
 
 #header

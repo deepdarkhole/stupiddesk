@@ -87,6 +87,12 @@ function stupid()
 	removeItems();
 	create( null );
 	last_id = null;
+
+	ga('send', {
+	  hitType: 'event',
+	  eventCategory: 'action',
+	  eventAction: 'stupid'
+	});
 }
 
 function center()

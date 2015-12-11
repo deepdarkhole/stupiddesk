@@ -29,7 +29,8 @@ var element_id = {
 		confirm: "confirm",
 		share: "share",
 		intro_cancel: "intro_view",
-		about: "about"
+		about: "about",
+		share_img: "share_img"
 	};
 	
 var defaultImages = [

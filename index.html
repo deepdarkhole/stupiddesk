@@ -87,12 +87,12 @@
         <li>
             <button id="loading" type="button" name="start" class="green_btn" disabled onclick="start();">
                 <span class="bkg"></span>    
-                <span class="text"><i class="fa fa-twitter-magic"></i> Get Stupid</span>
+                <span class="text"><i class="fa fa-twitter-magic"></i><span class="hidden-sm"> Get Stupid</span></span>
             </button>
         </li>
 
 
-        <li><button id="intro_view" type="button" name="view" class="grey_btn" disabled onclick="view();"><i class="fa fa-eye"></i> View</button></li>
+        <li><button id="intro_view" type="button" name="view" class="grey_btn" disabled onclick="view();"><i class="fa fa-eye"></i><span class="hidden-sm"> View</button></span></li>
         </ul>
 
         
@@ -105,46 +105,61 @@
         </p>
 
 <ul>
-        <li><button id="loading" type="button" name="stupid" class="green_btn" onclick="stupid();"><i class="fa fa-magic"></i> Make Stupid</button></li>
-        <li><button id="loading" type="button" name="cancel" class="grey_btn" onclick="cancel();"><i class="fa fa-times"></i> Cancel</button></li>
+        <li><button id="loading" type="button" name="stupid" class="green_btn" onclick="stupid();"><i class="fa fa-magic"></i><span class="hidden-sm"> Make Stupid</button></span></li>
+        <li><button id="loading" type="button" name="cancel" class="grey_btn" onclick="cancel();"><i class="fa fa-times"></i><span class="hidden-sm"> Cancel</button></span></li>
         </ul>
     </div>
 
     <div id="share" class="center modal">
 
 
-        <h1>Share Your Desk!</h1>
-        <p>Show off your mad organizational skills.</p>
-        <input readonly value="http://stupiddesk.com/?" >
-        <br/>
 
-        <ul>
 
-            <li><button ype="button" name="tweet" class="blue_btn" onclick="tweet();"><i class="fa fa-twitter-square"></i> Twitter</button>
+
+        <div class="share-container">
+
+            <div id="share_img" class="preview"></div>
+
+            <div class="share-content">
+                
+                <h1>Share Your Desk!</h1>
+                <p>Show off your mad organizational skills.</p>
+       
+            
+            
+
+            <input readonly value="http://stupiddesk.com/?" >
+            
+
+            <ul>
+
+                <li><button type="button" name="tweet" class="blue_btn" onclick="tweet();"><i class="fa fa-twitter-square"></i><span class="hidden-sm"> Twitter</span></button>
+                </li>
+
+            <li>
+            <button id="loading" type="button" name="facebook" class="blue_facebook_btn" onclick="facebook();"><i class="fa fa-facebook-square"></i><span class="hidden-sm"> Facebook</span></button>
             </li>
 
-        <li>
-        <button id="loading" type="button" name="facebook" class="blue_facebook_btn" onclick="facebook();"><i class="fa fa-facebook-square"></i> Facebook</button>
-        </li>
+            <li><button type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i><span class="hidden-sm"> Cancel</button></span></li>
 
-        <li><button type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Cancel</button></li>
+            </ul>
 
-        </ul>
-
+             </div>
+         </div>
 
 
     </div>
 
     <div id="header" class="center">
         <ul>
-            <li><button type="button" name="stupid" class="green_btn" onclick="confirm();"><i class="fa fa-magic"></i> Make Stupid</button></li>
-            <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i> Done</button></li>
-            <li><button type="button" name="learn" class="grey_btn" onclick="about();"><i class="fa fa-info-circle"></i> Learn More</button></li>
+            <li><button type="button" name="stupid" class="green_btn" onclick="confirm();"><i class="fa fa-magic"></i><span class="hidden-sm"> Make Stupid</button></span></li>
+            <li><button id="share_button" type="button" name="share" class="blue_btn" onclick="share();"><i class="fa fa-check-square"></i><span class="hidden-sm"> Done</button></span></li>
+            <li><button type="button" name="learn" class="grey_btn" onclick="about();"><i class="fa fa-info-circle"></i><span class="hidden-sm"> Learn More</button></span></li>
 
          
             <li>
                 <button type="button"  class="red_btn" onclick="toggleAudio();">
-                    <i id="audio_on" class="fa fa-volume-up"></i><i id="audio_off" class="fa fa-volume-off" style="display: none;"></i>
+                    <i id="audio_on" class="fa fa-volume-up"></i><span class="hidden-sm"><i id="audio_off" class="fa fa-volume-off" style="display: none;"></span></i>
                 </button>
             </li>
 
@@ -183,7 +198,7 @@
         </p>
 
         <ul>
-            <li><button type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i> Close</button></li>
+            <li><button type="button" name="close" class="grey_btn" onclick="cancel()"><i class="fa fa-times"></i><span class="hidden-sm"> Close</button></span></li>
         </ul>
 
 
@@ -194,6 +209,18 @@
     </div>
 
     <div id="footer" class="center">    
+
+<!--
+        <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+        <ins class="adsbygoogle"
+             style="display:block;width:468px;height:60px;margin:0px auto;margin-bottom:1em;"
+             data-ad-client="ca-pub-7882574446852005"
+             data-ad-slot="2942382577"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script> -->
+
         <p>
         Made in a <a href="http://www.deepdarkhole.com">Deep Dark Hole</a> using <a href="http://www.createjs.com">CreateJS</a>. Contribute on <a href="https://github.com/deepdarkhole/stupiddesk/">Github</a>.<br/>
         <a href="http://twitter.com/andreimarks/">@AndreiMarks</a> | <a href="http://twitter.com/willstall/">@WillStall</a>  | <a href="http://twitter.com/dainsaint/">@DainSaint</a> 

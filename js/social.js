@@ -51,7 +51,7 @@ function showShare( id )
 	
 
 	var img = document.getElementById(element_id.share_img);
-		img.setAttribute("src", exportCanvas() );
+		img.setAttribute("style", "background-image: url('" + exportCanvas() +"')" );
 }
 
 function tweet()

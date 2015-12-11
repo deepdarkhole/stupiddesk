@@ -110,12 +110,18 @@
 
 #intro
 {
-	visibility: hidden;
+	visibility: visible;
 }
 
 #share
 {
-	visibility: visible;
+	visibility: hidden;
+}
+
+#share h1
+{
+	white-space: nowrap;
+	margin-top: -15px;
 }
 
 .share-container
@@ -124,25 +130,46 @@
 	max-width: 1200px;
 
 	margin: 0px auto;
-	overflow: auto;;
+	overflow: auto;
+	display: table;
 }
 
 .share-content
 {
-	margin-left: 360px;
+	margin-left: 33%;
 	text-align: left;
+	display: table-cell;
+	padding-left: 20px;
+	box-sizing: border-box;
+
 }
+
+#share .preview
+{
+	background: #F6F3E9 center center no-repeat;
+	width: 30%;
+	margin: 10px auto;
+	background-size: contain;
+	border-radius: 12px;
+	margin-right: 10px;
+
+	display: table-cell;
+}
+
 
 #share .top
 {
 	width: 70%;
 	max-width: 880px;
-	text-align: left;
-	border: 1px solid red;
 	margin: 0px auto;
+	overflow: auto;
+	text-align: left;
 }
 
-
+#share *
+{
+	
+}
 
 #share input
 {
@@ -155,8 +182,7 @@
 	border-radius: 12px;
 	border: none;
 	font-family: "CoreSans Light";
-	text-align: center;
-	margin-bottom: 1em;
+	text-align: left;
 	cursor: text;
 	box-sizing: border-box;
 }
@@ -164,25 +190,21 @@
 #share input::selection
 {
 	background: #80C23C;
+
+}
+
+#share ul
+{
+	margin-left: -5px;
 }
 
 #share h1, #share p
 {
 	width: 100%;
+	text-align: left;
 	max-width: 100%;
-	
-	border: 1px solid red;
 }
 
-#share .preview
-{
-	background-color: #E93A60;
-	width: 320px;
-	height: 125px;
-	height: 100%;
-	margin: 10px auto;
-	float: left;
-}
 
 #share .ad
 {
@@ -333,7 +355,15 @@ h1 span
 		font-size: 60%;
 	}
 
+	.hidden-md
+	{
+		display: none;
+	}
 
+	#share h1
+	{
+		margin-top: -8px;
+	}
 
 }
 
@@ -349,6 +379,12 @@ h1 span
 		font-size: 14px;
 		padding: 10px 8px;
 	}
+
+	.hidden-sm
+	{
+		display: none;
+	}
+
 
 
 }

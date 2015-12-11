@@ -61,6 +61,8 @@ function load()
 
 function save( callback )
 {
+
+
 	//console.log("Save");
 	itemData = new Array();
 	for( var i = 0; i < itemContainer.children.length; i++)

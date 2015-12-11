@@ -110,27 +110,45 @@
 
 #intro
 {
-	visibility: visible;
+	visibility: hidden;
 }
 
 #share
 {
-	visibility: hidden;
+	visibility: visible;
 }
 
-.share_content
+.share-container
 {
 	width: 70%;
-	
+	max-width: 1200px;
+
+	margin: 0px auto;
+	overflow: auto;;
+}
+
+.share-content
+{
+	margin-left: 360px;
+	text-align: left;
+}
+
+#share .top
+{
+	width: 70%;
+	max-width: 880px;
+	text-align: left;
 	border: 1px solid red;
 	margin: 0px auto;
 }
+
+
 
 #share input
 {
 	background: rgba(0,0,0,.5);
 	color: #fff;
-	width: 70%;
+	width: 100%;
 	max-width: 800px;
 	padding: 12px;
 	font-size: 2em;
@@ -140,6 +158,7 @@
 	text-align: center;
 	margin-bottom: 1em;
 	cursor: text;
+	box-sizing: border-box;
 }
 
 #share input::selection
@@ -147,16 +166,36 @@
 	background: #80C23C;
 }
 
+#share h1, #share p
+{
+	width: 100%;
+	max-width: 100%;
+	
+	border: 1px solid red;
+}
+
+#share .preview
+{
+	background-color: #E93A60;
+	width: 320px;
+	height: 125px;
+	height: 100%;
+	margin: 10px auto;
+	float: left;
+}
+
 #share .ad
 {
 	display: block;
-	float:right;
+	float:left;
 	width: 336px;
 	height: 280px;
 	background: #E93A60;
 	color: #FFF;
-	line-height: 280px;
 	text-align: center;
+	padding: 120px 0px;
+	box-sizing: border-box;
+	margin-top: 30px;
 }
 
 #header
@@ -208,7 +247,18 @@
 
 }
 
-
+#footer .ad
+{
+	background: #FCBD04;
+	width: 468px;
+	height: 60px;
+	text-align: center;
+	color: #fff;
+	margin: 0px auto;
+	margin-bottom: 1em;
+	box-sizing: border-box;
+	padding: 10px 0px;
+}
 
 #footer a
 {

@@ -7,12 +7,10 @@ function exportCanvas()
     var bitmap = new createjs.Bitmap( canvas );
     
     bitmap.cache( 0, 0, canvas.width, canvas.height, 1 );
-    var base64 = bitmap.getCacheDataURL();
-    
-    print(base64); 
-
+    var base64 = bitmap.getCacheDataURL();    
+    //print(base64); 
     header.style.visibility = "visible";
-    //return base64;
+    return base64;
 }
 
 function share()
@@ -49,8 +47,11 @@ function showShare( id )
 	var modal = document.getElementById(element_id.share);
 		input = modal.getElementsByTagName("INPUT")[0];
 		input.value = "http://stupiddesk.com/?" + id;
-		input.select();
+		input.select();	
 	
+
+	var img = document.getElementById(element_id.share_img);
+		img.setAttribute("src", exportCanvas() );
 }
 
 function tweet()

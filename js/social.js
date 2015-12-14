@@ -83,5 +83,5 @@ function facebook()
 	  socialTarget: 'http://stupiddesk.com'
 	});
 
-	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value)+"&t="+"STOOPIDDESK", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(input.value), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
 }

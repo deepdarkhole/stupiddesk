@@ -32,15 +32,21 @@ function loadFromURL()
 			intro_cancel.setAttribute("style", "display: inline-block");
 					
 		create( JSON.parse(data) );
-	});
+	}).catch( error => create( itemData ) );
 
 	// knollRef.once('value')
-
+//
 	//console.log("load:" + id);
 
 	//id = "oAEUDaXhPc";
 
 	/*
+
+	.catch( function(error){
+			console.error(error);
+			dispatchWindowEvent( OnlineEvent.JOIN_GAME_FAILED );
+		});
+
 	var LoadObject = Parse.Object.extend("Knoll");
 	var query = new Parse.Query(LoadObject);
 		query.get(id, {

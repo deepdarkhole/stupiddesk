@@ -27,7 +27,10 @@ function create( data )
 
 		var imagesCopy = images.slice();
 		var length = Math.floor( Math.random() * ( randomMax - randomMin ) + randomMin );
-		
+
+		if(useAllImages)
+			length = imagesCopy.length;
+
 		for( var i = 0; i < length; i++)
 		{
 			var j = Math.floor( Math.random() * imagesCopy.length );

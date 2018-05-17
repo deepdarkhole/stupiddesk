@@ -21,7 +21,19 @@ function loadFromURL()
 	if(id == "")
 		return false;
 
-	window.database.ref('knolls/' + id).once('value').then( obj => console.log(obj.val()) );
+	window.database.ref('knolls/' + id).once('value').then( obj => 
+	{
+		console.log(obj.val()) 
+		var data = obj.val().data;
+
+		removeItems();
+
+		var intro_cancel = document.getElementById( element_id.intro_cancel);
+			intro_cancel.setAttribute("style", "display: inline-block");
+					
+		create( JSON.parse(data) );
+	});
+
 	// knollRef.once('value')
 
 	//console.log("load:" + id);

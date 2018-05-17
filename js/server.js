@@ -21,10 +21,14 @@ function loadFromURL()
 	if(id == "")
 		return false;
 
+	window.database.ref('knolls/' + id).once('value').then( obj => console.log(obj.val()) );
+	// knollRef.once('value')
+
 	//console.log("load:" + id);
 
 	//id = "oAEUDaXhPc";
 
+	/*
 	var LoadObject = Parse.Object.extend("Knoll");
 	var query = new Parse.Query(LoadObject);
 		query.get(id, {
@@ -49,7 +53,8 @@ function loadFromURL()
 		    create( itemData );
 		  }
 		});
-
+	*/
+	//firebase
 	return true;
 }
 
@@ -81,6 +86,12 @@ function save( callback )
 	if(debug)
 		console.log(data);
 
+
+	// firebase
+
+	window.database.ref('knolls/').push({ data: data }).once('value',obj => callback( obj.key ) );
+
+	/*
 	var SaveObject = Parse.Object.extend("Knoll");
 	var saveObject = new SaveObject();
 		saveObject.set("data", data)
@@ -94,5 +105,24 @@ function save( callback )
 				console.log('Failed to create new object, with error code: ' + error.message);
 			}
 		});
+		*/
 	//alert((JSON.stringify(itemData) ));
 }
+
+
+
+/*
+
+
+	return this.gamesRef.push({
+		isStarted: true,
+		boardData: this.game.board.getData(),
+		rules: rules,
+		firstPlayer: firstPlayer
+	});
+
+
+
+
+
+*/

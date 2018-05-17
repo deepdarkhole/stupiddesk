@@ -28,16 +28,29 @@ function init()
     // Parse
     // Parse.initialize("AeLWidTlB5fwyEf5BxDN90MMmSGIF9RpI3WDc8SI", "7IVEuZFFlpO2U6f5p8UF0q8doUX5w1DDS8adOvgQ");
 
+	// Firebase
+	var firebaseConfig = {
+		apiKey: "AIzaSyC9f6uP-frG31Sl6Z7-Y_bnnStpqs6Lio0",
+		authDomain: "stupid-desk.firebaseapp.com",
+		databaseURL: "https://stupid-desk.firebaseio.com",
+		projectId: "stupid-desk",
+		storageBucket: "stupid-desk.appspot.com",
+		messagingSenderId: "148909270117"
+	  };
+	firebase.initializeApp(firebaseConfig);
+
+	var database = firebase.database();
+
+	window.database = firebase.database();
+
     // Debug
     if(debug)
     {
     	start();
     }else{
 		// Create
-		create( itemData );
-
-    	// if(loadFromURL() == false)
-    		// create( itemData );	
+		if(loadFromURL() == false)
+    		create( itemData );	
     }
 }
 

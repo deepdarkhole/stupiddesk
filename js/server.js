@@ -63,7 +63,7 @@ function save( callback )
 {
 
 
-	//console.log("Save");
+	console.log("Save");
 	itemData = new Array();
 	for( var i = 0; i < itemContainer.children.length; i++)
 	{
@@ -77,21 +77,22 @@ function save( callback )
 		itemData[i] = data;
 	}
 	var data = JSON.stringify(itemData);
+
+	if(debug)
+		console.log(data);
+
 	var SaveObject = Parse.Object.extend("Knoll");
 	var saveObject = new SaveObject();
 		saveObject.set("data", data)
 		saveObject.save(null, {
-		  success: function(obj) {	  
-		    callback( obj.id );
-		  },
-		  error: function(obj, error) {
-		    // Execute any logic that should take place if the save fails.
-		    // error is a Parse.Error with an error code and message.
-		    console.log('Failed to create new object, with error code: ' + error.message);
-		  }
+			success: function(obj) {	  
+				callback( obj.id );
+			},
+			error: function(obj, error) {
+				// Execute any logic that should take place if the save fails.
+				// error is a Parse.Error with an error code and message.
+				console.log('Failed to create new object, with error code: ' + error.message);
+			}
 		});
-
-	if(debug)
-		console.log(data);
 	//alert((JSON.stringify(itemData) ));
 }
